@@ -1,0 +1,252 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.7" pages="2">
+  <diagram name="Atributos" id="0EHWey0c9uGeOcJy_RBK">
+    <mxGraphModel dx="2883" dy="994" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="TpoQ2PlLnXFbupfYh4xo-35" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;b&gt;&lt;font style=&quot;font-size: 28px;&quot;&gt;TRAVELAI&lt;/font&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="80" width="440" x="54" y="184" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-6" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="200" width="240" x="440" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-4" parent="UP37hCmrEPfrdURD3SZm-6" style="rounded=0;whiteSpace=wrap;html=1;" value="user_preferences" vertex="1">
+          <mxGeometry height="50" width="240" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-5" parent="UP37hCmrEPfrdURD3SZm-6" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="- id (PK) [Int]&lt;div&gt;- user_id (FK -&amp;gt; users(id))&lt;br&gt;&lt;div&gt;- travel_type [String]&lt;/div&gt;&lt;div&gt;- max_budget&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[Decimal]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- fav_weather&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[String]&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="240" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-7" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="200" width="250" x="-130" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="TpoQ2PlLnXFbupfYh4xo-26" parent="UP37hCmrEPfrdURD3SZm-7" style="rounded=0;whiteSpace=wrap;html=1;" value="users" vertex="1">
+          <mxGeometry height="50" width="250" as="geometry" />
+        </mxCell>
+        <mxCell id="TpoQ2PlLnXFbupfYh4xo-29" parent="UP37hCmrEPfrdURD3SZm-7" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="- id (PK) [Int]&lt;div&gt;- role_id (FK -&amp;gt; roles(id))&lt;br&gt;&lt;div&gt;- name [String]&lt;/div&gt;&lt;div&gt;- email&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[String]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- password&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[String]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- timestamps&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[Datetime]&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="250" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-8" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="200" width="240" x="160" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-1" parent="UP37hCmrEPfrdURD3SZm-8" style="rounded=0;whiteSpace=wrap;html=1;" value="roles" vertex="1">
+          <mxGeometry height="50" width="240" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-2" parent="UP37hCmrEPfrdURD3SZm-8" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="&lt;span style=&quot;&quot;&gt;- id (PK) [Int]&lt;/span&gt;&lt;div style=&quot;&quot;&gt;- name [String]&lt;/div&gt;&lt;div style=&quot;&quot;&gt;- timestamps&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[Datetime]&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="240" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-9" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="200" width="240" x="720" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-10" parent="UP37hCmrEPfrdURD3SZm-9" style="rounded=0;whiteSpace=wrap;html=1;" value="ai_chat_logs" vertex="1">
+          <mxGeometry height="50" width="240" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-11" parent="UP37hCmrEPfrdURD3SZm-9" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="- id (PK) [Int]&lt;div&gt;- user_id (FK -&amp;gt; users(id))&lt;br&gt;&lt;div&gt;- user_question [String]&lt;/div&gt;&lt;div&gt;- ia_answer&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[String]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- timestamps&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[Datetime]&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="240" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-12" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="200" width="246" x="-126" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-13" parent="UP37hCmrEPfrdURD3SZm-12" style="rounded=0;whiteSpace=wrap;html=1;" value="locations" vertex="1">
+          <mxGeometry height="50" width="245.99999999999997" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-14" parent="UP37hCmrEPfrdURD3SZm-12" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="- id (PK) [Int]&lt;div&gt;&lt;div&gt;- city [String]&lt;/div&gt;&lt;div&gt;- country&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[String]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- continent [String]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- weather_type&amp;nbsp;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); background-color: transparent;&quot;&gt;[String]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- description&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[String]&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- image [String]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- status [Boolean]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- timestamps [Datetime]&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="245.99999999999997" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-15" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="216" width="240" x="160" y="304" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-16" parent="UP37hCmrEPfrdURD3SZm-15" style="rounded=0;whiteSpace=wrap;html=1;" value="hotels" vertex="1">
+          <mxGeometry height="54" width="240" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-17" parent="UP37hCmrEPfrdURD3SZm-15" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="- id (PK) [Int]&lt;div&gt;&lt;div&gt;- location_id&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; locations(id))&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- nombre&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[String]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- estrellas&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[Int]&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- price [Decimal]&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="162" width="240" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-18" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="216" width="246" x="-126" y="304" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-19" parent="UP37hCmrEPfrdURD3SZm-18" style="rounded=0;whiteSpace=wrap;html=1;" value="flights" vertex="1">
+          <mxGeometry height="54" width="245.99999999999997" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-20" parent="UP37hCmrEPfrdURD3SZm-18" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="- id (PK) [Int]&lt;div&gt;&lt;div&gt;- location_id&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; locations(id))&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- airline&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[String]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- origin&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[String]&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- destiny&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[String]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- departure_date [DateTime]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- arrival_date [DateTime]&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- price [Decimal]&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="162" width="245.99999999999997" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-21" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="216" width="240" x="440" y="304" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-22" parent="UP37hCmrEPfrdURD3SZm-21" style="rounded=0;whiteSpace=wrap;html=1;" value="activities" vertex="1">
+          <mxGeometry height="54" width="240" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-23" parent="UP37hCmrEPfrdURD3SZm-21" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="- id (PK) [Int]&lt;div&gt;&lt;div&gt;- location_id&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; locations(id))&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- name&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;[String]&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- price [Decimal]&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="162" width="240" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-24" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="200" width="240" x="440" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-25" parent="UP37hCmrEPfrdURD3SZm-24" style="rounded=0;whiteSpace=wrap;html=1;" value="package" vertex="1">
+          <mxGeometry height="50" width="240.00000000000003" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-26" parent="UP37hCmrEPfrdURD3SZm-24" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="- id (PK) [Int]&lt;div&gt;&lt;div&gt;- hotel_id&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; hotels(id))&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;- flight_id&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; flights(id))&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;- activity_id&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; activities(id))&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- price [Decimal]&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="240.00000000000003" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-27" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="200" width="240" x="160" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-28" parent="UP37hCmrEPfrdURD3SZm-27" style="rounded=0;whiteSpace=wrap;html=1;" value="reservations" vertex="1">
+          <mxGeometry height="50" width="240" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-29" parent="UP37hCmrEPfrdURD3SZm-27" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="- id (PK) [Int]&lt;div&gt;&lt;div&gt;- user_id&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; users(id))&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;- package_id&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; packages(id)) {NULL}&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;- hotel_id&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; hotels(id)) {NULL}&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;- flight_id&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; flight(id)) {NULL}&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- price [Decimal]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- state [Enum]&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="240" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-30" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="200" width="240" x="720" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-31" parent="UP37hCmrEPfrdURD3SZm-30" style="rounded=0;whiteSpace=wrap;html=1;" value="reviews" vertex="1">
+          <mxGeometry height="50" width="240" as="geometry" />
+        </mxCell>
+        <mxCell id="UP37hCmrEPfrdURD3SZm-32" parent="UP37hCmrEPfrdURD3SZm-30" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="- id (PK) [Int]&lt;div&gt;- user_id&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; users(id))&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;- hotel_id&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; hotels(id)) {NULL}&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- flight_id&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; flight(id)) {NULL}&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;- package_id&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;(FK -&amp;gt; packages(id)) {NULL}&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- rating [Int]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- comment [String]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- state [Enum]&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- timestamps [Datetime]&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="240" y="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="KNIop4IIULivGVRCodvJ" name="EntidadRelacion">
+    <mxGraphModel dx="1501" dy="837" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-3" edge="1" parent="1" source="5CNihec-ENknDBCYRxTg-1" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;strokeColor=default;" target="5CNihec-ENknDBCYRxTg-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="400" />
+              <mxPoint x="280" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-10" connectable="0" parent="pzGYOxEXsaNxmdIBssEg-3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" value="1:1" vertex="1">
+          <mxGeometry relative="1" x="-0.1356" y="-2" as="geometry">
+            <mxPoint x="-2" y="6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-4" edge="1" parent="1" source="5CNihec-ENknDBCYRxTg-1" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="5CNihec-ENknDBCYRxTg-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="400" />
+              <mxPoint x="280" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-12" connectable="0" parent="pzGYOxEXsaNxmdIBssEg-4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" value="1:1" vertex="1">
+          <mxGeometry relative="1" x="-0.2283" y="1" as="geometry">
+            <mxPoint x="-1" y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-14" edge="1" parent="1" source="5CNihec-ENknDBCYRxTg-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="5CNihec-ENknDBCYRxTg-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-15" connectable="0" parent="pzGYOxEXsaNxmdIBssEg-14" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="-0.1413" y="1" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5CNihec-ENknDBCYRxTg-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;" value="Users" vertex="1">
+          <mxGeometry height="80" width="120" x="120" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-9" edge="1" parent="1" source="5CNihec-ENknDBCYRxTg-2" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="5CNihec-ENknDBCYRxTg-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-13" connectable="0" parent="pzGYOxEXsaNxmdIBssEg-9" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" value="1:N" vertex="1">
+          <mxGeometry relative="1" x="-0.0167" y="1" as="geometry">
+            <mxPoint x="-1" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5CNihec-ENknDBCYRxTg-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;" value="Roles" vertex="1">
+          <mxGeometry height="80" width="120" x="120" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-16" edge="1" parent="1" source="5CNihec-ENknDBCYRxTg-3" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="5CNihec-ENknDBCYRxTg-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-17" connectable="0" parent="pzGYOxEXsaNxmdIBssEg-16" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" value="N:1" vertex="1">
+          <mxGeometry relative="1" x="0.0234" y="2" as="geometry">
+            <mxPoint y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5CNihec-ENknDBCYRxTg-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;" value="Package" vertex="1">
+          <mxGeometry height="80" width="120" x="320" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-26" edge="1" parent="1" source="5CNihec-ENknDBCYRxTg-4" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="5CNihec-ENknDBCYRxTg-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="480" y="640" />
+              <mxPoint x="480" y="760" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5CNihec-ENknDBCYRxTg-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;" value="Hotels" vertex="1">
+          <mxGeometry height="80" width="120" x="520" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-27" edge="1" parent="1" source="5CNihec-ENknDBCYRxTg-5" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;fontSize=12;startSize=8;endSize=8;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="760.148148148148" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5CNihec-ENknDBCYRxTg-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;" value="Flights" vertex="1">
+          <mxGeometry height="80" width="120" x="520" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="5CNihec-ENknDBCYRxTg-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;" value="Reservations" vertex="1">
+          <mxGeometry height="80" width="120" x="120" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="5CNihec-ENknDBCYRxTg-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;" value="UserPreferences" vertex="1">
+          <mxGeometry height="80" width="120" x="360" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="5CNihec-ENknDBCYRxTg-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;" value="AIChatLogs" vertex="1">
+          <mxGeometry height="80" width="120" x="360" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-18" edge="1" parent="1" source="5CNihec-ENknDBCYRxTg-9" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;startArrow=none;startFill=0;" target="5CNihec-ENknDBCYRxTg-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="760" />
+              <mxPoint x="680" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-19" edge="1" parent="1" source="5CNihec-ENknDBCYRxTg-9" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;startArrow=none;startFill=0;" target="5CNihec-ENknDBCYRxTg-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-20" edge="1" parent="1" source="5CNihec-ENknDBCYRxTg-9" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;startArrow=none;startFill=0;endArrow=classic;endFill=1;" target="5CNihec-ENknDBCYRxTg-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="760" />
+              <mxPoint x="680" y="880" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5CNihec-ENknDBCYRxTg-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;" value="Locations" vertex="1">
+          <mxGeometry height="80" width="120" x="720" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-28" edge="1" parent="1" source="5CNihec-ENknDBCYRxTg-10" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="5CNihec-ENknDBCYRxTg-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="480" y="880" />
+              <mxPoint x="480" y="760" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5CNihec-ENknDBCYRxTg-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;" value="Activities" vertex="1">
+          <mxGeometry height="80" width="120" x="520" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="JZemuSRjeQN_cqzPGfTX-1" edge="1" parent="1" source="pzGYOxEXsaNxmdIBssEg-22" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" target="5CNihec-ENknDBCYRxTg-5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pzGYOxEXsaNxmdIBssEg-22" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" value="1:1" vertex="1">
+          <mxGeometry height="10" width="20" x="670" y="755" as="geometry" />
+        </mxCell>
+        <mxCell id="JZemuSRjeQN_cqzPGfTX-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" value="1:N" vertex="1">
+          <mxGeometry height="10" width="20" x="471" y="755" as="geometry" />
+        </mxCell>
+        <mxCell id="iRG8WvYjwk3dLFgCZDq0-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;b&gt;&lt;font style=&quot;font-size: 28px;&quot;&gt;TRAVELAI&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 28px;&quot;&gt;Diagrama Entidad-Relación&amp;nbsp;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="400" x="560" y="400" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
