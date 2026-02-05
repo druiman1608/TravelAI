@@ -16,6 +16,14 @@ class FlightFactory extends Factory
      */
     public function definition(): array
     {
-        return [];
+        $departure = $this->faker->dateTimeBetween('+1 week', '+2 months');
+        return [
+            'location_id' => \App\Models\Location::factory(),
+            'airline' => $this->faker->randomElement(['Iberia', 'Ryanair', 'Emirates', 'Vueling']),
+            'origin' => $this->faker->city(),
+            'departure' => $departure,
+            'arrival' => (clone $departure)->modify('+' . rand(2, 12) . ' hours'),
+            'price' => $this->faker->randomFloat(2, 50, 1000),
+        ];
     }
 }

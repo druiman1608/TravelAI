@@ -17,7 +17,10 @@ class ReservationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => null,
+            'package_id' => \App\Models\Package::factory(),
+            'price' => $this->faker->randomFloat(2, 500, 3000),
+            'status' => $this->faker->randomElement(['pendiente', 'confirmada', 'cancelada']),
         ];
     }
 }

@@ -21,4 +21,9 @@ class Activity extends Model
     {
         return $this->belongsTo(Location::class);
     }
+
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
 }

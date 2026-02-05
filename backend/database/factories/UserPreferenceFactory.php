@@ -17,7 +17,10 @@ class UserPreferenceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => null,
+            'travel_type' => $this->faker->randomElement(['Aventura', 'Relax', 'Cultural', 'Familiar']),
+            'max_budget' => $this->faker->randomFloat(2, 1000, 5000),
+            'fav_weather' => $this->faker->randomElement(['Caluroso', 'Frío', 'Templado', 'Tropical']),
         ];
     }
 }

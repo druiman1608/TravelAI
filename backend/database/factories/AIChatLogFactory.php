@@ -17,7 +17,9 @@ class AIChatLogFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => null,
+            'user_question' => $this->faker->sentence() . '?',
+            'ai_answer' => 'Basado en tus preferencias, te recomiendo visitar ' . $this->faker->city() . ' debido a su clima ' . $this->faker->word(),
         ];
     }
 }

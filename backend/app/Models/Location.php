@@ -16,9 +16,8 @@ class Location extends Model
         'continent',
         'weather_type',
         'description',
-        'image',
+        'image_url',
         'status',
-        'timestamp',
     ];
 
     public function flights()
@@ -34,5 +33,10 @@ class Location extends Model
     public function activities()
     {
         return $this->hasMany(Activity::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

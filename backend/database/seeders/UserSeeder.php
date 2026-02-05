@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Users
+        // Crear usuarios
         User::create([
             'name' => 'Administrador',
             'email' => 'admin@admin.es',

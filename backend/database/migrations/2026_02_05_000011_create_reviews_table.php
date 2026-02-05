@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('hotel_id')->constrained('hotels')->onDelete('cascade')->nullable();
-            $table->foreignId('flight_id')->constrained('flights')->onDelete('cascade')->nullable();
-            $table->foreignId('package_id')->constrained('packages')->onDelete('cascade')->nullable();
-            $table->integer('rating');
+            $table->foreignId('hotel_id')->nullable()->constrained('hotels')->onDelete('cascade');
+            $table->foreignId('flight_id')->nullable()->constrained('flights')->onDelete('cascade');
+            $table->foreignId('package_id')->nullable()->constrained('packages')->onDelete('cascade');
+            $table->unsignedTinyInteger('rating');
             $table->text('comment');
-            $table->enum('status', ['pending', 'published', 'deleted'])->default('pending');
+            $table->enum('status', ['pendiente', 'publicada', 'borrada'])->default('pendiente');
             $table->timestamps();
         });
     }

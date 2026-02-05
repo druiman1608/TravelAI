@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Reservation;
 
 class ReservationSeeder extends Seeder
 {
@@ -12,6 +13,12 @@ class ReservationSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // Obtener solo usuarios
+        $users = \App\Models\User::where('role_id', 4)->get();
+
+        // Crear reservas
+        foreach ($users as $user) {
+            \App\Models\Reservation::factory()->create(['user_id' => $user->id]);
+        }
     }
 }

@@ -15,10 +15,10 @@ class Review extends Model
         'hotel_id',
         'flight_id',
         'package_id',
+        'location_id',
         'rating',
         'comment',
-        'state',
-        'timestamp',
+        'status',
     ];
 
     public function user()
@@ -39,5 +39,10 @@ class Review extends Model
     public function package()
     {
         return $this->belongsTo(Package::class);
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
     }
 }

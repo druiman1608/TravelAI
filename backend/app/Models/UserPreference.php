@@ -17,6 +17,10 @@ class UserPreference extends Model
         'fav_weather'
     ];
 
+    protected $casts = [
+        'max_budget' => 'float',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

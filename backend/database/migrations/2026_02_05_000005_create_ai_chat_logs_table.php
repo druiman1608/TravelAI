@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('a_i_chat_logs', function (Blueprint $table) {
+        Schema::create('ai_chat_logs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->longText('user_question');
+            $table->longText('ai_answer');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('a_i_chat_logs');
+        Schema::dropIfExists('ai_chat_logs');
     }
 };

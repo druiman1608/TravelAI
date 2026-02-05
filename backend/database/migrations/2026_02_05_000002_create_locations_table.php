@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->city('city');
+            $table->string('city');
             $table->string('country');
             $table->string('continent');
             $table->string('weather_type');
-            $table->string('description');
-            $table->string('image_url');
+            $table->text('description');
+            $table->string('image_url')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

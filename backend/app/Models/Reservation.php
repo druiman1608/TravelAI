@@ -15,8 +15,9 @@ class Reservation extends Model
         'package_id',
         'hotel_id',
         'flight_id',
+        'activity_id',
         'price',
-        'state'
+        'status'
     ];
 
     public function user()
@@ -37,5 +38,10 @@ class Reservation extends Model
     public function flight()
     {
         return $this->belongsTo(Flight::class);
+    }
+
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class);
     }
 }

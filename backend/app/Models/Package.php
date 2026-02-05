@@ -11,10 +11,11 @@ class Package extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
         'hotel_id',
         'flight_id',
         'activity_id',
-        'price',
+        'total_price',
     ];
 
     public function hotel()
@@ -30,5 +31,10 @@ class Package extends Model
     public function activity()
     {
         return $this->belongsTo(Activity::class);
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }

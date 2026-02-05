@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_preferences', function (Blueprint $table) {
+        Schema::create('hotels', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('location_id')->constrained('locations')->onDelete('cascade');
+            $table->string('name');
+            $table->text('description');
+            $table->unsignedTinyInteger('stars');
+            $table->decimal('price_per_night', 8, 2);
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_preferences');
+        Schema::dropIfExists('hotels');
     }
 };

@@ -14,7 +14,6 @@ class Flight extends Model
         'location_id',
         'airline',
         'origin',
-        'destiny',
         'departure_date',
         'arrival_date',
         'price',

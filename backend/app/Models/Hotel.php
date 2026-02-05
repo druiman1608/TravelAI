@@ -22,4 +22,14 @@ class Hotel extends Model
     {
         return $this->belongsTo(Location::class);
     }
+
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

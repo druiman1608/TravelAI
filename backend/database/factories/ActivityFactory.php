@@ -18,9 +18,9 @@ class ActivityFactory extends Factory
     {
         return [
             'location_id' => \App\Models\Location::factory(),
-            'name' => $this->faker->sentence(3),
-            'description' => $this->faker->paragraph(),
-            'price' => $this->faker->randomFloat(2, 10, 200),
+            'name' => $this->faker->randomElement(['Tour por ', 'Entradas a ', 'Cena en ', 'Excursión a ']) . $this->faker->city(),
+            'description' => $this->faker->sentence(10),
+            'price' => $this->faker->randomFloat(2, 5, 200),
         ];
     }
 }

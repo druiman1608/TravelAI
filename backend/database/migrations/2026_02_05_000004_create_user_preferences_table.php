@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ai_chat_logs', function (Blueprint $table) {
+        Schema::create('user_preferences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('user_question');
-            $table->string('ia_answer');
+            $table->string('travel_type');
+            $table->decimal('max_budget', 10, 2);
+            $table->string('fav_weather');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ai_chat_logs');
+        Schema::dropIfExists('user_preferences');
     }
 };

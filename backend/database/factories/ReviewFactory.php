@@ -17,7 +17,11 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => null,
+            'hotel_id' => \App\Models\Hotel::factory(),
+            'rating' => $this->faker->numberBetween(1, 5),
+            'comment' => $this->faker->realText(100),
+            'status' => $this->faker->randomElement(['pendiente', 'publicada', 'borrada']),
         ];
     }
 }

@@ -17,7 +17,11 @@ class HotelFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'location_id' => \App\Models\Location::factory(),
+            'name' => $this->faker->company() . ' Hotel',
+            'description' => $this->faker->text(200),
+            'stars' => $this->faker->numberBetween(1, 5),
+            'price_per_night' => $this->faker->randomFloat(2, 45, 600),
         ];
     }
 }
