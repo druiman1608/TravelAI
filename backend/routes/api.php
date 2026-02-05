@@ -2,10 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+// Controllers:
 use App\Http\Controllers\HotelController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResource('hotels', HotelController::class);
+Route::get('/hotels', [HotelController::class, 'index']);

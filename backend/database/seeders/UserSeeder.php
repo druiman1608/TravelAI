@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Usuarios
+        // Users
         User::create([
             'name' => 'Administrador',
             'email' => 'admin@admin.es',
@@ -39,6 +39,13 @@ class UserSeeder extends Seeder
             'name' => 'Usuario',
             'email' => 'user@user.es',
             'password' => bcrypt('Usuario1234?'),
+            'role_id' => 4,
+        ]);
+
+        User::create([
+            'name' => 'Tester',
+            'email' => 'tester@tester.es',
+            'password' => bcrypt('Tester1234?'),
             'role_id' => 4,
         ]);
     }

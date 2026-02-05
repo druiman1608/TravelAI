@@ -17,7 +17,10 @@ class ActivityFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'location_id' => \App\Models\Location::factory(),
+            'name' => $this->faker->sentence(3),
+            'description' => $this->faker->paragraph(),
+            'price' => $this->faker->randomFloat(2, 10, 200),
         ];
     }
 }
