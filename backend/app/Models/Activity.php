@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hotel extends Model
+class Activity extends Model
 {
-    /** @use HasFactory<\Database\Factories\HotelFactory> */
+    /** @use HasFactory<\Database\Factories\ActivityFactory> */
     use HasFactory;
 
     protected $fillable = [
         'location_id',
         'name',
         'description',
-        'stars',
-        'price_per_night',
+        'price',
     ];
 
     public function location()

@@ -5,17 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Package extends Model
+class Review extends Model
 {
-    /** @use HasFactory<\Database\Factories\PackageFactory> */
+    /** @use HasFactory<\Database\Factories\ReviewFactory> */
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'hotel_id',
         'flight_id',
-        'activity_id',
-        'price',
+        'package_id',
+        'rating',
+        'comment',
+        'state',
+        'timestamp',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function hotel()
     {
@@ -27,8 +36,8 @@ class Package extends Model
         return $this->belongsTo(Flight::class);
     }
 
-    public function activity()
+    public function package()
     {
-        return $this->belongsTo(Activity::class);
+        return $this->belongsTo(Package::class);
     }
 }
