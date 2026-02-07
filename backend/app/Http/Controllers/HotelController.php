@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hotel;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class HotelController extends Controller
@@ -12,7 +13,8 @@ class HotelController extends Controller
      */
     public function index()
     {
-        //
+        $hotels = Hotel::with('location')->get();
+        return view('hotels.index', compact('hotels'));
     }
 
     /**
@@ -20,7 +22,10 @@ class HotelController extends Controller
      */
     public function create()
     {
-        //
+
+        $locations = Location::all();
+
+        return view('hotels.create', compact('locations'));
     }
 
     /**
@@ -28,7 +33,17 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'stars' => 'required|integer|min:1|max:5',
+            'location_id' => 'required|exists:locations,id',
+            'price_per_night' => 'required|numeric|min:1',
+        ]);
+
+        \App\Models\Hotel::create($validated);
+
+        return redirect()->route('hotels.index')->with('success', 'Hotel creado');
     }
 
     /**
@@ -36,7 +51,7 @@ class HotelController extends Controller
      */
     public function show(Hotel $hotel)
     {
-        //
+        return view('hotels.show', compact('hotel'));
     }
 
     /**
@@ -44,7 +59,9 @@ class HotelController extends Controller
      */
     public function edit(Hotel $hotel)
     {
-        //
+        $locations = Location::all();
+
+        return view('hotels.edit', compact('locations', 'hotel'));
     }
 
     /**
@@ -52,7 +69,17 @@ class HotelController extends Controller
      */
     public function update(Request $request, Hotel $hotel)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'stars' => 'required|integer|min:1|max:5',
+            'location_id' => 'required|exists:locations,id',
+            'price_per_night' => 'required|numeric|min:1',
+        ]);
+
+        $hotel->update($validated);
+
+        return redirect()->route('hotels.index')->with('success', 'Hotel actualizado');
     }
 
     /**
@@ -60,6 +87,7 @@ class HotelController extends Controller
      */
     public function destroy(Hotel $hotel)
     {
-        //
+        $hotel->delete();
+        return redirect()->route('hotels.index');
     }
 }

@@ -1,0 +1,51 @@
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.85rem;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+th {
+    background-color: beige;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    display: inline-block;
+}
+
+.btn-create {
+    background-color: #333;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.form-inline {
+    display: inline;
+}
+
+button {
+    cursor: pointer;
+}
