@@ -24,7 +24,6 @@ class HotelController extends Controller
     {
 
         $locations = Location::all();
-
         return view('hotels.create', compact('locations'));
     }
 
@@ -34,10 +33,10 @@ class HotelController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'location_id' => 'required|exists:locations,id',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'stars' => 'required|integer|min:1|max:5',
-            'location_id' => 'required|exists:locations,id',
             'price_per_night' => 'required|numeric|min:1',
         ]);
 
@@ -60,7 +59,6 @@ class HotelController extends Controller
     public function edit(Hotel $hotel)
     {
         $locations = Location::all();
-
         return view('hotels.edit', compact('locations', 'hotel'));
     }
 
@@ -78,7 +76,6 @@ class HotelController extends Controller
         ]);
 
         $hotel->update($validated);
-
         return redirect()->route('hotels.index')->with('success', 'Hotel actualizado');
     }
 

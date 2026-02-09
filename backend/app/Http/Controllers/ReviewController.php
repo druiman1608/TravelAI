@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\Package;
+use App\Models\Hotel;
+use App\Models\Flight;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -12,7 +16,8 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        $reviews = Review::all();
+        return view('reviews.index', compact('reviews'));
     }
 
     /**
@@ -20,7 +25,10 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        //
+        $packages = Package::all();
+        $hotels = Hotel::with('location')->get();
+        $flights = Flight::with('location')->get();
+        return view('reviews.create', compact('packages', 'hotels', 'flights'));
     }
 
     /**
@@ -28,7 +36,19 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'user_id' => Auth::id(),
+            'hotel_id' => 'required|exists:hotels,id',
+            'flight_id' => 'required|exists:flights,id',
+            'package_id' => 'required|exists:packages,id',
+            'rating' => 'required|integer|min:1',
+            'comment' => 'required|string',
+            'status' => 'boolean',
+        ]);
+
+        \App\Models\Review::create($validated);
+
+        return redirect()->route('reviews.index')->with('success', 'Reseña creada');
     }
 
     /**
@@ -36,7 +56,7 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        //
+        return view('reviews.show', compact('review'));
     }
 
     /**
@@ -44,7 +64,10 @@ class ReviewController extends Controller
      */
     public function edit(Review $review)
     {
-        //
+        $packages = Package::all();
+        $hotels = Hotel::with('location')->get();
+        $flights = Flight::with('location')->get();
+        return view('reviews.edit', compact('packages', 'hotels', 'flights', 'review'));
     }
 
     /**
@@ -52,7 +75,18 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        //
+        $validated = $request->validate([
+            'user_id' => Auth::id(),
+            'hotel_id' => 'required|exists:hotels,id',
+            'flight_id' => 'required|exists:flights,id',
+            'package_id' => 'required|exists:packages,id',
+            'rating' => 'required|integer|min:1',
+            'comment' => 'required|string',
+            'status' => 'boolean',
+        ]);
+
+        $review->update($validated);
+        return redirect()->route('reviews.index')->with('success', 'Reseña actualizada');
     }
 
     /**
@@ -60,6 +94,7 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //
+        $review->delete();
+        return redirect()->route('reviews.index');
     }
 }

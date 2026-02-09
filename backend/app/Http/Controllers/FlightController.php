@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flight;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class FlightController extends Controller
@@ -12,7 +13,8 @@ class FlightController extends Controller
      */
     public function index()
     {
-        //
+        $flights = Flight::with('location')->get();
+        return view('flights.index', compact('flights'));
     }
 
     /**
@@ -20,7 +22,8 @@ class FlightController extends Controller
      */
     public function create()
     {
-        //
+        $locations = Location::all();
+        return view('flights.create', compact('locations'));
     }
 
     /**
@@ -28,7 +31,18 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'location_id' => 'required|exists:locations,id',
+            'airline' => 'required|string|max:255',
+            'origin' => 'required|string|max:255',
+            'departure' => 'required|date|after:now',
+            'arrival' => 'required|date|after:departure',
+            'price' => 'required|numeric|min:1',
+        ]);
+
+        \App\Models\Flight::create($validated);
+
+        return redirect()->route('flights.index')->with('success', 'Vuelo creado');
     }
 
     /**
@@ -36,7 +50,7 @@ class FlightController extends Controller
      */
     public function show(Flight $flight)
     {
-        //
+        return view('flights.show', compact('flight'));
     }
 
     /**
@@ -44,7 +58,8 @@ class FlightController extends Controller
      */
     public function edit(Flight $flight)
     {
-        //
+        $locations = Location::all();
+        return view('flights.edit', compact('locations', 'flight'));
     }
 
     /**
@@ -52,7 +67,17 @@ class FlightController extends Controller
      */
     public function update(Request $request, Flight $flight)
     {
-        //
+        $validated = $request->validate([
+            'location_id' => 'required|exists:locations,id',
+            'airline' => 'required|string|max:255',
+            'origin' => 'required|string|max:255',
+            'departure' => 'required|date|after:now',
+            'arrival' => 'required|date|after:departure',
+            'price' => 'required|numeric|min:1',
+        ]);
+
+        $flight->update($validated);
+        return redirect()->route('flights.index')->with('success', 'Vuelo actualizado');
     }
 
     /**
@@ -60,6 +85,7 @@ class FlightController extends Controller
      */
     public function destroy(Flight $flight)
     {
-        //
+        $flight->delete();
+        return redirect()->route('flights.index');
     }
 }

@@ -19,6 +19,7 @@
             <td><?php echo e($hotel->price_per_night); ?></td>
             <td>
                 <a href="<?php echo e(route('hotels.show', $hotel->id)); ?>">Ver</a> |
+                <a href="<?php echo e(route('hotels.edit', $hotel->id)); ?>">Editar</a> |
                 <form action="<?php echo e(route('hotels.destroy', $hotel->id)); ?>" method="POST" style="display:inline;">
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('DELETE'); ?>

@@ -60,7 +60,18 @@ class User extends Authenticatable
         return $this->hasMany(AIChatLog::class);
     }
 
-    // public function isAdmin(): bool {
-    //     return $this->role && $this->role->name === 'admin';
-    // }
+    public function isAdmin(): bool
+    {
+        return $this->role === config('roles.Administrador');
+    }
+
+    public function isMod(): bool
+    {
+        return $this->role === config('roles.Moderador');
+    }
+
+    public function isPremium(): bool
+    {
+        return $this->role === config('roles.Premium');
+    }
 }

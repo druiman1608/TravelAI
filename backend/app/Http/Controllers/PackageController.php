@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\Hotel;
+use App\Models\Flight;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 
 class PackageController extends Controller
@@ -12,7 +15,11 @@ class PackageController extends Controller
      */
     public function index()
     {
-        //
+        $hotels = Hotel::with('location')->get();
+        $flights = Flight::with('location')->get();
+        $activities = Activity::with('location')->get();
+
+        return view('packages.index', compact('hotels', 'flights', 'activities'));
     }
 
     /**
@@ -20,7 +27,11 @@ class PackageController extends Controller
      */
     public function create()
     {
-        //
+        $hotels = Hotel::with('location')->get();
+        $flights = Flight::with('location')->get();
+        $activities = Activity::with('location')->get();
+
+        return view('packages.create', compact('hotels', 'flights', 'activities'));
     }
 
     /**
@@ -28,7 +39,17 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'hotel_id' => 'required|exists:hotels,id',
+            'flight_id' => 'required|exists:flights,id',
+            'activity_id' => 'required|exists:activities,id',
+            'total_price' => 'required|numeric|min:1',
+        ]);
+
+        \App\Models\Package::create($validated);
+
+        return redirect()->route('packages.index')->with('success', 'Paquete creado');
     }
 
     /**
@@ -36,7 +57,7 @@ class PackageController extends Controller
      */
     public function show(Package $package)
     {
-        //
+        return view('packages.show', compact('package'));
     }
 
     /**
@@ -44,7 +65,10 @@ class PackageController extends Controller
      */
     public function edit(Package $package)
     {
-        //
+        $hotels = Hotel::with('location')->get();
+        $flights = Flight::with('location')->get();
+        $activities = Activity::with('location')->get();
+        return view('packages.edit', compact('hotels', 'flights', 'activities', 'package'));
     }
 
     /**
@@ -52,7 +76,16 @@ class PackageController extends Controller
      */
     public function update(Request $request, Package $package)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'hotel_id' => 'required|exists:hotels,id',
+            'flight_id' => 'required|exists:flights,id',
+            'activity_id' => 'required|exists:activities,id',
+            'total_price' => 'required|numeric|min:1',
+        ]);
+
+        $package->update($validated);
+        return redirect()->route('packages.index')->with('success', 'Paquete actualizado');
     }
 
     /**
@@ -60,6 +93,7 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        //
+        $package->delete();
+        return redirect()->route('packages.index');
     }
 }
