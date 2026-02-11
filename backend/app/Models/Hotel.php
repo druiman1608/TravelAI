@@ -20,7 +20,12 @@ class Hotel extends Model
 
     public function location()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(Location::class, 'location_id');
+    }
+
+    public function origin()
+    {
+        return $this->belongsTo(Location::class, 'origin');
     }
 
     public function packages()

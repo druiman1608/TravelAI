@@ -37,7 +37,7 @@ class User extends Authenticatable
 
     public function role(): BelongsTo
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class, 'role_id');
     }
 
     public function preferences(): HasOne
@@ -62,16 +62,16 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return $this->role === config('roles.Administrador');
+        return $this->role_id === config('roles.Administrador');
     }
 
     public function isMod(): bool
     {
-        return $this->role === config('roles.Moderador');
+        return $this->role_id === config('roles.Moderador');
     }
 
     public function isPremium(): bool
     {
-        return $this->role === config('roles.Premium');
+        return $this->role_id === config('roles.Premium');
     }
 }

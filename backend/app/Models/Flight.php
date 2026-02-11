@@ -14,14 +14,14 @@ class Flight extends Model
         'location_id',
         'airline',
         'origin',
-        'departure_date',
-        'arrival_date',
+        'departure',
+        'arrival',
         'price',
     ];
 
     public function location()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(Location::class, 'location_id');
     }
 
     public function packages()

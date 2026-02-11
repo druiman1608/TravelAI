@@ -13,7 +13,7 @@ class FlightController extends Controller
      */
     public function index()
     {
-        $flights = Flight::with('location')->get();
+        $flights = Flight::with('destino')->get();
         return view('flights.index', compact('flights'));
     }
 
