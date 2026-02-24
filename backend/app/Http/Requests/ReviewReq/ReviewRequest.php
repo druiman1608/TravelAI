@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Activity;
+namespace App\Http\Requests\ReviewReq;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class ActivityRequest extends FormRequest
+class ReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +26,13 @@ class ActivityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'location_id' => 'required|exists:locations,id',
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:1',
+            'user_id' => Auth::id(),
+            'hotel_id' => 'required|exists:hotels,id',
+            'flight_id' => 'required|exists:flights,id',
+            'package_id' => 'required|exists:packages,id',
+            'rating' => 'required|integer|min:1',
+            'comment' => 'required|string',
+            'status' => 'boolean',
         ];
     }
 }

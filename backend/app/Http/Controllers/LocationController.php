@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\LocationReq\LocationRequest;
+
 class LocationController extends Controller
 {
     /**
@@ -27,20 +29,9 @@ class LocationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(LocationRequest $request)
     {
-        $validated = $request->validate([
-            'city' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
-            'continent' => 'required|string|max:255',
-            'weather_type' => 'required|string|max:255',
-            'description' => 'required|string',
-            'image_url' => 'nullable|url|max:255',
-            'status' => 'boolean',
-        ]);
-
-        \App\Models\Location::created($validated);
-
+        Location::create($request->validated());
         return redirect()->route('locations.index')->with('success', 'Localizacion creada');
     }
 
@@ -63,20 +54,9 @@ class LocationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Location $location)
+    public function update(LocationRequest $request, Location $location)
     {
-        $validated = $request->validate([
-            'city' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
-            'continent' => 'required|string|max:255',
-            'weather_type' => 'required|string|max:255',
-            'description' => 'required|string',
-            'image_url' => 'nullable|url|max:255',
-            'status' => 'boolean',
-
-        ]);
-
-        $location->update($validated);
+        $location->update($request->validated());
         return redirect()->route('locations.index')->with('success', 'Localizacion actualizad');
     }
 

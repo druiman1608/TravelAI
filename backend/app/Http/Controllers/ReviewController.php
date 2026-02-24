@@ -9,6 +9,8 @@ use App\Models\Flight;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Requests\ReviewReq\ReviewRequest;
+
 class ReviewController extends Controller
 {
     /**
@@ -34,20 +36,9 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ReviewRequest $request)
     {
-        $validated = $request->validate([
-            'user_id' => Auth::id(),
-            'hotel_id' => 'required|exists:hotels,id',
-            'flight_id' => 'required|exists:flights,id',
-            'package_id' => 'required|exists:packages,id',
-            'rating' => 'required|integer|min:1',
-            'comment' => 'required|string',
-            'status' => 'boolean',
-        ]);
-
-        \App\Models\Review::create($validated);
-
+        Review::create($request->validated());
         return redirect()->route('reviews.index')->with('success', 'Reseña creada');
     }
 
@@ -73,19 +64,9 @@ class ReviewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Review $review)
+    public function update(ReviewRequest $request, Review $review)
     {
-        $validated = $request->validate([
-            'user_id' => Auth::id(),
-            'hotel_id' => 'required|exists:hotels,id',
-            'flight_id' => 'required|exists:flights,id',
-            'package_id' => 'required|exists:packages,id',
-            'rating' => 'required|integer|min:1',
-            'comment' => 'required|string',
-            'status' => 'boolean',
-        ]);
-
-        $review->update($validated);
+        $review->update($request->validated());
         return redirect()->route('reviews.index')->with('success', 'Reseña actualizada');
     }
 

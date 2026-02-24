@@ -8,6 +8,8 @@ use App\Models\Flight;
 use App\Models\Activity;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\PackageReq\PackageRequest;
+
 class PackageController extends Controller
 {
     /**
@@ -37,18 +39,9 @@ class PackageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PackageRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'hotel_id' => 'required|exists:hotels,id',
-            'flight_id' => 'required|exists:flights,id',
-            'activity_id' => 'required|exists:activities,id',
-            'total_price' => 'required|numeric|min:1',
-        ]);
-
-        \App\Models\Package::create($validated);
-
+        Package::create($request->validated());
         return redirect()->route('packages.index')->with('success', 'Paquete creado');
     }
 
@@ -74,17 +67,9 @@ class PackageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Package $package)
+    public function update(PackageRequest $request, Package $package)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'hotel_id' => 'required|exists:hotels,id',
-            'flight_id' => 'required|exists:flights,id',
-            'activity_id' => 'required|exists:activities,id',
-            'total_price' => 'required|numeric|min:1',
-        ]);
-
-        $package->update($validated);
+        $package->update($request->validated());
         return redirect()->route('packages.index')->with('success', 'Paquete actualizado');
     }
 

@@ -6,7 +6,7 @@ use App\Models\Activity;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
-use App\Http\Requests\Activity\ActivityRequest;
+use App\Http\Requests\ActivityReq\ActivityRequest;
 
 class ActivityController extends Controller
 {

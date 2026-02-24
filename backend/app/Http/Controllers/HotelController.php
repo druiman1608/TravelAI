@@ -6,6 +6,8 @@ use App\Models\Hotel;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\HotelReq\HotelRequest;
+
 class HotelController extends Controller
 {
     /**
@@ -30,18 +32,9 @@ class HotelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(HotelRequest $request)
     {
-        $validated = $request->validate([
-            'location_id' => 'required|exists:locations,id',
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'stars' => 'required|integer|min:1|max:5',
-            'price_per_night' => 'required|numeric|min:1',
-        ]);
-
-        \App\Models\Hotel::create($validated);
-
+        Hotel::create($request->validated());
         return redirect()->route('hotels.index')->with('success', 'Hotel creado');
     }
 
@@ -65,17 +58,9 @@ class HotelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Hotel $hotel)
+    public function update(HotelRequest $request, Hotel $hotel)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'stars' => 'required|integer|min:1|max:5',
-            'location_id' => 'required|exists:locations,id',
-            'price_per_night' => 'required|numeric|min:1',
-        ]);
-
-        $hotel->update($validated);
+        $hotel->update($request->validated());
         return redirect()->route('hotels.index')->with('success', 'Hotel actualizado');
     }
 

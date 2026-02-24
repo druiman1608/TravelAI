@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Http\Requests\AIChatLog;
+namespace App\Http\Requests\HotelReq;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class AIChatLogRequest extends FormRequest
+class HotelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Auth::check();
+        /** @var \App\Models\User $user */
+
+        $user = Auth::user();
+        return Auth::check() && $user->isAdmin();
     }
 
     /**
@@ -23,7 +26,11 @@ class AIChatLogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'message' => 'sometimes|required|string',
+            'location_id' => 'required|exists:locations,id',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'stars' => 'required|integer|min:1|max:5',
+            'price_per_night' => 'required|numeric|min:1',
         ];
     }
 }

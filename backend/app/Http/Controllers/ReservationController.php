@@ -9,6 +9,8 @@ use App\Models\Flight;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Requests\ReservationReq\ReservationRequest;
+
 class ReservationController extends Controller
 {
     /**
@@ -34,14 +36,8 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
-        $validated = $request->validate([
-            'package_id' => 'required|exists:packages,id',
-            'hotel_id' => 'required|exists:hotels,id',
-            'flight_id' => 'required|exists:flights,id',
-        ]);
-
         $price = 0;
 
         if ($request->filled('package_id')) {
@@ -89,15 +85,9 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update(ReservationRequest $request, Reservation $reservation)
     {
-        $validated = $request->validate([
-            'status' => 'required|in:pendiente,confirmada,cancelada',
-        ]);
-
-        // NECESITO VALIDAR SI EL QUE ESTA EDITANDO LA RESERVA ES ADMIN O EL PROPIOP USER
-
-        $reservation->update($validated);
+        $reservation->update($request->validated());
         return redirect()->route('reservations.index')->with('success', 'Reserva Actualizada');
     }
 

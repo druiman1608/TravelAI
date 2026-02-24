@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Activity\FlightRequest as ActivityFlightRequest;
 use App\Models\Flight;
 use App\Models\Location;
 use Illuminate\Http\Request;
+
+use App\Http\Requests\FlightReq\FlightRequest;
 
 class FlightController extends Controller
 {
@@ -29,19 +32,9 @@ class FlightController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FlightRequest $request)
     {
-        $validated = $request->validate([
-            'location_id' => 'required|exists:locations,id',
-            'airline' => 'required|string|max:255',
-            'origin' => 'required|string|max:255',
-            'departure' => 'required|date|after:now',
-            'arrival' => 'required|date|after:departure',
-            'price' => 'required|numeric|min:1',
-        ]);
-
-        \App\Models\Flight::create($validated);
-
+        Flight::create($request->validated());
         return redirect()->route('flights.index')->with('success', 'Vuelo creado');
     }
 
@@ -65,18 +58,9 @@ class FlightController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Flight $flight)
+    public function update(FlightRequest $request, Flight $flight)
     {
-        $validated = $request->validate([
-            'location_id' => 'required|exists:locations,id',
-            'airline' => 'required|string|max:255',
-            'origin' => 'required|string|max:255',
-            'departure' => 'required|date|after:now',
-            'arrival' => 'required|date|after:departure',
-            'price' => 'required|numeric|min:1',
-        ]);
-
-        $flight->update($validated);
+        $flight->update($request->validated());
         return redirect()->route('flights.index')->with('success', 'Vuelo actualizado');
     }
 
