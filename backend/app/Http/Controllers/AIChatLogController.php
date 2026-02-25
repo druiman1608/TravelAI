@@ -17,12 +17,12 @@ class AIChatLogController extends Controller
         $user = Auth::user();
 
         if ($user->isAdmin()) {
-            $aichatlogs = AIChatLog::with('user')->get();
+            $logs = AIChatLog::with('user')->latest()->get();
         } else {
-            $aichatlogs = AIChatLog::where('user_id', $user->id)->get();
+            $logs = AIChatLog::where('user_id', $user->id)->latest()->get();
         }
 
-        return view('aichatlogs.index', compact('aichatlogs'));
+        return view('aichatlogs.index', compact('logs'));
     }
 
     /**
@@ -36,16 +36,16 @@ class AIChatLogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AIChatLog $aIChatLog)
+    public function show(AIChatLog $aichatlog)
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
 
-        if (Auth::id() !== $aIChatLog->user_id && !$user->isAdmin()) {
-            abort(403);
+        if ($aichatlog->user_id !== $user->id && !$user->isAdmin()) {
+            abort(403, 'No tienes permiso para acceder a este chat');
         }
 
-        return view('aichatlogs.show', compact('aIChatLog'));
+        return view('aichatlogs.show', compact('aichatlog'));
     }
 
     /**
@@ -59,16 +59,16 @@ class AIChatLogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AIChatLog $aIChatLog)
+    public function destroy(AIChatLog $aichatlog)
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
 
-        if (Auth::id() !== $aIChatLog->user_id && !$user->isAdmin()) {
-            abort(403);
+        if ($aichatlog->user_id !== $user->id && !$user->isAdmin()) {
+            abort(403, 'No tienes permiso para borrar a este chat');
         }
 
-        $aIChatLog->delete();
+        $aichatlog->delete();
         return redirect()->route('aichatlogs.index');
     }
 }

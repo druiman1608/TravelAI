@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\User;
 
 class AdminMiddleware
 {
@@ -16,10 +17,14 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->isAdmin) {
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if ($user && $user->isAdmin()) {
             return $next($request);
         }
 
-        return redirect('/')->with('ERROR', 'No tienes permisos para acceder a esta pagina');
+        return redirect()->route('dashboard')->with('error', 'No tienes permisos de Administrador.');
     }
 }

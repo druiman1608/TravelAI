@@ -18,7 +18,15 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::all();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        $query = Review::with(['user', 'hotel', 'flight', 'package']);
+
+        $reviews = ($user->isAdmin() || $user->isMod())
+            ? $query->latest()->get()
+            : $query->where('user_id', $user->id)->latest()->get();
+
         return view('reviews.index', compact('reviews'));
     }
 
@@ -38,7 +46,10 @@ class ReviewController extends Controller
      */
     public function store(ReviewRequest $request)
     {
-        Review::create($request->validated());
+        Review::create(array_merge($request->validated(), [
+            'user_id' => Auth::id(),
+            'status' => 'pendiente'
+        ]));
         return redirect()->route('reviews.index')->with('success', 'Reseña creada');
     }
 
@@ -47,6 +58,14 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if (!$user->isAdmin() && !$user->isMod() && $review->user_id !== $user->id) {
+            abort(403);
+        }
+
+        $review->load(['user', 'hotel', 'flight', 'package']);
         return view('reviews.show', compact('review'));
     }
 
@@ -55,9 +74,17 @@ class ReviewController extends Controller
      */
     public function edit(Review $review)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if (!$user->isAdmin() && !$user->isMod() && $review->user_id !== $user->id) {
+            abort(403);
+        }
+
         $packages = Package::all();
         $hotels = Hotel::with('location')->get();
         $flights = Flight::with('location')->get();
+
         return view('reviews.edit', compact('packages', 'hotels', 'flights', 'review'));
     }
 
@@ -75,6 +102,14 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if (!$user->isAdmin() && $review->user_id !== $user->id) {
+            abort(403);
+        }
+
         $review->delete();
         return redirect()->route('reviews.index');
     }

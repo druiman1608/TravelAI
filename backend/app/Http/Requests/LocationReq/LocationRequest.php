@@ -32,7 +32,7 @@ class LocationRequest extends FormRequest
             'weather_type' => 'required|string|max:255',
             'description' => 'required|string',
             'image_url' => 'nullable|url|max:255',
-            'status' => 'boolean',
+            'status' => 'required|boolean',
         ];
     }
 }

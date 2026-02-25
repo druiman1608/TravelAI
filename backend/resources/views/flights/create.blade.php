@@ -1,50 +1,41 @@
-<h1>Añadir nuevo hotel:</h1>
-<form method="POST" action="{{ route('hotels.store') }}">
+<h1>Añadir Nuevo Vuelo</h1>
+
+<form action="{{ route('flights.store') }}" method="POST">
     @csrf
+    <label>Aerolinea:</label>
+    <input type="text" name="airline" value="{{ old('airline') }}">
+    @error('airline') <div style="color:red">{{ $message }}</div> @enderror
+    <br><br>
 
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" name="name" value="{{ old('name') }}" required><br><br>
-
-    @error('name')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
-
-    <label for="description">Descripción:</label>
-    <textarea id="description" name="description" required>{{ old('description') }}</textarea><br><br>
-
-    @error('description')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
-
-    <label for="stars">Estrellas:</label>
-    <input type="number" id="stars" name="stars" min="1" max="5" value="{{ old('stars') }}" required><br><br>
-
-    @error('stars')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
-
-    <label for="location_id">Ubicación:</label>
-    <select id="location_id" name="location_id" required>
-        <option value="">Selecciona una localizacion</option>
+    <label>Destino:</label>
+    <select name="location_id">
         @foreach($locations as $location)
         <option value="{{ $location->id }}" {{ old('location_id') == $location->id ? 'selected' : '' }}>
             {{ $location->city }} ({{ $location->country }})
         </option>
         @endforeach
     </select>
+    <br><br>
 
-    @error('location')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
+    <label>Origen:</label>
+    <input type="text" name="origin" value="{{ old('origin') }}">
+    @error('origin') <div style="color:red">{{ $message }}</div> @enderror
+    <br><br>
 
-    <label for="price_per_night">Precio por noche:</label>
-    <input type="number" id="price_per_night" name="price_per_night" step="0.01" value="{{ old('price_per_night') }}"
-        required><br><br>
+    <label>Salida:</label>
+    <input type="datetime-local" name="departure" value="{{ old('departure') }}">
+    @error('departure') <div style="color:red">{{ $message }}</div> @enderror
+    <br><br>
 
-    @error('price_per_night')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
+    <label>Llegada:</label>
+    <input type="datetime-local" name="arrival" value="{{ old('arrival') }}">
+    @error('arrival') <div style="color:red">{{ $message }}</div> @enderror
+    <br><br>
 
-    <button type="submit">Añadir hotel</button>
+    <label>Precio:</label>
+    <input type="number" step="0.01" name="price" value="{{ old('price') }}">
+    @error('price') <div style="color:red">{{ $message }}</div> @enderror
+    <br><br>
 
+    <button type="submit">Guardar Vuelo</button>
 </form>

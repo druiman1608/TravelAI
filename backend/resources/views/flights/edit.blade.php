@@ -1,52 +1,27 @@
-<h1>Editar hotel:</h1>
-<form method="POST" action="{{ route('hotels.update', $hotel->id) }}">
-    @csrf
-    @method('PUT')
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" name="name" value="{{ old('name', $hotel->name) }}" required><br><br>
+<h1>Editar Vuelo: {{ $flight->airline }}</h1>
 
-    @error('name')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
+<form action="{{ route('flights.update', $flight->id) }}" method="POST">
+    @csrf @method('PUT')
 
-    <label for="description">Descripción:</label>
-    <textarea id="description" name="description"
-        required>{{ old('description', $hotel->description) }}</textarea><br><br>
+    <label>Aerolinea:</label>
+    <input type="text" name="airline" value="{{ old('airline', $flight->airline) }}">
+    <br><br>
 
-    @error('description')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
-
-    <label for="stars">Estrellas:</label>
-    <input type="number" id="stars" name="stars" min="1" max="5" value="{{ old('stars', $hotel->stars) }}"
-        required><br><br>
-
-    @error('stars')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
-
-    <label for="location_id">Ubicación:</label>
-    <select id="location_id" name="location_id" required>
-        <option value="">Selecciona una localizacion</option>
+    <label>Destino:</label>
+    <select name="location_id">
         @foreach($locations as $location)
         <option value="{{ $location->id }}"
-            {{ old('location_id', $hotel->location_id) == $location->id ? 'selected' : '' }}>
-            {{ $location->city }} ({{ $location->country }})
+            {{ old('location_id', $flight->location_id) == $location->id ? 'selected' : '' }}>
+            {{ $location->city }}
         </option>
         @endforeach
     </select>
+    <br><br>
 
-    @error('location')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
+    <label>Salida:</label>
+    <input type="datetime-local" name="departure"
+        value="{{ old('departure', \Carbon\Carbon::parse($flight->departure)->format('Y-m-d\TH:i')) }}">
+    <br><br>
 
-    <label for="price_per_night">Precio por noche:</label>
-    <input type="number" id="price_per_night" name="price_per_night" step="0.01"
-        value="{{ old('price_per_night', $hotel->price_per_night) }}" required><br><br>
-
-    @error('price_per_night')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
-
-    <button type="submit">Actualizar hotel</button>
+    <button type="submit">Actualizar Vuelo</button>
 </form>

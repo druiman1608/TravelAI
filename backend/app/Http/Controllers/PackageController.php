@@ -17,11 +17,9 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::with('location')->get();
-        $flights = Flight::with('location')->get();
-        $activities = Activity::with('location')->get();
+        $packages = Package::with('hotel', 'flight', 'activity')->get();
 
-        return view('packages.index', compact('hotels', 'flights', 'activities'));
+        return view('packages.index', compact('packages'));
     }
 
     /**

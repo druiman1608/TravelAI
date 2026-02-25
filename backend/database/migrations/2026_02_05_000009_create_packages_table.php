@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('hotel_id')->constrained('hotels')->onDelete('cascade');
-            $table->foreignId('flight_id')->constrained('flights')->onDelete('cascade');
+            $table->foreignId('hotel_id')->nullable()->constrained('hotels')->onDelete('cascade');
+            $table->foreignId('flight_id')->nullable()->constrained('flights')->onDelete('cascade');
             $table->foreignId('activity_id')->nullable()->constrained('activities')->onDelete('cascade');
             $table->decimal('total_price', 10, 2);
             $table->timestamps();

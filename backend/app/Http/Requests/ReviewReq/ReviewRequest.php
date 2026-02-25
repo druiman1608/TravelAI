@@ -12,10 +12,7 @@ class ReviewRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        /** @var \App\Models\User $user */
-
-        $user = Auth::user();
-        return Auth::check() && $user->isAdmin();
+        return Auth::check();
     }
 
     /**
@@ -25,14 +22,23 @@ class ReviewRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'user_id' => Auth::id(),
-            'hotel_id' => 'required|exists:hotels,id',
-            'flight_id' => 'required|exists:flights,id',
-            'package_id' => 'required|exists:packages,id',
-            'rating' => 'required|integer|min:1',
-            'comment' => 'required|string',
-            'status' => 'boolean',
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        $rules = [
+            'hotel_id'   => 'nullable|exists:hotels,id',
+            'flight_id'  => 'nullable|exists:flights,id',
+            'package_id' => 'nullable|exists:packages,id',
+            'rating'     => 'required|integer|min:1|max:5',
+            'comment'    => 'required|string|min:5',
         ];
+
+        if ($this->isMethod('put') || $this->isMethod('patch')) {
+            if ($user->isAdmin() || $user->isMod()) {
+                $rules['status'] = 'required|in:pendiente,publicada,borrada';
+            }
+        }
+
+        return $rules;
     }
 }

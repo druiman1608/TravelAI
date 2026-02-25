@@ -18,7 +18,13 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::all();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        $query = Reservation::with(['package', 'hotel', 'flight', 'user']);
+
+        $reservations = $user->isAdmin() ? $query->get() : $query->where('user_id', $user->id)->get();
+
         return view('reservations.index', compact('reservations'));
     }
 
@@ -68,6 +74,15 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if (!$user->isAdmin() && $reservation->user_id !== Auth::id()) {
+            abort(403, 'No tienes permiso para ver esta reserva.');
+        }
+
+        $reservation->load(['package', 'hotel', 'flight', 'user']);
         return view('reservations.show', compact('reservation'));
     }
 
@@ -87,7 +102,17 @@ class ReservationController extends Controller
      */
     public function update(ReservationRequest $request, Reservation $reservation)
     {
-        $reservation->update($request->validated());
+        $price = $reservation->price;
+
+        if ($request->filled('package_id')) {
+            $price = Package::findOrFail($request->package_id)->total_price;
+        } else if ($request->filled('hotel_id')) {
+            $price = Hotel::findOrFail($request->hotel_id)->price_per_night;
+        } else if ($request->filled('flight_id')) {
+            $price = Flight::findOrFail($request->flight_id)->price;
+        }
+
+        $reservation->update(array_merge($request->validated(), ['price' => $price]));
         return redirect()->route('reservations.index')->with('success', 'Reserva Actualizada');
     }
 

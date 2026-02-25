@@ -12,10 +12,7 @@ class ReservationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        /** @var \App\Models\User $user */
-
-        $user = Auth::user();
-        return Auth::check() && $user->isAdmin();
+        return Auth::check();
     }
 
     /**
@@ -25,16 +22,21 @@ class ReservationRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->isMethod('put') || $this->isMethod('patch')) {
-            return [
-                'status' => 'required|in:pendiente,confirmada,cancelada',
-            ];
+
+        $rules = [
+            'package_id' => 'nullable|exists:packages,id',
+            'hotel_id'   => 'nullable|exists:hotels,id',
+            'flight_id'  => 'nullable|exists:flights,id',
+        ];
+
+        if ($this->isMethod('post')) {
+            $rules['package_id'] .= '|required_without_all:hotel_id,flight_id';
         }
 
-        return [
-            'package_id' => 'nullable|exists:packages,id',
-            'hotel_id' => 'nullable|exists:hotels,id',
-            'flight_id' => 'nullable|exists:flights,id',
-        ];
+        if ($this->isMethod('put') || $this->isMethod('patch')) {
+            $rules['status'] = 'required|in:pendiente,confirmada,cancelada';
+        }
+
+        return $rules;
     }
 }

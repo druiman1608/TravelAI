@@ -1,50 +1,40 @@
-<h1>Añadir nuevo hotel:</h1>
-<form method="POST" action="{{ route('hotels.store') }}">
+<h1>Añadir Nuevo Hotel</h1>
+
+<form action="{{ route('hotels.store') }}" method="POST">
     @csrf
 
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" name="name" value="{{ old('name') }}" required><br><br>
+    <label>Nombre del Hotel:</label>
+    <input type="text" name="name" value="{{ old('name') }}">
+    @error('name') <div style="color:red">{{ $message }}</div> @enderror
+    <br><br>
 
-    @error('name')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
-
-    <label for="description">Descripción:</label>
-    <textarea id="description" name="description" required>{{ old('description') }}</textarea><br><br>
-
-    @error('description')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
-
-    <label for="stars">Estrellas:</label>
-    <input type="number" id="stars" name="stars" min="1" max="5" value="{{ old('stars') }}" required><br><br>
-
-    @error('stars')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
-
-    <label for="location_id">Ubicación:</label>
-    <select id="location_id" name="location_id" required>
-        <option value="">Selecciona una localizacion</option>
+    <label>Ubicacion:</label>
+    <select name="location_id">
+        <option value="">Selecciona una ciudad</option>
         @foreach($locations as $location)
         <option value="{{ $location->id }}" {{ old('location_id') == $location->id ? 'selected' : '' }}>
             {{ $location->city }} ({{ $location->country }})
         </option>
         @endforeach
     </select>
+    @error('location_id') <div style="color:red">{{ $message }}</div> @enderror
+    <br><br>
 
-    @error('location')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
+    <label>Estrellas:</label>
+    <input type="number" name="stars" min="1" max="5" value="{{ old('stars') }}">
+    @error('stars') <div style="color:red">{{ $message }}</div> @enderror
+    <br><br>
 
-    <label for="price_per_night">Precio por noche:</label>
-    <input type="number" id="price_per_night" name="price_per_night" step="0.01" value="{{ old('price_per_night') }}"
-        required><br><br>
+    <label>Precio por noche:</label>
+    <input type="number" step="0.01" name="price_per_night" value="{{ old('price_per_night') }}">
+    @error('price_per_night') <div style="color:red">{{ $message }}</div> @enderror
+    <br><br>
 
-    @error('price_per_night')
-    <div class="error" style="color:red">{{ $message }}</div>
-    @enderror
+    <label>Descripcion:</label><br>
+    <textarea name="description" rows="4">{{ old('description') }}</textarea>
+    @error('description') <div style="color:red">{{ $message }}</div> @enderror
+    <br><br>
 
-    <button type="submit">Añadir hotel</button>
-
+    <button type="submit">Guardar Hotel</button>
 </form>
+<a href="{{ route('hotels.index') }}">Cancelar</a>

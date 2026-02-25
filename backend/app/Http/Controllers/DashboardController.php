@@ -11,8 +11,6 @@ use App\Models\Reservation;
 use App\Models\AIChatLog;
 use Illuminate\Support\Facades\Auth;
 
-
-
 class DashboardController extends Controller
 {
     public function index()
@@ -28,13 +26,11 @@ class DashboardController extends Controller
         ];
 
         if ($user->isAdmin()) {
-
             $data['users'] = User::latest()->take(5)->get();
-        } else {
-
-            $data['reservations'] = Reservation::where('user_id', $user->id)->latest()->take(5)->get();
-            $data['aichatlogs'] = AIChatLog::where('user_id', $user->id)->latest()->take(5)->get();
         }
+
+        $data['reservations'] = Reservation::where('user_id', $user->id)->latest()->take(5)->get();
+        $data['aichatlogs'] = AIChatLog::where('user_id', $user->id)->latest()->take(5)->get();
 
         return view('dashboard.index', compact('data'));
     }

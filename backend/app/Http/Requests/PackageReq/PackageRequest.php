@@ -27,10 +27,28 @@ class PackageRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'hotel_id' => 'required|exists:hotels,id',
-            'flight_id' => 'required|exists:flights,id',
-            'activity_id' => 'required|exists:activities,id',
+            'hotel_id'    => 'nullable|exists:hotels,id',
+            'flight_id'   => 'nullable|exists:flights,id',
+            'activity_id' => 'nullable|exists:activities,id',
             'total_price' => 'required|numeric|min:1',
         ];
+    }
+
+    public function validator($validator)
+    {
+        $validator->after(function ($validator) {
+
+            $fields = [
+                $this->hotel_id,
+                $this->flight_id,
+                $this->activity_id
+            ];
+
+            $fieldsCount = count(array_filter($fields));
+
+            if ($fieldsCount < 2) {
+                $validator->errors()->add('fields', 'Un paquete debe tener almenos 2 servicios');
+            }
+        });
     }
 }

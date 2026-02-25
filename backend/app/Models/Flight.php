@@ -33,4 +33,12 @@ class Flight extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    protected function casts(): array
+    {
+        return [
+            'departure' => 'datetime',
+            'arrival' => 'datetime',
+        ];
+    }
 }
