@@ -24,7 +24,6 @@ class HotelController extends Controller
      */
     public function create()
     {
-
         $locations = Location::all();
         return view('hotels.create', compact('locations'));
     }

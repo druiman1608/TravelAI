@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\UserPreference;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserPreferenceReq\UserPreferenceRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserPreferenceController extends Controller
 {
@@ -12,54 +14,47 @@ class UserPreferenceController extends Controller
      */
     public function index()
     {
-        //
+        $preference = Auth::user()->preferences;
+        return view('userPreferences.form', compact('preference'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserPreferenceRequest $request)
     {
-        //
+        UserPreference::updateOrCreate(
+            ['user_id' => Auth::id()],
+            $request->validated()
+        );
+
+        return redirect()->route('userPreferences.index')->with('success', 'Preferencias guardadasa');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(UserPreference $userPreference)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UserPreference $userPreference)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserPreference $userPreference)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(UserPreference $userPreference)
     {
-        //
+        $this->authorize('delete', $userPreference);
+        $userPreference->delete();
+
+        return redirect()->route('userPreferences.index')->with('success', 'Preferencias eliminadas');
     }
 }

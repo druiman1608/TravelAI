@@ -57,3 +57,30 @@ Crea el archivo de configuración del Backend:
 - Limpiar caché de Laravel: docker exec -it travelai-app php artisan config:clear
 - Refrescar Base de Datos y añadir datos: docker exec -it travelai-app php artisan migrate:fresh --seed
 - Acceder al contenedor de Laravel: docker exec -it travelai-app bash
+
+## Usuarios introducidos por los seeders y sus credenciales:
+
+- Admin:
+  Nombre: Administrador
+  Email: admin@admin.es
+  Contraseña: Admin1234?
+
+- Moderador:
+  Nombre: Moderador
+  Email: mod@mod.es
+  Contraseña: Mod1234?
+
+- Usuario Premium:
+  Nombre: Premium
+  Email: premium@premium.es
+  Contraseña: Premium1234?
+
+- Usuario:
+  Nombre: Usuario
+  Email: user@user.es
+  Contraseña: Usuario1234?
+
+- Tester:
+  Nombre: Tester
+  Email: tester@tester.es
+  Contraseña: Tester1234?
