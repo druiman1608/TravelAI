@@ -10,7 +10,7 @@
     @csrf
 
     <label>Nombre del Paquete:</label>
-    <input type="text" name="name" value="{{ old('name') }}">
+    <input type="text" name="name" value="{{ old('name') }}" required>
     <br><br>
 
     <p><small>* Selecciona al menos dos:</small></p>
@@ -49,7 +49,7 @@
     <br><br>
 
     <label>Precio Total:</label>
-    <input type="number" step="0.01" name="total_price" value="{{ old('total_price') }}">
+    <input type="number" step="0.01" name="total_price" value="{{ old('total_price') }}" required>
     <br><br>
 
     <button type="submit">Crear Paquete</button>

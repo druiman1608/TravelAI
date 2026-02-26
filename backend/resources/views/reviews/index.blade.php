@@ -6,9 +6,9 @@
 <p>Tus opiniones sobre nuestros servicios:</p>
 @endif
 
+<p><a href="{{ route('dashboard') }}">Volver al Dashboard</a></p>
 <p><a href="{{ route('reviews.create') }}">Escribir una nueva reseña</a></p>
+<hr>
+<br>
 
 @include('reviews._list')
-
-<br>
-<a href="{{ route('dashboard') }}">Volver al Dashboard</a>

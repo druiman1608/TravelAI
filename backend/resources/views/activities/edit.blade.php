@@ -5,12 +5,12 @@
     @method('PUT')
 
     <label>Nombre:</label>
-    <input type="text" name="name" value="{{ old('name', $activity->name) }}">
+    <input type="text" name="name" value="{{ old('name', $activity->name) }}" required>
     @error('name') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Ubicacion:</label>
-    <select name="location_id">
+    <select name="location_id" required>
         @foreach($locations as $location)
         <option value="{{ $location->id }}"
             {{ old('location_id', $activity->location_id) == $location->id ? 'selected' : '' }}>
@@ -27,7 +27,7 @@
     <br><br>
 
     <label>Precio:</label>
-    <input type="number" step="0.01" name="price" value="{{ old('price', $activity->price) }}">
+    <input type="number" step="0.01" name="price" value="{{ old('price', $activity->price) }}" required>
     @error('price') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 

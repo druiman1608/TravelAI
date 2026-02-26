@@ -6,7 +6,7 @@
     <p>Selecciona el servicio que deseas valorar:</p>
 
     <label>Paquete:</label>
-    <select name="package_id">
+    <select name="package_id" required>
         <option value="">-- Ninguno --</option>
         @foreach($packages as $p)
         <option value="{{ $p->id }}">{{ $p->name }}</option>
@@ -15,7 +15,7 @@
     <br><br>
 
     <label>Hotel:</label>
-    <select name="hotel_id">
+    <select name="hotel_id" required>
         <option value="">-- Ninguno --</option>
         @foreach($hotels as $h)
         <option value="{{ $h->id }}">{{ $h->name }}</option>
@@ -24,7 +24,7 @@
     <br><br>
 
     <label>Vuelo:</label>
-    <select name="flight_id">
+    <select name="flight_id" required>
         <option value="">-- Ninguno --</option>
         @foreach($flights as $f)
         <option value="{{ $f->id }}">{{ $f->airline }} ({{ $f->origin }})</option>
@@ -33,11 +33,11 @@
     <br><br>
 
     <label>Puntuacion 1-5:</label>
-    <input type="number" name="rating" min="1" max="5" value="5">
+    <input type="number" name="rating" min="1" max="5" value="5" required>
     <br><br>
 
     <label>Comentario:</label><br>
-    <textarea name="comment" rows="5" cols="40"></textarea>
+    <textarea name="comment" rows="5" cols="40" required></textarea>
     <br><br>
 
     <button type="submit">Publicar Reseña</button>

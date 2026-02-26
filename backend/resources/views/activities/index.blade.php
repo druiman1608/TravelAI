@@ -1,10 +1,8 @@
 <h1>Listado de actividades:</h1>
-
+<p><a href="{{ route('dashboard') }}">Volver al Dashboard</a></p>
 @if(auth()->user()->isAdmin())
 <p><a href="{{ route('activities.create') }}">Crear nueva actividad</a></p>
 @endif
-
-@include('activities._list')
-
+<hr>
 <br>
-<a href="{{ route('dashboard') }}">Volver al Dashboard</a>
+@include('activities._list')

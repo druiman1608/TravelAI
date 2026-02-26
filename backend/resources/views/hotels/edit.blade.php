@@ -4,11 +4,11 @@
     @csrf @method('PUT')
 
     <label>Nombre:</label>
-    <input type="text" name="name" value="{{ old('name', $hotel->name) }}">
+    <input type="text" name="name" value="{{ old('name', $hotel->name) }}" required>
     <br><br>
 
     <label>Ubicacion:</label>
-    <select name="location_id">
+    <select name="location_id" required>
         @foreach($locations as $location)
         <option value="{{ $location->id }}"
             {{ old('location_id', $hotel->location_id) == $location->id ? 'selected' : '' }}>
@@ -19,12 +19,12 @@
     <br><br>
 
     <label>Estrellas:</label>
-    <input type="number" name="stars" min="1" max="5" value="{{ old('stars', $hotel->stars) }}">
+    <input type="number" name="stars" min="1" max="5" value="{{ old('stars', $hotel->stars) }}" required>
     <br><br>
 
     <label>Precio por noche:</label>
     <input type="number" step="0.01" name="price_per_night"
-        value="{{ old('price_per_night', $hotel->price_per_night) }}">
+        value="{{ old('price_per_night', $hotel->price_per_night) }}" required>
     <br><br>
 
     <label>Descripcion:</label><br>

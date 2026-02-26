@@ -4,12 +4,12 @@
     @csrf
 
     <label>Nombre:</label>
-    <input type="text" name="name" value="{{ old('name') }}">
+    <input type="text" name="name" value="{{ old('name') }}" required>
     @error('name') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Ubicacion:</label>
-    <select name="location_id">
+    <select name="location_id" required>
         <option value="">Selecciona una ubicacion</option>
         @foreach($locations as $location)
         <option value="{{ $location->id }}" {{ old('location_id') == $location->id ? 'selected' : '' }}>
@@ -26,7 +26,7 @@
     <br><br>
 
     <label>Precio:</label>
-    <input type="number" step="0.01" name="price" value="{{ old('price') }}">
+    <input type="number" step="0.01" name="price" value="{{ old('price') }}" required>
     @error('price') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 

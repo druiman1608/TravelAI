@@ -1,6 +1,6 @@
 <h1>Listado de usuarios:</h1>
-<p><a href="{{ route('users.create') }}">Crear nuevo usuario</a></p>
-@include('users._list')
-
+<p><a href="{{ route('dashboard') }}">Volver al Dashboard</a></p>
+<p><a href="{{ route('users.create') }}">Registrar Nuevo Usuario</a></p>
+<hr>
 <br>
-<a href="{{ route('dashboard') }}">Volver al Dashboard</a>
+@include('users._list')

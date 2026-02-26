@@ -4,27 +4,27 @@
     @csrf
 
     <label>Ciudad:</label>
-    <input type="text" name="city" value="{{ old('city') }}">
+    <input type="text" name="city" value="{{ old('city') }}" required>
     @error('city') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Pais:</label>
-    <input type="text" name="country" value="{{ old('country') }}">
+    <input type="text" name="country" value="{{ old('country') }}" required>
     @error('country') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Continente:</label>
-    <input type="text" name="continent" value="{{ old('continent') }}">
+    <input type="text" name="continent" value="{{ old('continent') }}" required>
     @error('continent') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Clima:</label>
-    <input type="text" name="weather_type" value="{{ old('weather_type') }}">
+    <input type="text" name="weather_type" value="{{ old('weather_type') }}" required>
     @error('weather_type') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Descripcion:</label><br>
-    <textarea name="description">{{ old('description') }}</textarea>
+    <textarea name="description" required>{{ old('description') }}</textarea>
     @error('description') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
@@ -34,7 +34,7 @@
     <br><br>
 
     <label>Estado:</label>
-    <select name="status">
+    <select name="status" required>
         <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Activo</option>
         <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Inactivo</option>
     </select>

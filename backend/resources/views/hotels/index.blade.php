@@ -1,8 +1,8 @@
 <h1>Listado de hoteles:</h1>
+<p><a href="{{ route('dashboard') }}">Volver al Dashboard</a></p>
 @if(auth()->user()->isAdmin())
 <p><a href="{{ route('hotels.create') }}">Crear nuevo hotel</a></p>
 @endif
-@include('hotels._list')
-
+<hr>
 <br>
-<a href="{{ route('dashboard') }}">Volver al Dashboard</a>
+@include('hotels._list')

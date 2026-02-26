@@ -1,11 +1,10 @@
 <h1>Listado de Reservas</h1>
 @if(auth()->user()->isAdmin())
-<p><strong>Administrador:</strong> Viendo todas las ventas.</p>
+<p><strong>Administrador:</strong> Viendo todas las reservas del sistema.</p>
 @else
 <p>Mis reservas:</p>
 @endif
-
-@include('reservations._list')
-
+<p><a href="{{ route('dashboard') }}">Volver al Dashboard</a></p>
+<hr>
 <br>
-<a href="{{ route('dashboard') }}">Volver al Dashboard</a>
+@include('reservations._list')

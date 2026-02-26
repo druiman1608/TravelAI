@@ -50,7 +50,8 @@
     <br><br>
 
     <label>Precio Total:</label>
-    <input type="number" step="0.01" name="total_price" value="{{ old('total_price', $package->total_price) }}">
+    <input type="number" step="0.01" name="total_price" value="{{ old('total_price', $package->total_price) }}"
+        required>
     @error('total_price') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
