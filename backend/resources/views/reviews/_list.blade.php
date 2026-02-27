@@ -1,3 +1,5 @@
+@include('partials.alerts')
+
 <link rel="stylesheet" href="{{ asset('css/_lists/_list.blade.css') }}">
 
 <table border="1">
@@ -7,15 +9,13 @@
             <th>Servicio</th>
             <th>Comentario</th>
             <th>Estado</th>
-            @if(auth()->user()->isAdmin() || auth()->user()->isMod())
             <th>Autor</th>
-            @endif
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach($reviews as $review)
-        <tr>
+        <tr class="{{ $review->status }}">
             <td>{{ $review->rating }} / 5</td>
             <td>
                 @if($review->package) Paquete: {{ $review->package->name }}
@@ -24,10 +24,13 @@
                 @endif
             </td>
             <td>{{ $review->comment }}</td>
-            <td>{{ $review->status }}</td>
-            @if(auth()->user()->isAdmin() || auth()->user()->isMod())
+            <td>
+                {{ $review->status }}
+                @if($review->status == 'pendiente' && $review->user_id == auth()->id())
+                [Solo visible para ti]
+                @endif
+            </td>
             <td>{{ $review->user->name }}</td>
-            @endif
             <td>
                 <a href="{{ route('reviews.show', $review->id) }}">Ver</a>
 
@@ -37,8 +40,9 @@
 
                 @if(auth()->user()->isAdmin())
                 | <form action="{{ route('reviews.destroy', $review->id) }}" method="POST" style="display:inline;">
-                    @csrf @method('DELETE')
-                    <button type="submit" onclick="return confirm('¿Borrar reseña?')">Eliminar</button>
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('¿Borrar definitivamente?')">Eliminar</button>
                 </form>
                 @endif
             </td>
@@ -48,5 +52,5 @@
 </table>
 
 @if($reviews->isEmpty())
-<p>No hay reseñas publicadas.</p>
+<p>No hay reseñas que mostrar.</p>
 @endif

@@ -78,4 +78,6 @@ unset($__errorArgs, $__bag); ?>
 
     <button type="submit">Guardar Hotel</button>
 </form>
-<a href="<?php echo e(route('hotels.index')); ?>">Cancelar</a><?php /**PATH /var/www/resources/views/hotels/create.blade.php ENDPATH**/ ?>
+
+<br>
+<a href="<?php echo e(route('hotels.index')); ?>">Cancelar y volver</a><?php /**PATH /var/www/resources/views/hotels/create.blade.php ENDPATH**/ ?>

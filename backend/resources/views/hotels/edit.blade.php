@@ -1,5 +1,7 @@
 <h1>Editar Hotel: {{ $hotel->name }}</h1>
 
+@include('partials.alerts')
+
 <form action="{{ route('hotels.update', $hotel->id) }}" method="POST">
     @csrf @method('PUT')
 

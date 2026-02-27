@@ -24,7 +24,6 @@ class AIChatLogRequest extends FormRequest
     {
         return [
             'user_question' => 'required|string',
-            'ai_answer'     => 'required|string',
         ];
     }
 }

@@ -1,5 +1,7 @@
 <h1>Detalle del Rol: {{ $role->name }}</h1>
 
+@include('partials.alerts')
+
 <a href="{{ route('roles.index') }}">Volver al listado</a>
 <hr>
 
@@ -12,7 +14,6 @@
 
             <label>Nombre:</label><br>
             <input type="text" name="name" value="{{ old('name', $role->name) }}">
-            @error('name') <p style="color: red;">{{ $message }}</p> @enderror
 
             <br><br>
             <button type="submit">Actualizar nombre</button>

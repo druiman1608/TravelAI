@@ -1,5 +1,7 @@
 <h1>Crear Nueva Reserva</h1>
 
+@include('partials.alerts')
+
 <form action="{{ route('reservations.store') }}" method="POST">
     @csrf
 

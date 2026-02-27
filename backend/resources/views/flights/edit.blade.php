@@ -1,12 +1,13 @@
 <h1>Editar Vuelo: {{ $flight->airline }}</h1>
 
+@include('partials.alerts')
+
 <form action="{{ route('flights.update', $flight->id) }}" method="POST">
     @csrf
     @method('PUT')
 
     <label>Aerolinea:</label>
     <input type="text" name="airline" value="{{ old('airline', $flight->airline) }}" required>
-    @error('airline') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Destino:</label>
@@ -22,24 +23,20 @@
 
     <label>Origen:</label>
     <input type="text" name="origin" value="{{ old('origin', $flight->origin) }}" required>
-    @error('origin') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Salida:</label>
     <input type="datetime-local" name="departure"
         value="{{ old('departure', $flight->departure->format('Y-m-d\TH:i')) }}" required>
-    @error('departure') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Llegada:</label>
     <input type="datetime-local" name="arrival" value="{{ old('arrival', $flight->arrival->format('Y-m-d\TH:i')) }}"
         required>
-    @error('arrival') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Precio:</label>
     <input type="number" name="price" step="0.01" value="{{ old('price', $flight->price) }}" required>
-    @error('price') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <button type="submit">Actualizar Vuelo</button>

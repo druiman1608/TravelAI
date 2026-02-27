@@ -4,51 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Review;
+use App\Http\Resources\ReviewResource;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\ReviewReq\ReviewRequest;
-
 
 class ReviewApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+
     public function index()
     {
-        return response()->json(Review::with('user')->get());
+        return $this->success(ReviewResource::collection(Review::all()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(ReviewRequest $request)
+    public function store(Request $request)
     {
-        return response()->json(Review::create($request->validated()), 201);
+        $item = Review::create($request->all());
+        return $this->success(new ReviewResource($item), 'Creado', 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Review $review)
+    public function show($id)
     {
-        return response()->json($review->load('user'));
+        $item = Review::find($id);
+        return $item ? $this->success(new ReviewResource($item)) : $this->error('No encontrado', 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(ReviewRequest $request, Review $review)
+    public function update(Request $request, $id)
     {
-        $review->update($request->validated());
-        return response()->json($review);
+        $item = Review::findOrFail($id);
+        $item->update($request->all());
+        return $this->success(new ReviewResource($item), 'Actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Review $review)
+    public function destroy($id)
     {
-        $review->delete();
-        return response()->json(['message' => 'Review eliminada'], 200);
+        Review::destroy($id);
+        return $this->success(null, 'Eliminado');
     }
 }

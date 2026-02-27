@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\{
-    AuthController,
+    AuthApiController,
     ActivityApiController,
     AIChatLogApiController,
     FlightApiController,
@@ -17,12 +17,14 @@ use App\Http\Controllers\Api\{
     UserPreferenceApiController
 };
 
-Route::post('/login', [AuthController::class, 'login'])->name('api.login');
+// Ruta de Login
+Route::post('/login', [AuthApiController::class, 'login'])->name('api.login');
 
+// Rutas Protegidas por Sanctum
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/user', function (Request $request) {
-        return $request->user();
+        return new \App\Http\Resources\UserResource($request->user());
     })->name('api.user');
 
     Route::apiResource('activities', ActivityApiController::class)->names('api.activities');
@@ -37,5 +39,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('roles', RoleApiController::class)->names('api.roles');
     Route::apiResource('users', UserApiController::class)->names('api.users');
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('api.logout');
+    Route::post('/logout', [AuthApiController::class, 'logout'])->name('api.logout');
 });

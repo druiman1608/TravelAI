@@ -1,5 +1,15 @@
 <h1>Crear Nueva Reserva</h1>
 
+<?php if($errors->any()): ?>
+<div style="background: #fee2e2; color: #b91c1c; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <ul>
+        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <li><?php echo e($error); ?></li>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </ul>
+</div>
+<?php endif; ?>
+
 <form action="<?php echo e(route('reservations.store')); ?>" method="POST">
     <?php echo csrf_field(); ?>
 

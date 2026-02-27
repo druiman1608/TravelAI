@@ -4,50 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
+use App\Http\Resources\ActivityResource;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\ActivityReq\ActivityRequest;
 
 class ActivityApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+
     public function index()
     {
-        return response()->json(Activity::all());
+        return $this->success(ActivityResource::collection(Activity::all()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(ActivityRequest $request)
+    public function store(Request $request)
     {
-        return response()->json(Activity::create($request->validated()), 201);
+        $item = Activity::create($request->all());
+        return $this->success(new ActivityResource($item), 'Creado', 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Activity $activity)
+    public function show($id)
     {
-        return response()->json($activity);
+        $item = Activity::find($id);
+        return $item ? $this->success(new ActivityResource($item)) : $this->error('No encontrado', 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(ActivityRequest $request, Activity $activity)
+    public function update(Request $request, $id)
     {
-        $activity->update($request->validated());
-        return response()->json($activity);
+        $item = Activity::findOrFail($id);
+        $item->update($request->all());
+        return $this->success(new ActivityResource($item), 'Actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Activity $activity)
+    public function destroy($id)
     {
-        $activity->delete();
-        return response()->json(['message' => 'Actividad eliminada'], 200);
+        Activity::destroy($id);
+        return $this->success(null, 'Eliminado');
     }
 }

@@ -4,51 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Package;
+use App\Http\Resources\PackageResource;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\PackageReq\PackageRequest;
-
 
 class PackageApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+
     public function index()
     {
-        return response()->json(Package::with(['hotel', 'flight', 'activities'])->get());
+        return $this->success(PackageResource::collection(Package::all()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(PackageRequest $request)
+    public function store(Request $request)
     {
-        return response()->json(Package::create($request->validated()), 201);
+        $item = Package::create($request->all());
+        return $this->success(new PackageResource($item), 'Creado', 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Package $package)
+    public function show($id)
     {
-        return response()->json($package->load(['hotel', 'flight', 'activities']));
+        $item = Package::find($id);
+        return $item ? $this->success(new PackageResource($item)) : $this->error('No encontrado', 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(PackageRequest $request, Package $package)
+    public function update(Request $request, $id)
     {
-        $package->update($request->validated());
-        return response()->json($package);
+        $item = Package::findOrFail($id);
+        $item->update($request->all());
+        return $this->success(new PackageResource($item), 'Actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Package $package)
+    public function destroy($id)
     {
-        $package->delete();
-        return response()->json(['message' => 'Paquete eliminado'], 200);
+        Package::destroy($id);
+        return $this->success(null, 'Eliminado');
     }
 }

@@ -1,10 +1,6 @@
 <h1>Crear Nuevo Paquete</h1>
 
-@if ($errors->any())
-<div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 20px;">
-    <strong>Error:</strong> Debes seleccionar al menos dos servicios.
-</div>
-@endif
+@include('partials.alerts')
 
 <form action="{{ route('packages.store') }}" method="POST">
     @csrf

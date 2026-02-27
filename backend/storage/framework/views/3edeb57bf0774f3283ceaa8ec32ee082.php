@@ -36,4 +36,4 @@
 </div>
 
 <br>
-<a href="<?php echo e(route('packages.index')); ?>">Volver al catalogo</a><?php /**PATH /var/www/resources/views/packages/show.blade.php ENDPATH**/ ?>
+<a href="<?php echo e(route('packages.index')); ?>">Volver</a><?php /**PATH /var/www/resources/views/packages/show.blade.php ENDPATH**/ ?>

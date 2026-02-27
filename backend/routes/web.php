@@ -42,9 +42,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('roles', RoleController::class);
         Route::resource('locations', LocationController::class);
 
-        // [Logs de la IA]
-        Route::get('/ai-logs', [AIChatLogController::class, 'index'])->name('aichatlogs.index');
-        Route::get('/ai-logs/{aichatlog}', [AIChatLogController::class, 'show'])->name('aichatlogs.show');
+        // [Logs de la IA - Borrado admin]
         Route::delete('/ai-logs/{log}', [AIChatLogController::class, 'destroy'])->name('aichatlogs.destroy');
     });
 
@@ -68,6 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('reviews', ReviewController::class);
 
     // [Chat con IA]
+    Route::get('/ai-logs', [AIChatLogController::class, 'index'])->name('aichatlogs.index');
+    Route::get('/ai-logs/{aichatlog}', [AIChatLogController::class, 'show'])->name('aichatlogs.show');
     Route::get('/ai-chat/create', [AIChatLogController::class, 'create'])->name('aichatlogs.create');
     Route::post('/ai-chat/store', [AIChatLogController::class, 'store'])->name('aichatlogs.store');
 

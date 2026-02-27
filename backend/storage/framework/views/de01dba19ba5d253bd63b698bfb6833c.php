@@ -19,4 +19,7 @@ unset($__errorArgs, $__bag); ?>
 
     <br>
     <button type="submit">Preguntar</button>
-</form><?php /**PATH /var/www/resources/views/aichatlogs/create.blade.php ENDPATH**/ ?>
+</form>
+
+<br>
+<a href="<?php echo e(route('aichatlogs.index')); ?>">Cancelar y volver</a><?php /**PATH /var/www/resources/views/aichatlogs/create.blade.php ENDPATH**/ ?>

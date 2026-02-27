@@ -12,5 +12,5 @@
 <a href="<?php echo e(route('activities.edit', $activity->id)); ?>">Editar Actividad</a>
 <?php endif; ?>
 
-<br><br>
-<a href="<?php echo e(route('activities.index')); ?>">Volver al listado</a><?php /**PATH /var/www/resources/views/activities/show.blade.php ENDPATH**/ ?>
+<br>
+<a href="<?php echo e(route('activities.index')); ?>">Volver</a><?php /**PATH /var/www/resources/views/activities/show.blade.php ENDPATH**/ ?>

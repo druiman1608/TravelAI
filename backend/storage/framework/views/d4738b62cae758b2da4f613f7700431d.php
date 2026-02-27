@@ -72,4 +72,6 @@ unset($__errorArgs, $__bag); ?>
 
     <button type="submit">Guardar Usuario</button>
 </form>
-<p><a href="<?php echo e(route('users.index')); ?>">Cancelar</a></p><?php /**PATH /var/www/resources/views/users/create.blade.php ENDPATH**/ ?>
+
+<br>
+<a href="<?php echo e(route('users.index')); ?>">Cancelar y volver</a><?php /**PATH /var/www/resources/views/users/create.blade.php ENDPATH**/ ?>

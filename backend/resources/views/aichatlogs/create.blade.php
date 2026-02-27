@@ -1,16 +1,14 @@
 <h1>Consultar a la IA</h1>
 
+@include('partials.alerts')
+
 <form action="{{ route('aichatlogs.store') }}" method="POST">
     @csrf
 
     <label>Escribe tu pregunta:</label><br>
     <textarea name="user_question" required>{{ old('user_question') }}</textarea>
+    <br><br>
 
-    @error('user_question')
-    <p style="color:red">{{ $message }}</p>
-    @enderror
-
-    <br>
     <button type="submit">Preguntar</button>
 </form>
 

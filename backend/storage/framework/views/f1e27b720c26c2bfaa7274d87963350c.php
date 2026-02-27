@@ -34,4 +34,7 @@
     <br><br>
 
     <button type="submit">Actualizar</button>
-</form><?php /**PATH /var/www/resources/views/users/edit.blade.php ENDPATH**/ ?>
+</form>
+
+<br>
+<a href="<?php echo e(route('users.index')); ?>">Cancelar y volver</a><?php /**PATH /var/www/resources/views/users/edit.blade.php ENDPATH**/ ?>

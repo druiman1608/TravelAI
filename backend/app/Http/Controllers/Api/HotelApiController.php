@@ -4,50 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hotel;
+use App\Http\Resources\HotelResource;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\HotelReq\HotelRequest;
 
 class HotelApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+
     public function index()
     {
-        return response()->json(Hotel::with('location')->get());
+        return $this->success(HotelResource::collection(Hotel::all()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(HotelRequest $request)
+    public function store(Request $request)
     {
-        return response()->json(Hotel::create($request->validated()), 201);
+        $item = Hotel::create($request->all());
+        return $this->success(new HotelResource($item), 'Creado', 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Hotel $hotel)
+    public function show($id)
     {
-        return response()->json($hotel->load('location'));
+        $item = Hotel::find($id);
+        return $item ? $this->success(new HotelResource($item)) : $this->error('No encontrado', 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(HotelRequest $request, Hotel $hotel)
+    public function update(Request $request, $id)
     {
-        $hotel->update($request->validated());
-        return response()->json($hotel);
+        $item = Hotel::findOrFail($id);
+        $item->update($request->all());
+        return $this->success(new HotelResource($item), 'Actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Hotel $hotel)
+    public function destroy($id)
     {
-        $hotel->delete();
-        return response()->json(['message' => 'Hotel eliminado'], 200);
+        Hotel::destroy($id);
+        return $this->success(null, 'Eliminado');
     }
 }

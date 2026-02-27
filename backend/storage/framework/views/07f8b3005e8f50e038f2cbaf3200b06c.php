@@ -11,4 +11,6 @@
 <?php if(auth()->user()->isAdmin()): ?>
 <p><a href="<?php echo e(route('hotels.edit', $hotel->id)); ?>">Editar hotel</a></p>
 <?php endif; ?>
-<a href="<?php echo e(route('hotels.index')); ?>">Volver al listado</a><?php /**PATH /var/www/resources/views/hotels/show.blade.php ENDPATH**/ ?>
+
+<br>
+<a href="<?php echo e(route('hotels.index')); ?>">Volver</a><?php /**PATH /var/www/resources/views/hotels/show.blade.php ENDPATH**/ ?>

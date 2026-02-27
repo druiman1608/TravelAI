@@ -9,7 +9,7 @@ use App\Models\Activity;
 use App\Models\User;
 use App\Models\Reservation;
 use App\Models\AIChatLog;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Review;
 
 class DashboardController extends Controller
 {
@@ -18,11 +18,18 @@ class DashboardController extends Controller
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
+        $latestReviews = Review::with('user')
+            ->where('status', 'publicada')
+            ->latest()
+            ->take(3)
+            ->get();
+
         $data = [
             'hotels' => Hotel::with('location')->latest()->take(5)->get(),
             'flights' => Flight::with('location')->latest()->take(5)->get(),
             'packages' => Package::latest()->take(5)->get(),
             'activities' => Activity::with('location')->latest()->take(5)->get(),
+            'latest_reviews' => $latestReviews,
         ];
 
         if ($user->isAdmin()) {

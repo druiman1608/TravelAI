@@ -16,10 +16,10 @@ class HotelResource extends JsonResource
     {
         // return parent::toArray($request);
         return [
-            'loc' => $this->location_id,
-            'nam' => $this->name,
-            'des' => $this->description,
-            'pri' => $this->price_per_night,
+            'id' => $this->id,
+            'nombre' => $this->name ?? $this->number,
+            'precio' => $this->price ?? $this->price_per_night,
+            'ubicacion' => $this->location->city ?? 'N/A',
         ];
     }
 }

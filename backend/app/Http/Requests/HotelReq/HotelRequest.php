@@ -30,7 +30,7 @@ class HotelRequest extends FormRequest
         return [
             'location_id' => 'required|exists:locations,id',
             'name' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'required|string|max:255',
             'stars' => 'required|integer|min:1|max:5',
             'price_per_night' => 'required|numeric|min:1',
         ];

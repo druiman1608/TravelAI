@@ -1,14 +1,6 @@
 <h1>Dejar una Reseña</h1>
 
-@if ($errors->any())
-<div style="color: red;">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+@include('partials.alerts')
 
 <form action="{{ route('reviews.store') }}" method="POST">
     @csrf

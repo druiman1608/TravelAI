@@ -4,50 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserPreference;
+use App\Http\Resources\UserPreferenceResource;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserPreferenceReq\UserPreferenceRequest;
 
 class UserPreferenceApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+
     public function index()
     {
-        return response()->json(UserPreference::all());
+        return $this->success(UserPreferenceResource::collection(UserPreference::all()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(UserPreferenceRequest $request)
+    public function store(Request $request)
     {
-        return response()->json(UserPreference::create($request->validated()), 201);
+        $item = UserPreference::create($request->all());
+        return $this->success(new UserPreferenceResource($item), 'Creado', 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(UserPreference $userPreference)
+    public function show($id)
     {
-        return response()->json($userPreference);
+        $item = UserPreference::find($id);
+        return $item ? $this->success(new UserPreferenceResource($item)) : $this->error('No encontrado', 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UserPreferenceRequest $request, UserPreference $userPreference)
+    public function update(Request $request, $id)
     {
-        $userPreference->update($request->validated());
-        return response()->json($userPreference);
+        $item = UserPreference::findOrFail($id);
+        $item->update($request->all());
+        return $this->success(new UserPreferenceResource($item), 'Actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(UserPreference $userPreference)
+    public function destroy($id)
     {
-        $userPreference->delete();
-        return response()->json(['message' => 'Preferencia eliminada'], 200);
+        UserPreference::destroy($id);
+        return $this->success(null, 'Eliminado');
     }
 }

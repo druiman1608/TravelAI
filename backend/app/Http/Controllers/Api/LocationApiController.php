@@ -4,50 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Location;
+use App\Http\Resources\LocationResource;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\LocationReq\LocationRequest;
 
 class LocationApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+
     public function index()
     {
-        return response()->json(Location::all());
+        return $this->success(LocationResource::collection(Location::all()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(LocationRequest $request)
+    public function store(Request $request)
     {
-        return response()->json(Location::create($request->validated()), 201);
+        $item = Location::create($request->all());
+        return $this->success(new LocationResource($item), 'Creado', 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Location $location)
+    public function show($id)
     {
-        return response()->json($location);
+        $item = Location::find($id);
+        return $item ? $this->success(new LocationResource($item)) : $this->error('No encontrado', 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(LocationRequest $request, Location $location)
+    public function update(Request $request, $id)
     {
-        $location->update($request->validated());
-        return response()->json($location);
+        $item = Location::findOrFail($id);
+        $item->update($request->all());
+        return $this->success(new LocationResource($item), 'Actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Location $location)
+    public function destroy($id)
     {
-        $location->delete();
-        return response()->json(['message' => 'Localizacion eliminada'], 200);
+        Location::destroy($id);
+        return $this->success(null, 'Eliminado');
     }
 }

@@ -4,66 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
+use App\Http\Resources\ReservationResource;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\ReservationReq\ReservationRequest;
-
 
 class ReservationApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+
     public function index()
     {
-        return response()->json(Reservation::with([
-            'user',
-            'package.hotel',
-            'package.flight',
-            'hotel.location',
-            'flight.location',
-            'activity.location'
-        ])->get());
+        return $this->success(ReservationResource::collection(Reservation::all()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(ReservationRequest $request)
+    public function store(Request $request)
     {
-        $reservation = Reservation::create($request->validated());
-        return response()->json($reservation->load(['package', 'hotel', 'flight', 'activity']), 201);
+        $item = Reservation::create($request->all());
+        return $this->success(new ReservationResource($item), 'Creado', 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Reservation $reservation)
+    public function show($id)
     {
-        return response()->json($reservation->load([
-            'user',
-            'package.hotel',
-            'package.flight',
-            'hotel.location',
-            'flight.location',
-            'activity.location'
-        ]));
+        $item = Reservation::find($id);
+        return $item ? $this->success(new ReservationResource($item)) : $this->error('No encontrado', 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(ReservationRequest $request, Reservation $reservation)
+    public function update(Request $request, $id)
     {
-        $reservation->update($request->validated());
-        return response()->json($reservation);
+        $item = Reservation::findOrFail($id);
+        $item->update($request->all());
+        return $this->success(new ReservationResource($item), 'Actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Reservation $reservation)
+    public function destroy($id)
     {
-        $reservation->delete();
-        return response()->json(['message' => 'Reserva eliminada'], 200);
+        Reservation::destroy($id);
+        return $this->success(null, 'Eliminado');
     }
 }

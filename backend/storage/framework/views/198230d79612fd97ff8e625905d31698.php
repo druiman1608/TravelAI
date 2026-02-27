@@ -20,7 +20,8 @@
                 <?php if(auth()->user()->isAdmin()): ?>
                 |
                 <form action="<?php echo e(route('aichatlogs.destroy', $log->id)); ?>" method="POST" style="display:inline;">
-                    <?php echo csrf_field(); ?> <?php echo method_field('DELETE'); ?>
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('DELETE'); ?>
                     <button type="submit" onclick="return confirm('¿Borrar Log?')">Borrar</button>
                 </form>
                 <?php endif; ?>

@@ -20,7 +20,8 @@
                 @if(auth()->user()->isAdmin())
                 |
                 <form action="{{ route('aichatlogs.destroy', $log->id) }}" method="POST" style="display:inline;">
-                    @csrf @method('DELETE')
+                    @csrf
+                    @method('DELETE')
                     <button type="submit" onclick="return confirm('¿Borrar Log?')">Borrar</button>
                 </form>
                 @endif

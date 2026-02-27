@@ -9,4 +9,6 @@
 <?php if(auth()->user()->isAdmin()): ?>
 <p><a href="<?php echo e(route('flights.edit', $flight->id)); ?>">Editar vuelo</a></p>
 <?php endif; ?>
+
+<br>
 <a href="<?php echo e(route('flights.index')); ?>">Volver</a><?php /**PATH /var/www/resources/views/flights/show.blade.php ENDPATH**/ ?>

@@ -1,10 +1,6 @@
 <h1>Editar Paquete: {{ $package->name }}</h1>
 
-@if ($errors->any())
-<div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 20px;">
-    <strong>Error:</strong> Debes seleccionar al menos dos servicios.
-</div>
-@endif
+@include('partials.alerts')
 
 <form action="{{ route('packages.update', $package->id) }}" method="POST">
     @csrf
@@ -12,7 +8,6 @@
 
     <label>Nombre del Paquete:</label>
     <input type="text" name="name" value="{{ old('name', $package->name) }}" required>
-    @error('name') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Hotel:</label>
@@ -52,7 +47,6 @@
     <label>Precio Total:</label>
     <input type="number" step="0.01" name="total_price" value="{{ old('total_price', $package->total_price) }}"
         required>
-    @error('total_price') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <button type="submit">Guardar Cambios</button>

@@ -4,65 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Http\Resources\UserResource;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserReq\UserRequest;
-use Illuminate\Support\Facades\Hash;
 
 class UserApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+
     public function index()
     {
-        return response()->json(User::with('role')->get());
+        return $this->success(UserResource::collection(User::all()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
-        $data['password'] = Hash::make($data['password']);
-        return response()->json(User::create($data), 201);
+        $item = User::create($request->all());
+        return $this->success(new UserResource($item), 'Creado', 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
+    public function show($id)
     {
-        return response()->json($user->load([
-            'role',
-            'reservations.package',
-            'reservations.hotel',
-            'reservations.flight',
-            'reservations.activity'
-        ]));
+        $item = User::find($id);
+        return $item ? $this->success(new UserResource($item)) : $this->error('No encontrado', 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UserRequest $request, User $user)
+    public function update(Request $request, $id)
     {
-        $data = $request->validated();
-
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
-
-        $user->update($data);
-        return response()->json($user, 200);
+        $item = User::findOrFail($id);
+        $item->update($request->all());
+        return $this->success(new UserResource($item), 'Actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
-        return response()->json(['message' => 'Usuario eliminado'], 200);
+        User::destroy($id);
+        return $this->success(null, 'Eliminado');
     }
 }

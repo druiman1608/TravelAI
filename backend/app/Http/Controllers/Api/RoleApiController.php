@@ -4,54 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Http\Resources\RoleResource;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\RoleReq\RoleRequest;
 
 class RoleApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+
     public function index()
     {
-        if (!auth()->user()->isAdmin()) {
-            return response()->json(['error' => 'No tienes permiso'], 403);
-        }
-
-        return response()->json(Role::all());
+        return $this->success(RoleResource::collection(Role::all()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(RoleRequest $request)
+    public function store(Request $request)
     {
-        return response()->json(Role::create($request->validated()), 201);
+        $item = Role::create($request->all());
+        return $this->success(new RoleResource($item), 'Creado', 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Role $role)
+    public function show($id)
     {
-        return response()->json($role);
+        $item = Role::find($id);
+        return $item ? $this->success(new RoleResource($item)) : $this->error('No encontrado', 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(RoleRequest $request, Role $role)
+    public function update(Request $request, $id)
     {
-        $role->update($request->validated());
-        return response()->json($role);
+        $item = Role::findOrFail($id);
+        $item->update($request->all());
+        return $this->success(new RoleResource($item), 'Actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Role $role)
+    public function destroy($id)
     {
-        $role->delete();
-        return response()->json(['message' => 'Rol eliminado'], 200);
+        Role::destroy($id);
+        return $this->success(null, 'Eliminado');
     }
 }

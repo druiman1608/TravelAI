@@ -4,56 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\AIChatLog;
+use App\Http\Resources\AiChatLogResource;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\AIChatLogReq\AIChatLogRequest;
 
 class AIChatLogApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+
     public function index()
     {
-        return response()->json(AIChatLog::with('user')->get());
+        return $this->success(AiChatLogResource::collection(AIChatLog::all()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(AIChatLogRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
-
-        $data['user_id'] = auth()->id();
-
-        $log = AIChatLog::create($data);
-
-        return response()->json($log, 201);
+        $item = AIChatLog::create($request->all());
+        return $this->success(new AiChatLogResource($item), 'Creado', 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(AIChatLog $aIChatLog)
+    public function show($id)
     {
-        return response()->json($aIChatLog);
+        $item = AIChatLog::find($id);
+        return $item ? $this->success(new AiChatLogResource($item)) : $this->error('No encontrado', 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(AIChatLogRequest $request, AIChatLog $aIChatLog)
+    public function update(Request $request, $id)
     {
-        $aIChatLog->update($request->validated());
-        return response()->json($aIChatLog);
+        $item = AIChatLog::findOrFail($id);
+        $item->update($request->all());
+        return $this->success(new AiChatLogResource($item), 'Actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(AIChatLog $aIChatLog)
+    public function destroy($id)
     {
-        $aIChatLog->delete();
-        return response()->json(['message' => 'Log con la IA eliminado'], 200);
+        AIChatLog::destroy($id);
+        return $this->success(null, 'Eliminado');
     }
 }

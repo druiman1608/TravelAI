@@ -84,5 +84,6 @@ unset($__errorArgs, $__bag); ?>
 
     <button type="submit">Guardar Localizacion</button>
 </form>
+
 <br>
 <a href="<?php echo e(route('locations.index')); ?>">Cancelar y volver</a><?php /**PATH /var/www/resources/views/locations/create.blade.php ENDPATH**/ ?>

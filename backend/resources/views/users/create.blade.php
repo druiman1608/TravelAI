@@ -1,25 +1,23 @@
 <h1>Crear Usuario</h1>
 
+@include('partials.alerts')
+
 <form action="{{ route('users.store') }}" method="POST">
     @csrf
     <label>Nombre:</label><br>
     <input type="text" name="name" value="{{ old('name') }}" required>
-    @error('name') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Email:</label><br>
     <input type="email" name="email" value="{{ old('email') }}" required>
-    @error('email') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Contraseña:</label><br>
     <input type="password" name="password" required>
-    @error('password') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Confirmar Contraseña:</label><br>
     <input type="password" name="password_confirmation" required>
-    @error('password_confirmation') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <label>Rol:</label><br>
@@ -31,7 +29,6 @@
         </option>
         @endforeach
     </select>
-    @error('role_id') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <button type="submit">Guardar Usuario</button>

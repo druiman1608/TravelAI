@@ -1,5 +1,7 @@
 <h1>Editar Usuario: {{ $user->name }}</h1>
 
+@include('partials.alerts')
+
 <form action="{{ route('users.update', $user->id) }}" method="POST">
     @csrf @method('PUT')
 

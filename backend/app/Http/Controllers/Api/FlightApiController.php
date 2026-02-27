@@ -4,50 +4,41 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Flight;
+use App\Http\Resources\FlightResource;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\FlightReq\FlightRequest;
 
 class FlightApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+
     public function index()
     {
-        return response()->json(Flight::with('location')->get());
+        return $this->success(FlightResource::collection(Flight::all()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(FlightRequest $request)
+    public function store(Request $request)
     {
-        return response()->json(Flight::create($request->validated()), 201);
+        $item = Flight::create($request->all());
+        return $this->success(new FlightResource($item), 'Creado', 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Flight $flight)
+    public function show($id)
     {
-        return response()->json($flight->load('location'));
+        $item = Flight::find($id);
+        return $item ? $this->success(new FlightResource($item)) : $this->error('No encontrado', 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(FlightRequest $request, Flight $flight)
+    public function update(Request $request, $id)
     {
-        $flight->update($request->validated());
-        return response()->json($flight);
+        $item = Flight::findOrFail($id);
+        $item->update($request->all());
+        return $this->success(new FlightResource($item), 'Actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Flight $flight)
+    public function destroy($id)
     {
-        $flight->delete();
-        return response()->json(['message' => 'Vuelo eliminado'], 200);
+        Flight::destroy($id);
+        return $this->success(null, 'Eliminado');
     }
 }
