@@ -6,9 +6,9 @@
 <p>Tus opiniones sobre nuestros servicios:</p>
 <?php endif; ?>
 
+<p><a href="<?php echo e(route('dashboard')); ?>">Volver al Dashboard</a></p>
 <p><a href="<?php echo e(route('reviews.create')); ?>">Escribir una nueva reseña</a></p>
-
-<?php echo $__env->make('reviews._list', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-
+<hr>
 <br>
-<a href="<?php echo e(route('dashboard')); ?>">Volver al Dashboard</a><?php /**PATH /var/www/resources/views/reviews/index.blade.php ENDPATH**/ ?>
+
+<?php echo $__env->make('reviews._list', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /var/www/resources/views/reviews/index.blade.php ENDPATH**/ ?>

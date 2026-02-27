@@ -12,4 +12,4 @@
 <p><strong>Estado:</strong> <?php echo e($review->status); ?></p>
 
 <br>
-<a href="<?php echo e(route('reviews.index')); ?>">Volver al listado</a><?php /**PATH /var/www/resources/views/reviews/show.blade.php ENDPATH**/ ?>
+<a href="<?php echo e(route('reviews.index')); ?>">Volver</a><?php /**PATH /var/www/resources/views/reviews/show.blade.php ENDPATH**/ ?>

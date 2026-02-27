@@ -12,10 +12,12 @@ class HotelRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        /** @var \App\Models\User $user */
+        // /** @var \App\Models\User $user */
 
-        $user = Auth::user();
-        return Auth::check() && $user->isAdmin();
+        // $user = Auth::user();
+        // return Auth::check() && $user->isAdmin();
+
+        return true;
     }
 
     /**

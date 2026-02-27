@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo e(asset('../../css/_list/_list.blade.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('css/_lists/_list.blade.css')); ?>">
 
 <table border="1">
     <thead>
@@ -30,12 +30,14 @@
                 <strong><?php echo e($res->status); ?></strong>
             </td>
             <td>
-                <a href="<?php echo e(route('reservations.show', $res->id)); ?>">Ver Detalles</a>
+                <a href="<?php echo e(route('reservations.show', $res->id)); ?>">Ver</a>
+                | <a href="<?php echo e(route('reservations.edit', $res->id)); ?>">Editar</a> |
                 <?php if(auth()->user()->isAdmin()): ?>
-                | <form action="<?php echo e(route('reservations.destroy', $res->id)); ?>" method="POST" style="display:inline;">
+                <form action="<?php echo e(route('reservations.destroy', $res->id)); ?>" method="POST" style="display:inline;">
                     <?php echo csrf_field(); ?> <?php echo method_field('DELETE'); ?>
                     <button type="submit" onclick="return confirm('¿Cancelar reserva?')">Borrar</button>
                 </form>
+
                 <?php endif; ?>
             </td>
         </tr>

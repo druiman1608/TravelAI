@@ -12,5 +12,5 @@
 <a href="{{ route('activities.edit', $activity->id) }}">Editar Actividad</a>
 @endif
 
-<br><br>
-<a href="{{ route('activities.index') }}">Volver al listado</a>
+<br>
+<a href="{{ route('activities.index') }}">Volver</a>

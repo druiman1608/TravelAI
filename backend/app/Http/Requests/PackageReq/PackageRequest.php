@@ -34,20 +34,17 @@ class PackageRequest extends FormRequest
         ];
     }
 
-    public function validator($validator)
+    public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-
-            $fields = [
+            $selected = collect([
                 $this->hotel_id,
                 $this->flight_id,
-                $this->activity_id
-            ];
+                $this->activity_id,
+            ])->filter()->count();
 
-            $fieldsCount = count(array_filter($fields));
-
-            if ($fieldsCount < 2) {
-                $validator->errors()->add('fields', 'Un paquete debe tener almenos 2 servicios');
+            if ($selected < 2) {
+                $validator->errors()->add('services', 'Debes seleccionar al menos 2 servicios para el paquete.');
             }
         });
     }

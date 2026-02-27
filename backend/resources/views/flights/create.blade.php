@@ -39,3 +39,6 @@
 
     <button type="submit">Guardar Vuelo</button>
 </form>
+
+<br>
+<a href="{{ route('flights.index') }}">Cancelar y volver</a>

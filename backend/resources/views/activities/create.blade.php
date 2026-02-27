@@ -21,7 +21,7 @@
     <br><br>
 
     <label>Descripcion:</label>
-    <textarea name="description">{{ old('description') }}</textarea>
+    <textarea name="description" required>{{ old('description') }}</textarea>
     @error('description') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
@@ -32,4 +32,6 @@
 
     <button type="submit">Guardar Actividad</button>
 </form>
-<a href="{{ route('activities.index') }}">Volver</a>
+
+<br>
+<a href="{{ route('activities.index') }}">Cancelar y volver</a>

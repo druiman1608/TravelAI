@@ -1,73 +1,96 @@
 <h1>Editar Reserva #{{ $reservation->id }}</h1>
 
-@if ($errors->any())
-<div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 20px;">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-
 <form action="{{ route('reservations.update', $reservation->id) }}" method="POST">
     @csrf
     @method('PUT')
 
-    <label><strong>Estado de la Reserva:</strong></label>
-    <select name="status">
-        <option value="pendiente" {{ old('status', $reservation->status) == 'pendiente' ? 'selected' : '' }}>Pendiente
-        </option>
-        <option value="confirmada" {{ old('status', $reservation->status) == 'confirmada' ? 'selected' : '' }}>
-            Confirmada</option>
-        <option value="cancelada" {{ old('status', $reservation->status) == 'cancelada' ? 'selected' : '' }}>Cancelada
-        </option>
-    </select>
-    <br><br>
-
-    <p><small>* El precio se recalcula al cambiar el servicio.</small></p>
-
-    <label>Cambiar a Paquete:</label>
-    <select name="package_id">
-        <option value="">-- Ninguno --</option>
-        @foreach($packages as $package)
-        <option value="{{ $package->id }}"
-            {{ old('package_id', $reservation->package_id) == $package->id ? 'selected' : '' }}>
-            {{ $package->name }} ({{ $package->total_price }}€)
-        </option>
-        @endforeach
-    </select>
-    <br><br>
-
-    <label>Cambiar a Hotel:</label>
-    <select name="hotel_id">
-        <option value="">-- Ninguno --</option>
-        @foreach($hotels as $hotel)
-        <option value="{{ $hotel->id }}" {{ old('hotel_id', $reservation->hotel_id) == $hotel->id ? 'selected' : '' }}>
-            {{ $hotel->name }} ({{ $hotel->price_per_night }}€/noche)
-        </option>
-        @endforeach
-    </select>
-    <br><br>
-
-    <label>Cambiar a Vuelo:</label>
-    <select name="flight_id">
-        <option value="">-- Ninguno --</option>
-        @foreach($flights as $flight)
-        <option value="{{ $flight->id }}"
-            {{ old('flight_id', $reservation->flight_id) == $flight->id ? 'selected' : '' }}>
-            {{ $flight->airline }} ({{ $flight->price }}€)
-        </option>
-        @endforeach
-    </select>
-    <br><br>
-
-    <div style="background-color: #f4f4f4; padding: 10px; display: inline-block; border: 1px solid #ddd;">
-        <strong>Precio actual:</strong> {{ $reservation->price }}€
+    @if(auth()->user()->isAdmin())
+    <div>
+        <label>Paquete:</label><br>
+        <select name="package_id">
+            <option value="">Ninguno</option>
+            @foreach($packages as $package)
+            <option value="{{ $package->id }}" {{ $reservation->package_id == $package->id ? 'selected' : '' }}>
+                {{ $package->name }} ({{ $package->total_price }}€)
+            </option>
+            @endforeach
+        </select>
     </div>
-    <br><br>
+    <br>
 
-    <button type="submit">Actualizar Reserva</button>
+    <div>
+        <label>Hotel:</label><br>
+        <select name="hotel_id">
+            <option value="">Ninguno</option>
+            @foreach($hotels as $hotel)
+            <option value="{{ $hotel->id }}" {{ $reservation->hotel_id == $hotel->id ? 'selected' : '' }}>
+                {{ $hotel->name }} ({{ $hotel->location->name }})
+            </option>
+            @endforeach
+        </select>
+    </div>
+    <br>
+
+    <div>
+        <label>Vuelo:</label><br>
+        <select name="flight_id">
+            <option value="">Ninguno</option>
+            @foreach($flights as $flight)
+            <option value="{{ $flight->id }}" {{ $reservation->flight_id == $flight->id ? 'selected' : '' }}>
+                {{ $flight->airline }} - {{ $flight->destination }}
+            </option>
+            @endforeach
+        </select>
+    </div>
+    <br>
+
+    <div>
+        <label>Actividad:</label><br>
+        <select name="activity_id">
+            <option value="">Ninguno</option>
+            @foreach($activities as $activity)
+            <option value="{{ $activity->id }}" {{ $reservation->activity_id == $activity->id ? 'selected' : '' }}>
+                {{ $activity->name }}
+            </option>
+            @endforeach
+        </select>
+    </div>
+    <br>
+
+    <label>Estado de la Reserva [Vista Admin]:</label><br>
+    <select name="status">
+        <option value="pendiente" {{ $reservation->status == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
+        <option value="confirmada" {{ $reservation->status == 'confirmada' ? 'selected' : '' }}>Confirmada</option>
+        <option value="cancelada" {{ $reservation->status == 'cancelada' ? 'selected' : '' }}>Cancelada</option>
+    </select>
+    <br><br>
+    <button type="submit">Guardar Cambios</button>
+
+    @else
+    <div style="background: #f4f4f4; padding: 15px; border-radius: 8px;">
+        <p><strong>Detalles de tu reserva:</strong></p>
+        <ul>
+            @if($reservation->package_id) <li>Paquete: {{ $reservation->package->name }}</li> @endif
+            @if($reservation->hotel_id) <li>Hotel: {{ $reservation->hotel->name }}</li> @endif
+            @if($reservation->flight_id) <li>Vuelo: {{ $reservation->flight->airline }}
+                ({{ $reservation->flight->destination }})</li> @endif
+            @if($reservation->activity_id) <li>Actividad: {{ $reservation->activity->name }}</li> @endif
+        </ul>
+        <p><strong>Precio Total:</strong> {{ number_format($reservation->price, 2) }}€</p>
+        <p><strong>Estado actual:</strong> {{ ucfirst($reservation->status) }}</p>
+    </div>
+
+    <br>
+    @if($reservation->status !== 'cancelada')
+    <input type="hidden" name="status" value="cancelada">
+    <button type="submit" style="background: red; color: white;"
+        onclick="return confirm('¿Seguro de que quieres cancelar esta reserva?')">
+        Cancelar Reserva
+    </button>
+    @else
+    <p style="color: red;">Esta reserva ya ha sido cancelada.</p>
+    @endif
+    @endif
 </form>
 
 <br>

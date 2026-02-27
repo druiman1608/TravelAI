@@ -11,7 +11,7 @@
     @method('PUT')
 
     <label>Nombre del Paquete:</label>
-    <input type="text" name="name" value="{{ old('name', $package->name) }}">
+    <input type="text" name="name" value="{{ old('name', $package->name) }}" required>
     @error('name') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 

@@ -1,0 +1,169 @@
+.dashboard-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.hr-divider {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.nav-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+.btn-primary {
+    background: #007bff;
+}
+.btn-secondary {
+    background: #c5c779;
+}
+.btn-success {
+    background: #62875d;
+}
+.btn-purple {
+    background: #6a4d7a;
+}
+.btn-gold {
+    background: gold;
+    color: black;
+}
+.btn-outline {
+    background: #f8f9fa;
+    color: #333;
+    border: 1px solid #ccc;
+}
+.btn-danger {
+    background: #ff4d4d;
+    border: none;
+    cursor: pointer;
+}
+
+.admin-panel {
+    margin-top: 30px;
+    padding: 20px;
+    border: 2px dashed #dc3545;
+    border-radius: 10px;
+    background: #fff5f5;
+}
+
+.admin-title {
+    color: #dc3545;
+    margin-top: 0;
+}
+.btn-admin {
+    padding: 8px 15px;
+    background: #343a40;
+    color: white;
+    border-radius: 4px;
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.card-price {
+    color: green;
+    font-weight: bold;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.data-table th {
+    background: #eee;
+    padding: 10px;
+}
+.data-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.badge {
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+.badge-success {
+    background: #d4edda;
+}
+.badge-warning {
+    background: #fff3cd;
+}
+
+.catalog-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.btn-catalog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #ffffff;
+    color: #333;
+    border: 2px solid #eaeaea;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-catalog:hover {
+    border-color: #007bff;
+    background: #f0f7ff;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.btn-catalog i {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.border-hotels {
+    border-left: 5px solid #ff6b6b;
+}
+.border-flights {
+    border-left: 5px solid #4dadf7;
+}
+.border-packages {
+    border-left: 5px solid #51cf66;
+}
+.border-activities {
+    border-left: 5px solid #fcc419;
+}

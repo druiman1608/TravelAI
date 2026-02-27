@@ -1,38 +1,36 @@
-<link rel="stylesheet" href="{{ asset('../../css/_list/_list.blade.css') }}">
+<link rel="stylesheet" href="{{ asset('css/_lists/_list.blade.css') }}">
 
 <table border="1">
     <thead>
         <tr>
-            <th>Fecha</th>
-            @if(auth()->user()->isAdmin())
+            <th>ID</th>
+            <th>Pregunta</th>
             <th>Usuario</th>
-            @endif
-            <th>Pregunta (Resumen)</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($logs as $log)
+        @forelse($logs as $log)
         <tr>
-            <td>{{ $log->created_at->format('d/m/Y H:i') }}</td>
-            @if(auth()->user()->isAdmin())
-            <td>{{ $log->user->name }}</td>
-            @endif
-
-            <td>{{ Str::limit($log->user_question, 40) }}...</td>
+            <td>{{ $log->id }}</td>
+            <td>{{ Str::limit($log->user_question, 50) }}</td>
+            <td>{{ $log->user?->name ?? 'N/A' }}</td>
             <td>
                 <a href="{{ route('aichatlogs.show', $log->id) }}">Ver</a>
                 @if(auth()->user()->isAdmin())
                 |
                 <form action="{{ route('aichatlogs.destroy', $log->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" onclick="return confirm('¿Eliminar log?')">Borrar</button>
+                    @csrf @method('DELETE')
+                    <button type="submit" onclick="return confirm('¿Borrar Log?')">Borrar</button>
                 </form>
                 @endif
             </td>
         </tr>
-        @endforeach
+        @empty
+        <tr>
+            <td colspan="4">No se encontraron logs en la base de datos.</td>
+        </tr>
+        @endforelse
     </tbody>
 </table>
 

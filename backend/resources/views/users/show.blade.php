@@ -6,4 +6,10 @@
     <li><strong>Fecha de Registro:</strong> {{ $user->created_at->format('d/m/Y') }}</li>
 </ul>
 
+<br>
+@if(auth()->user()->isAdmin())
+<p><a href="{{ route('users.edit', $user->id) }}">Editar usuario</a></p>
+@endif
+
+<br>
 <a href="{{ route('users.index') }}">Volver</a>

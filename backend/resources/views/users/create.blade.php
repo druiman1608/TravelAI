@@ -17,6 +17,11 @@
     @error('password') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
+    <label>Confirmar Contraseña:</label><br>
+    <input type="password" name="password_confirmation" required>
+    @error('password_confirmation') <div style="color:red">{{ $message }}</div> @enderror
+    <br><br>
+
     <label>Rol:</label><br>
     <select name="role_id" required>
         <option value="">Seleccionar Rol</option>
@@ -31,4 +36,6 @@
 
     <button type="submit">Guardar Usuario</button>
 </form>
-<p><a href="{{ route('users.index') }}">Cancelar</a></p>
+
+<br>
+<a href="{{ route('users.index') }}">Cancelar y volver</a>

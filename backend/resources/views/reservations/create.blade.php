@@ -3,8 +3,6 @@
 <form action="{{ route('reservations.store') }}" method="POST">
     @csrf
 
-    <p><small>* Selecciona solo una de las opciones para realizar la reserva:</small></p>
-
     <label>Reservar Paquete:</label>
     <select name="package_id">
         <option value="">-- No seleccionar paquete --</option>
@@ -38,7 +36,19 @@
     </select>
     <br><br>
 
+    <label>Reservar Actividad:</label>
+    <select name="activity_id">
+        <option value="">-- No seleccionar actividad --</option>
+        @foreach($activities as $activity)
+        <option value="{{ $activity->id }}" {{ old('activity_id') == $activity->id ? 'selected' : '' }}>
+            {{ $activity->name }} ({{ $activity->price }}€)
+        </option>
+        @endforeach
+    </select>
+    <br><br>
+
     <button type="submit">Confirmar Reserva</button>
 </form>
+
 <br>
-<a href="{{ route('reservations.index') }}">Volver</a>
+<a href="{{ route('reservations.index') }}">Cancelar y volver</a>

@@ -4,23 +4,46 @@
     @csrf
     @method('PUT')
 
+    <div>
+        <label>Reseña sobre:</label><br>
+        <strong>
+            @if($review->hotel_id) Hotel: {{ $review->hotel->name }}
+            @elseif($review->flight_id) Vuelo: {{ $review->flight->airline }}
+            @elseif($review->activity_id) Actividad: {{ $review->activity->name }}
+            @elseif($review->package_id) Paquete: {{ $review->package->name }}
+            @else Elemento no encontrado
+            @endif
+        </strong>
+    </div>
+    <br>
+
+    <div>
+        <label>Comentario:</label><br>
+        <textarea name="comment" rows="5" cols="40" {{ auth()->user()->isMod() ? 'readonly' : '' }}
+            {{ (auth()->user()->isAdmin() || !auth()->user()->isMod()) ? '' : 'readonly' }}>{{ $review->comment }}</textarea>
+    </div>
+    <br>
+
     @if(auth()->user()->isAdmin() || auth()->user()->isMod())
-    <label>Estado:</label>
-    <select name="status" required>
-        <option value="pendiente" {{ $review->status == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
-        <option value="publicada" {{ $review->status == 'publicada' ? 'selected' : '' }}>Publicada</option>
-        <option value="borrada" {{ $review->status == 'borrada' ? 'selected' : '' }}>Borrada</option>
-    </select>
-    <br><br>
+    <div>
+        <label>Estado de la Reseña [Moderación]:</label><br>
+        <select name="status">
+            <option value="pendiente" {{ $review->status == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
+            <option value="aprobada" {{ $review->status == 'aprobada' ? 'selected' : '' }}>Aprobada</option>
+            <option value="rechazada" {{ $review->status == 'rechazada' ? 'selected' : '' }}>Rechazada</option>
+        </select>
+    </div>
+    <br>
+    <button type="submit">Guardar Cambios</button>
+    @else
+    <p>Estado actual: <strong>{{ ucfirst($review->status) }}</strong></p>
+
+    @if($review->status !== 'cancelada')
+    <input type="hidden" name="status" value="cancelada">
+    <button type="submit" onclick="return confirm('¿Seguro que quieres cancelar esta reseña?')">Eliminar Reseña</button>
     @endif
-
-    <label>Puntuacion:</label>
-    <input type="number" name="rating" min="1" max="5" value="{{ $review->rating }}" required>
-    <br><br>
-
-    <label>Comentario:</label><br>
-    <textarea name="comment" rows="5" cols="40">{{ $review->comment }}</textarea>
-    <br><br>
-
-    <button type="submit">Guardar cambios</button>
+    @endif
 </form>
+
+<br>
+<a href="{{ route('reviews.index') }}">Cancelar y volver</a>

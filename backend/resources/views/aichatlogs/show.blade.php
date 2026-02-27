@@ -1,8 +1,7 @@
 <h1>Detalle de la consulta #{{ $aiChatLog->id }}</h1>
 
-<p><strong>Fecha:</strong> {{ $aiChatLog->created_at->format('d/m/Y H:i:s') }}</p>
-<p><strong>Usuario:</strong> {{ $aiChatLog->user->name }} ({{ $aiChatLog->user->email }})</p>
-
+<p><strong>Fecha:</strong> {{ $aiChatLog->created_at?->format('d/m/Y H:i:s') ?? 'Fecha no disponible' }}</p>
+<p><strong>Usuario:</strong> {{ $aiChatLog->user?->name ?? 'Usuario no encontrado' }}</p>
 <hr>
 
 <div style="margin-bottom: 20px;">
@@ -20,4 +19,4 @@
 </div>
 
 <br>
-<a href="{{ route('aichatlogs.index') }}">Volver al historial</a>
+<a href="{{ route('aichatlogs.index') }}">Volver</a>

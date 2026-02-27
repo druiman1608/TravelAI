@@ -28,9 +28,5 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
 
-    <label>
-        <input type="checkbox" name="remember"> Recordarme
-    </label>
-
     <button type="submit">Entrar</button>
 </form><?php /**PATH /var/www/resources/views/auth/login.blade.php ENDPATH**/ ?>

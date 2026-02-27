@@ -9,7 +9,8 @@
 
         @if($package->flight)
         <li><strong>Vuelo:</strong> {{ $package->flight->airline }} ({{ $package->flight->origin }} a
-            {{ $package->flight->location->city }})</li>
+            {{ $package->flight->location->city }})
+        </li>
         @endif
 
         @if($package->activity)
@@ -26,7 +27,7 @@
         <input type="hidden" name="package_id" value="{{ $package->id }}">
         <button type="submit"
             style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
-            Confirmar Reserva
+            Reservar
         </button>
     </form>
     @else
@@ -35,4 +36,4 @@
 </div>
 
 <br>
-<a href="{{ route('packages.index') }}">Volver al catalogo</a>
+<a href="{{ route('packages.index') }}">Volver</a>

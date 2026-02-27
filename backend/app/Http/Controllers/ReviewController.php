@@ -6,72 +6,50 @@ use App\Models\Review;
 use App\Models\Package;
 use App\Models\Hotel;
 use App\Models\Flight;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use App\Http\Requests\ReviewReq\ReviewRequest;
 
 class ReviewController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
+        $query = Review::with(['user', 'hotel', 'flight', 'package', 'activity']);
 
-        $query = Review::with(['user', 'hotel', 'flight', 'package']);
-
-        $reviews = ($user->isAdmin() || $user->isMod())
-            ? $query->latest()->get()
-            : $query->where('user_id', $user->id)->latest()->get();
+        if ($user->isAdmin() || $user->isMod()) {
+            $reviews = $query->latest()->get();
+        } else {
+            $reviews = $query->where('user_id', $user->id)
+                ->where('status', '!=', 'cancelada')
+                ->latest()
+                ->get();
+        }
 
         return view('reviews.index', compact('reviews'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $packages = Package::all();
         $hotels = Hotel::with('location')->get();
         $flights = Flight::with('location')->get();
-        return view('reviews.create', compact('packages', 'hotels', 'flights'));
+        $activities = Activity::all();
+
+        return view('reviews.create', compact('packages', 'hotels', 'flights', 'activities'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ReviewRequest $request)
     {
         Review::create(array_merge($request->validated(), [
             'user_id' => Auth::id(),
             'status' => 'pendiente'
         ]));
-        return redirect()->route('reviews.index')->with('success', 'Reseña creada');
+        return redirect()->route('reviews.index')->with('success', 'Reseña enviada a moderación.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Review $review)
-    {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-
-        if (!$user->isAdmin() && !$user->isMod() && $review->user_id !== $user->id) {
-            abort(403);
-        }
-
-        $review->load(['user', 'hotel', 'flight', 'package']);
-        return view('reviews.show', compact('review'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Review $review)
     {
         /** @var \App\Models\User $user */
@@ -84,33 +62,55 @@ class ReviewController extends Controller
         $packages = Package::all();
         $hotels = Hotel::with('location')->get();
         $flights = Flight::with('location')->get();
+        $activities = Activity::all();
 
-        return view('reviews.edit', compact('packages', 'hotels', 'flights', 'review'));
+        return view('reviews.edit', compact('packages', 'hotels', 'flights', 'activities', 'review'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(ReviewRequest $request, Review $review)
     {
-        $review->update($request->validated());
-        return redirect()->route('reviews.index')->with('success', 'Reseña actualizada');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Review $review)
-    {
-
         /** @var \App\Models\User $user */
         $user = Auth::user();
 
-        if (!$user->isAdmin() && $review->user_id !== $user->id) {
+        if (!$user->isAdmin() && !$user->isMod() && $review->user_id !== $user->id) {
+            abort(403);
+        }
+
+        if (!$user->isAdmin() && !$user->isMod()) {
+            if ($request->status === 'cancelada') {
+                $review->status = 'cancelada';
+                $review->save();
+                return redirect()->route('reviews.index')->with('success', 'Reseña cancelada.');
+            }
+
+            $review->comment = $request->comment;
+            $review->rating = $request->rating;
+            $review->status = 'pendiente';
+            $review->save();
+            return redirect()->route('reviews.index')->with('success', 'Reseña actualizada y enviada a moderación.');
+        }
+
+        if ($user->isAdmin() || $user->isMod()) {
+            $review->status = $request->status;
+
+            if ($user->isAdmin()) {
+                $review->comment = $request->comment;
+                $review->rating = $request->rating;
+            }
+        }
+
+        $review->save();
+
+        return redirect()->route('reviews.index')->with('success', 'Reseña moderada correctamente.');
+    }
+
+    public function destroy(Review $review)
+    {
+        if (!Auth::user()->isAdmin() && $review->user_id !== Auth::id()) {
             abort(403);
         }
 
         $review->delete();
-        return redirect()->route('reviews.index');
+        return redirect()->route('reviews.index')->with('success', 'Reseña eliminada físicamente.');
     }
 }

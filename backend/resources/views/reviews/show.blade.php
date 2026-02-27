@@ -12,4 +12,4 @@
 <p><strong>Estado:</strong> {{ $review->status }}</p>
 
 <br>
-<a href="{{ route('reviews.index') }}">Volver al listado</a>
+<a href="{{ route('reviews.index') }}">Volver</a>

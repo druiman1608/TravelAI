@@ -11,4 +11,6 @@
 @if(auth()->user()->isAdmin())
 <p><a href="{{ route('hotels.edit', $hotel->id) }}">Editar hotel</a></p>
 @endif
-<a href="{{ route('hotels.index') }}">Volver al listado</a>
+
+<br>
+<a href="{{ route('hotels.index') }}">Volver</a>

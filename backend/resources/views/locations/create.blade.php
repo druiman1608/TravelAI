@@ -42,3 +42,6 @@
 
     <button type="submit">Guardar Localizacion</button>
 </form>
+
+<br>
+<a href="{{ route('locations.index') }}">Cancelar y volver</a>

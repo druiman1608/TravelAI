@@ -14,9 +14,5 @@
     <span style="color: red;">{{$message}}</span>
     @enderror
 
-    <label>
-        <input type="checkbox" name="remember"> Recordarme
-    </label>
-
     <button type="submit">Entrar</button>
 </form>

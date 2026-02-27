@@ -41,6 +41,11 @@ class Review extends Model
         return $this->belongsTo(Package::class);
     }
 
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class);
+    }
+
     public function location()
     {
         return $this->belongsTo(Location::class);

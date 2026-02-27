@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('package_id')->nullable()->constrained('packages')->onDelete('set null');
             $table->foreignId('hotel_id')->nullable()->constrained('hotels')->onDelete('set null');
             $table->foreignId('flight_id')->nullable()->constrained('flights')->onDelete('set null');
+            $table->foreignId('activity_id')->nullable()->constrained('activities')->onDelete('set null');
             $table->decimal('price', 10, 2);
             $table->enum('status', ['pendiente', 'confirmada', 'cancelada'])->default('pendiente');
             $table->timestamps();

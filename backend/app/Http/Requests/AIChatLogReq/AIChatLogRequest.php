@@ -23,7 +23,8 @@ class AIChatLogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'message' => 'sometimes|required|string',
+            'user_question' => 'required|string',
+            'ai_answer'     => 'required|string',
         ];
     }
 }

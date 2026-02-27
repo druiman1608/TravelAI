@@ -20,12 +20,7 @@ class User extends Authenticatable
         'role_id',
         'name',
         'email',
-        // 'password',
-    ];
-
-    protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     protected function casts(): array
@@ -63,16 +58,16 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return $this->role_id === config('roles.Administrador');
+        return $this->role_id == config('roles.Administrador');
     }
 
     public function isMod(): bool
     {
-        return $this->role_id === config('roles.Moderador');
+        return $this->role_id == config('roles.Moderador');
     }
 
     public function isPremium(): bool
     {
-        return $this->role_id === config('roles.Premium');
+        return $this->role_id == config('roles.Premium');
     }
 }

@@ -16,6 +16,10 @@
     <input type="password" name="password">
     <br><br>
 
+    <label>Confirmar Contraseña:</label><br>
+    <input type="password" name="password_confirmation">
+    <br><br>
+
     @if(auth()->user()->isAdmin())
     <label>Rol:</label><br>
     <select name="role_id" required>
@@ -30,3 +34,6 @@
 
     <button type="submit">Actualizar</button>
 </form>
+
+<br>
+<a href="{{ route('users.index') }}">Cancelar y volver</a>

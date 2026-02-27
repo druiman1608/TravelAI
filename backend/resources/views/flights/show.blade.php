@@ -9,4 +9,6 @@
 @if(auth()->user()->isAdmin())
 <p><a href="{{ route('flights.edit', $flight->id) }}">Editar vuelo</a></p>
 @endif
+
+<br>
 <a href="{{ route('flights.index') }}">Volver</a>

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class AIChatLog extends Model
 {
-    /** @use HasFactory<\Database\Factories\AIChatLogFactory> */
     use HasFactory;
 
     protected $table = 'ai_chat_logs';
@@ -16,6 +15,11 @@ class AIChatLog extends Model
         'user_id',
         'user_question',
         'ai_answer',
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function user()

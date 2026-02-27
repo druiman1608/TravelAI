@@ -9,7 +9,8 @@
 
         <?php if($package->flight): ?>
         <li><strong>Vuelo:</strong> <?php echo e($package->flight->airline); ?> (<?php echo e($package->flight->origin); ?> a
-            <?php echo e($package->flight->location->city); ?>)</li>
+            <?php echo e($package->flight->location->city); ?>)
+        </li>
         <?php endif; ?>
 
         <?php if($package->activity): ?>
@@ -26,7 +27,7 @@
         <input type="hidden" name="package_id" value="<?php echo e($package->id); ?>">
         <button type="submit"
             style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
-            Confirmar Reserva
+            Reservar
         </button>
     </form>
     <?php else: ?>

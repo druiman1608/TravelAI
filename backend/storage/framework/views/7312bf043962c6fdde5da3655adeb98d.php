@@ -5,7 +5,7 @@
     <?php echo method_field('PUT'); ?>
 
     <label>Nombre:</label>
-    <input type="text" name="name" value="<?php echo e(old('name', $activity->name)); ?>">
+    <input type="text" name="name" value="<?php echo e(old('name', $activity->name)); ?>" required>
     <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -17,7 +17,7 @@ unset($__errorArgs, $__bag); ?>
     <br><br>
 
     <label>Ubicacion:</label>
-    <select name="location_id">
+    <select name="location_id" required>
         <?php $__currentLoopData = $locations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $location): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <option value="<?php echo e($location->id); ?>"
             <?php echo e(old('location_id', $activity->location_id) == $location->id ? 'selected' : ''); ?>>
@@ -37,7 +37,7 @@ unset($__errorArgs, $__bag); ?>
     <br><br>
 
     <label>Descripcion:</label>
-    <textarea name="description"><?php echo e(old('description', $activity->description)); ?></textarea>
+    <textarea name="description" required><?php echo e(old('description', $activity->description)); ?></textarea>
     <?php $__errorArgs = ['description'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -49,7 +49,7 @@ unset($__errorArgs, $__bag); ?>
     <br><br>
 
     <label>Precio:</label>
-    <input type="number" step="0.01" name="price" value="<?php echo e(old('price', $activity->price)); ?>">
+    <input type="number" step="0.01" name="price" value="<?php echo e(old('price', $activity->price)); ?>" required>
     <?php $__errorArgs = ['price'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

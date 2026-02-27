@@ -14,7 +14,14 @@ class UserPreferenceController extends Controller
      */
     public function index()
     {
-        $preference = Auth::user()->preferences;
+        if (auth()->user()->isAdmin()) {
+
+            $preferences = UserPreference::with('user')->get();
+            return view('userPreferences.index', compact('preferences'));
+        }
+
+        $preference = auth()->user()->preferences;
+
         return view('userPreferences.form', compact('preference'));
     }
 
@@ -32,7 +39,7 @@ class UserPreferenceController extends Controller
             $request->validated()
         );
 
-        return redirect()->route('userPreferences.index')->with('success', 'Preferencias guardadasa');
+        return redirect()->route('dashboard')->with('success', '¡Preferencias actualizadas con éxito!');
     }
 
     /**

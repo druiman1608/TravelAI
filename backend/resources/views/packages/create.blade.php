@@ -54,3 +54,6 @@
 
     <button type="submit">Crear Paquete</button>
 </form>
+
+<br>
+<a href="{{ route('packages.index') }}">Cancelar y volver</a>

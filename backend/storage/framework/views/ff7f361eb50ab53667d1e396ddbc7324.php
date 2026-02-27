@@ -11,7 +11,7 @@
     <?php echo method_field('PUT'); ?>
 
     <label>Nombre del Paquete:</label>
-    <input type="text" name="name" value="<?php echo e(old('name', $package->name)); ?>">
+    <input type="text" name="name" value="<?php echo e(old('name', $package->name)); ?>" required>
     <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -59,7 +59,8 @@ unset($__errorArgs, $__bag); ?>
     <br><br>
 
     <label>Precio Total:</label>
-    <input type="number" step="0.01" name="total_price" value="<?php echo e(old('total_price', $package->total_price)); ?>">
+    <input type="number" step="0.01" name="total_price" value="<?php echo e(old('total_price', $package->total_price)); ?>"
+        required>
     <?php $__errorArgs = ['total_price'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

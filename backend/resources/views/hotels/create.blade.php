@@ -3,6 +3,12 @@
 <form action="{{ route('hotels.store') }}" method="POST">
     @csrf
 
+    @if ($errors->any())
+    <div style="color: red; background: #fee; padding: 10px; margin-bottom: 10px;">
+        <ul>@foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach</ul>
+    </div>
+    @endif
+
     <label>Nombre del Hotel:</label>
     <input type="text" name="name" value="{{ old('name') }}" required>
     @error('name') <div style="color:red">{{ $message }}</div> @enderror
@@ -31,10 +37,12 @@
     <br><br>
 
     <label>Descripcion:</label><br>
-    <textarea name="description" rows="4">{{ old('description') }}</textarea>
+    <textarea name="description" required rows="4">{{ old('description') }}</textarea>
     @error('description') <div style="color:red">{{ $message }}</div> @enderror
     <br><br>
 
     <button type="submit">Guardar Hotel</button>
 </form>
-<a href="{{ route('hotels.index') }}">Cancelar</a>
+
+<br>
+<a href="{{ route('hotels.index') }}">Cancelar y volver</a>

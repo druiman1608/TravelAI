@@ -25,4 +25,9 @@
 <h2>Total: {{ $reservation->price }}€</h2>
 
 <br>
-<a href="{{ route('reservations.index') }}">Volver al listado</a>
+@if(auth()->user()->isAdmin())
+<p><a href="{{ route('reservations.edit', $reservation->id) }}">Editar reserva</a></p>
+@endif
+
+<br>
+<a href="{{ route('reservations.index') }}">Volver</a>

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('../../css/_list/_list.blade.css') }}">
+<link rel="stylesheet" href="{{ asset('css/_lists/_list.blade.css') }}">
 
 <table border="1">
     <thead>
@@ -26,7 +26,7 @@
                 <form action="{{ route('locations.destroy', $location->id) }}" method="POST" style="display:inline;">
                     @csrf @method('DELETE')
                     <button type="submit"
-                        onclick="return confirm('¿Borrar ciudad? cuidado, esto borrara hoteles y vuelos asociados a esta localizacion.')">Borrar</button>
+                        onclick="return confirm('¿Borrar localizacion? cuidado, esto borrara hoteles y vuelos asociados a esta localizacion.')">Borrar</button>
                 </form>
                 @endif
             </td>

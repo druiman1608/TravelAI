@@ -25,4 +25,9 @@
 <h2>Total: <?php echo e($reservation->price); ?>€</h2>
 
 <br>
-<a href="<?php echo e(route('reservations.index')); ?>">Volver al listado</a><?php /**PATH /var/www/resources/views/reservations/show.blade.php ENDPATH**/ ?>
+<?php if(auth()->user()->isAdmin()): ?>
+<p><a href="<?php echo e(route('reservations.edit', $reservation->id)); ?>">Editar reserva</a></p>
+<?php endif; ?>
+
+<br>
+<a href="<?php echo e(route('reservations.index')); ?>">Volver</a><?php /**PATH /var/www/resources/views/reservations/show.blade.php ENDPATH**/ ?>

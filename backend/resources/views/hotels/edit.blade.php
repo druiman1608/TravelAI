@@ -28,9 +28,11 @@
     <br><br>
 
     <label>Descripcion:</label><br>
-    <textarea name="description">{{ old('description', $hotel->description) }}</textarea>
+    <textarea name="description" required>{{ old('description', $hotel->description) }}</textarea>
     <br><br>
 
     <button type="submit">Actualizar Hotel</button>
 </form>
-<a href="{{ route('hotels.index') }}">Volver</a>
+
+<br>
+<a href="{{ route('hotels.index') }}">Cancelar y volver</a>
