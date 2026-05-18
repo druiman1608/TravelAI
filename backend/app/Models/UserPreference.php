@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserPreference extends Model
 {
-    /** @use HasFactory<\Database\Factories\UserPreferenceFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -17,11 +17,7 @@ class UserPreference extends Model
         'fav_weather'
     ];
 
-    protected $casts = [
-        'max_budget' => 'float',
-    ];
-
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

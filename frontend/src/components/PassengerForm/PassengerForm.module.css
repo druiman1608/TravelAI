@@ -1,0 +1,99 @@
+﻿.passengerCard {
+  background: var(--blanquezino-fondo);
+  border: 1px solid var(--borde-claro);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: all 0.2s ease;
+}
+
+.passengerCard:hover {
+  border-color: var(--azul-accion);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: var(--azulOscuro-texto);
+  font-size: 0.95rem;
+}
+
+.icon {
+  color: var(--azul-accion);
+  font-size: 1.2rem;
+}
+
+.inputGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputGroup label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--texto-secundario);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.inputGroup input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--borde-medio);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.inputGroup input:focus {
+  border-color: var(--azul-accion);
+  ring: 2px rgba(59, 130, 246, 0.1);
+}
+
+.passengerCard {
+  background: var(--blanco);
+  border: 1px solid var(--borde-claro);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.inputGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+@media (max-width: 600px) {
+  .inputGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    font-size: 0.85rem;
+  }
+}
+
+.inputGroup label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--texto-secundario);
+  margin-bottom: 5px;
+}
+
+.inputGroup input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--borde-medio);
+  width: 100%;
+}

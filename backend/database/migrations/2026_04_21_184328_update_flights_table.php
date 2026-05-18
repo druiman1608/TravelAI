@@ -1,0 +1,24 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::table('flights', function (Blueprint $table) {
+            $table->string('duration_time')->nullable()->after('arrival');
+            $table->integer('stops')->default(0)->after('duration_time');
+            $table->string('image_url')->nullable();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('flights', function (Blueprint $table) {
+            $table->dropColumn(['duration_time', 'stops', 'image_url']);
+        });
+    }
+};

@@ -18,6 +18,8 @@ class ModMiddleware
             return $next($request);
         }
 
-        return redirect()->route('dashboard')->with('error', 'Acceso restringido a Moderadores.');
+        return response()->json([
+            'message' => 'Acceso denegado. Solo moderadores o administradores.'
+        ], 403);
     }
 }

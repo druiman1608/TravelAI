@@ -2,19 +2,19 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AiChatLogResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(Request $request): array
+    public function toArray($request): array
     {
-        // return parent::toArray($request);
-        return ($this->resource->toArray($request));
+        return [
+            'id'             => $this->id,
+            'usuario_id'     => $this->user_id,
+            'pregunta'       => $this->message,
+            'respuesta_ia'   => $this->response,
+            'datos_contexto' => $this->context_data,
+            'fecha'          => $this->created_at?->format('d-m-Y H:i:s'),
+        ];
     }
 }

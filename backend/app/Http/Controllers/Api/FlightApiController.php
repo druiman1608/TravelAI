@@ -5,40 +5,68 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Flight;
 use App\Http\Resources\FlightResource;
-use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\FlightReq\FlightRequest;
+use Illuminate\Support\Facades\Storage;
 
 class FlightApiController extends Controller
 {
-    use ApiResponse;
-
     public function index()
     {
-        return $this->success(FlightResource::collection(Flight::all()));
+        $flights = Flight::with(['origin', 'destination'])->get();
+        return FlightResource::collection($flights);
     }
 
-    public function store(Request $request)
+    public function store(FlightRequest $request)
     {
-        $item = Flight::create($request->all());
-        return $this->success(new FlightResource($item), 'Creado', 201);
+        $data = $request->validated();
+
+        if ($request->hasFile('image_flight')) {
+            $data['image_url'] = $request->file('image_flight')->store('flights', 'public');
+        } else {
+            $data['image_url'] = 'ImagesProduccion/Loading/LoadingImage.jpg';
+        }
+
+        if (isset($data['extras']) && is_string($data['extras'])) {
+            $data['extras'] = json_decode($data['extras'], true) ?? [];
+        }
+
+        $flight = Flight::create($data);
+        return response()->json([
+            'status' => 'success',
+            'data'   => new FlightResource($flight->load(['origin', 'destination']))
+        ], 201);
     }
 
-    public function show($id)
+    public function update(FlightRequest $request, int $id)
     {
-        $item = Flight::find($id);
-        return $item ? $this->success(new FlightResource($item)) : $this->error('No encontrado', 404);
+        $flight = Flight::findOrFail($id);
+        $data = $request->validated();
+
+        if ($request->hasFile('image_flight')) {
+            if ($flight->getRawOriginal('image_url')) {
+                Storage::disk('public')->delete($flight->getRawOriginal('image_url'));
+            }
+            $data['image_url'] = $request->file('image_flight')->store('flights', 'public');
+        }
+
+        if (isset($data['extras']) && is_string($data['extras'])) {
+            $data['extras'] = json_decode($data['extras'], true) ?? [];
+        }
+
+        $flight->update($data);
+        return response()->json([
+            'status' => 'success',
+            'data'   => new FlightResource($flight->load(['origin', 'destination']))
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function destroy(int $id)
     {
-        $item = Flight::findOrFail($id);
-        $item->update($request->all());
-        return $this->success(new FlightResource($item), 'Actualizado');
-    }
-
-    public function destroy($id)
-    {
-        Flight::destroy($id);
-        return $this->success(null, 'Eliminado');
+        $flight = Flight::findOrFail($id);
+        if ($flight->getRawOriginal('image_url')) {
+            Storage::disk('public')->delete($flight->getRawOriginal('image_url'));
+        }
+        $flight->delete();
+        return response()->json(['message' => 'Vuelo eliminado']);
     }
 }

@@ -8,8 +8,18 @@ done
 
 echo "--- MySQL detectado! ---"
 
+echo "--- Ejecutando Migraciones ---"
+php artisan migrate:fresh --force
+
+echo "--- Creando enlace de almacenamiento ---"
+php artisan storage:link --force
+
+echo "--- Ejecutando Seeders ---"
+php artisan db:seed --force
+
 # Permisos
-chmod -R 777 /var/www/storage /var/www/bootstrap/cache
+chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 echo "--- Arrancando PHP-FPM ---"
 exec php-fpm

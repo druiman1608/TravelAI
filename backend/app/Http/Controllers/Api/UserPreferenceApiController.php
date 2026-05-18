@@ -5,40 +5,32 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\UserPreference;
 use App\Http\Resources\UserPreferenceResource;
-use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\UserPreferenceReq\UserPreferenceRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserPreferenceApiController extends Controller
 {
-    use ApiResponse;
-
-    public function index()
+    public function showMe()
     {
-        return $this->success(UserPreferenceResource::collection(UserPreference::all()));
+        $prefs = UserPreference::where('user_id', Auth::id())->first();
+
+        if (!$prefs) {
+            return response()->json(['data' => null]);
+        }
+
+        return new UserPreferenceResource($prefs);
     }
 
-    public function store(Request $request)
+    public function store(UserPreferenceRequest $request)
     {
-        $item = UserPreference::create($request->all());
-        return $this->success(new UserPreferenceResource($item), 'Creado', 201);
-    }
+        $prefs = UserPreference::updateOrCreate(
+            ['user_id' => Auth::id()],
+            $request->validated()
+        );
 
-    public function show($id)
-    {
-        $item = UserPreference::find($id);
-        return $item ? $this->success(new UserPreferenceResource($item)) : $this->error('No encontrado', 404);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $item = UserPreference::findOrFail($id);
-        $item->update($request->all());
-        return $this->success(new UserPreferenceResource($item), 'Actualizado');
-    }
-
-    public function destroy($id)
-    {
-        UserPreference::destroy($id);
-        return $this->success(null, 'Eliminado');
+        return response()->json([
+            'status' => 'success',
+            'data' => new UserPreferenceResource($prefs)
+        ]);
     }
 }

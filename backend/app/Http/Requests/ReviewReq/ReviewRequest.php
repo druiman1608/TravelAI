@@ -20,13 +20,11 @@ class ReviewRequest extends FormRequest
             'package_id'  => 'nullable|exists:packages,id',
             'activity_id' => 'nullable|exists:activities,id',
             'rating'      => 'required|integer|min:1|max:5',
-            'comment'     => 'required|string|min:5',
+            'comment'     => 'required|string|min:5|max:1000',
         ];
 
-        if ($this->isMethod('put') || $this->isMethod('patch')) {
-            if (Auth::user()->isAdmin() || Auth::user()->isMod()) {
-                $rules['status'] = 'required|in:pendiente,aprobada,rechazada,cancelada';
-            }
+        if (Auth::user()->isAdmin() || Auth::user()->isMod()) {
+            $rules['status'] = 'required|in:pending,approved,rejected';
         }
 
         return $rules;
@@ -44,10 +42,10 @@ class ReviewRequest extends FormRequest
                 ]);
 
                 if (count($servicios) === 0) {
-                    $validator->errors()->add('package_id', 'Debes seleccionar al menos un servicio para valorar.');
+                    $validator->errors()->add('servicio', 'Debes seleccionar qué estás valorando.');
                 }
                 if (count($servicios) > 1) {
-                    $validator->errors()->add('package_id', 'Solo puedes valorar un servicio por reseña. No selecciones varios.');
+                    $validator->errors()->add('servicio', 'Solo puedes valorar un elemento por reseña.');
                 }
             }
         });
@@ -56,8 +54,9 @@ class ReviewRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'comment.min' => 'El comentario es demasiado corto (minimo 5 caracteres).',
-            'rating.required' => 'La puntuacion es obligatoria.',
+            'rating.required' => 'La puntuación es obligatoria.',
+            'comment.min'     => 'El comentario debe tener al menos 5 caracteres.',
+            'status.in'       => 'El estado seleccionado no es válido.',
         ];
     }
 }

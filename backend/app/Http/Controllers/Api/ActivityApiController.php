@@ -5,40 +5,86 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Http\Resources\ActivityResource;
-use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\ActivityReq\ActivityRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ActivityApiController extends Controller
 {
-    use ApiResponse;
-
     public function index()
     {
-        return $this->success(ActivityResource::collection(Activity::all()));
+        $activities = Activity::with(['location'])->get();
+        return ActivityResource::collection($activities);
     }
 
-    public function store(Request $request)
+    public function store(ActivityRequest $request)
     {
-        $item = Activity::create($request->all());
-        return $this->success(new ActivityResource($item), 'Creado', 201);
+        $data = $request->validated();
+
+        $paths = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $paths[] = $file->store('activities', 'public');
+            }
+        }
+
+        if (isset($data['extras']) && is_string($data['extras'])) {
+            $data['extras'] = json_decode($data['extras'], true) ?? [];
+        }
+
+        $loading = 'ImagesProduccion/Loading/LoadingImage.jpg';
+        $data['images'] = $paths ?: [$loading, $loading, $loading];
+        $activity = Activity::create($data);
+
+        return response()->json([
+            'status' => 'success',
+            'data'   => new ActivityResource($activity->load('location'))
+        ], 201);
     }
 
-    public function show($id)
+    public function show(int $id)
     {
-        $item = Activity::find($id);
-        return $item ? $this->success(new ActivityResource($item)) : $this->error('No encontrado', 404);
+        $activity = Activity::with(['reviews.user', 'location'])->findOrFail($id);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => new ActivityResource($activity),
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ActivityRequest $request, int $id)
     {
-        $item = Activity::findOrFail($id);
-        $item->update($request->all());
-        return $this->success(new ActivityResource($item), 'Actualizado');
+        $activity = Activity::findOrFail($id);
+        $data = $request->validated();
+
+        if ($request->hasFile('images')) {
+            $paths = [];
+            foreach ($request->file('images') as $file) {
+                $paths[] = $file->store('activities', 'public');
+            }
+            $data['images'] = $paths;
+        }
+
+        if (isset($data['extras']) && is_string($data['extras'])) {
+            $data['extras'] = json_decode($data['extras'], true) ?? [];
+        }
+
+        $activity->update($data);
+        return response()->json([
+            'status' => 'success',
+            'data'   => new ActivityResource($activity->load('location'))
+        ]);
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        Activity::destroy($id);
-        return $this->success(null, 'Eliminado');
+        $activity = Activity::findOrFail($id);
+        $images = $activity->images ?? [];
+
+        foreach ($images as $path) {
+            Storage::disk('public')->delete($path);
+        }
+
+        $activity->delete();
+        return response()->json(['message' => 'Actividad eliminada']);
     }
 }

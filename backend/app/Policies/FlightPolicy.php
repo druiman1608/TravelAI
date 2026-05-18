@@ -4,11 +4,9 @@ namespace App\Policies;
 
 use App\Models\Flight;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
-
 class FlightPolicy
 {
-    public function before(User $user)
+    public function before(User $user, string $ability)
     {
         if ($user->isAdmin()) {
             return true;

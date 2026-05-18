@@ -1,0 +1,74 @@
+﻿.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.avatarRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--fondo-claro);
+}
+.preview {
+  width: 60px;
+  height: 60px;
+  background: var(--azul-principal);
+  color: var(--blanco);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.uploadBox label {
+  display: block;
+  font-weight: 700;
+  color: var(--azulOscuro-texto);
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.group label {
+  font-weight: 700;
+  color: var(--azulOscuro-texto);
+  font-size: 0.9rem;
+}
+.group input {
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid var(--borde-claro);
+  outline: none;
+  transition: 0.3s;
+}
+.group input:focus {
+  border-color: var(--azul-principal);
+}
+
+.saveBtn {
+  background: var(--azul-principal);
+  color: var(--blanco);
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+@media (max-width: 600px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}

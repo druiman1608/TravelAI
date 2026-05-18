@@ -1,0 +1,114 @@
+﻿.formContainer {
+  background: var(--blanco);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid var(--borde-claro);
+  margin-top: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.formContainer h3 {
+  margin: 0 0 5px 0;
+  color: var(--azul-marino-oscuro);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.formContainer p {
+  color: var(--texto-secundario);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.formElement {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.star {
+  cursor: pointer;
+  font-size: 2.2rem;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.star:hover {
+  transform: scale(1.15);
+}
+
+.ratingText {
+  margin-left: 10px;
+  color: var(--azulOscuro-texto);
+  font-weight: 700;
+  font-size: 1rem;
+  background: var(--fondo-claro);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid var(--borde-medio);
+  font-family: inherit;
+  resize: vertical;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: var(--blanco);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--azul-principal);
+  background: var(--blanco);
+  box-shadow: 0 0 0 4px rgba(0, 42, 125, 0.08);
+}
+
+.submitBtn {
+  align-self: flex-start;
+  background: var(--azul-principal);
+  color: var(--blanco);
+  border: none;
+  padding: 14px 40px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 5px;
+}
+
+.submitBtn:disabled {
+  background: var(--texto-placeholder);
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--azul-noche);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 42, 125, 0.2);
+}
+
+@media (max-width: 600px) {
+  .formContainer {
+    padding: 20px;
+  }
+  .star {
+    font-size: 1.8rem;
+  }
+  .submitBtn {
+    width: 100%;
+  }
+}

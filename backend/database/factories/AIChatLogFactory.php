@@ -2,24 +2,21 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AIChatLog>
- */
 class AIChatLogFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            'user_id' => null,
-            'user_question' => $this->faker->sentence() . '?',
-            'ai_answer' => 'Basado en tus preferencias, te recomiendo visitar ' . $this->faker->city() . ' debido a su clima ' . $this->faker->word(),
+            'user_id' => User::inRandomOrder()->first()?->id ?: User::factory(),
+            'message' => fake()->paragraph(),
+            'response' => fake()->paragraph(3),
+            'context_data' => json_encode([
+                'source' => fake()->randomElement(['web', 'mobile', 'app']),
+                'last_page' => fake()->randomElement(['/hoteles', '/vuelos', '/paquetes', '/actividades']),
+            ]),
         ];
     }
 }

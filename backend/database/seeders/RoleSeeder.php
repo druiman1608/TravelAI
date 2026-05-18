@@ -8,17 +8,10 @@ use App\Models\Role;
 
 class RoleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Roles
-        $roles = ['Administrador', 'Moderador', 'Premium', 'Usuario'];
-
-        // Crear roles
-        foreach ($roles as $role) {
-            \App\Models\Role::create(['name' => $role]);
+        foreach (['Administrador', 'Moderador', 'Premium', 'Usuario'] as $name) {
+            Role::firstOrCreate(['name' => $name]);
         }
     }
 }

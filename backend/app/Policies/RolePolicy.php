@@ -4,11 +4,9 @@ namespace App\Policies;
 
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
-
 class RolePolicy
 {
-    public function before(User $user, $ability)
+    public function before(User $user, string $ability)
     {
         if ($user->isAdmin()) {
             return true;

@@ -7,23 +7,23 @@ use Illuminate\Support\Facades\Auth;
 
 class AIChatLogRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return Auth::check();
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'user_question' => 'required|string',
+            'message'      => 'required|string',
+            'context_data' => 'nullable|array',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'message.required' => 'El mensaje del usuario es obligatorio.',
         ];
     }
 }

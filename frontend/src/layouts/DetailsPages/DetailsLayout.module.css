@@ -1,0 +1,239 @@
+﻿.mainContainer {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.btnFullWidth {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--azulOscuro-texto);
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.backCircle {
+  width: 40px;
+  height: 40px;
+  background: var(--blanco);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: var(--azul-principal);
+  transition: 0.3s;
+}
+
+.backBtn:hover .backCircle {
+  background: var(--azul-principal);
+  color: var(--blanco);
+}
+
+.topCard {
+  background: var(--blanco);
+  padding: 25px 35px;
+  border-radius: 20px;
+  border: 1px solid var(--fondo-hover);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.titleRow h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--azulOscuro-texto);
+}
+
+.starsBadge {
+  color: var(--amarillo-estrella);
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.locationText {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--texto-secundario);
+  margin-top: 8px;
+  font-size: 1.1rem;
+}
+
+.locIcon {
+  color: var(--rojo-airbnb);
+}
+
+.btnReserveTop {
+  background: var(--blanco);
+  border: 2px solid var(--azul-principal);
+  color: var(--azul-principal);
+  padding: 12px 60px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btnReserveTop:hover {
+  background: var(--azul-noche);
+  color: var(--blanco);
+}
+
+.internalLink {
+  text-decoration: none;
+  color: var(--azul-principal);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: 0.2s;
+}
+
+.internalLink:hover {
+  text-decoration: underline;
+  color: var(--rojo-airbnb);
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 30px;
+  align-items: stretch;
+  margin-bottom: 30px;
+}
+
+.galleryWrapper {
+  background: var(--blanco);
+  padding: 15px;
+  border-radius: 20px;
+  border: 1px solid var(--fondo-hover);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+  height: 100%;
+  overflow: hidden;
+}
+
+.sidebarInner {
+  background: var(--blanco);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid var(--fondo-hover);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarInner h3 {
+  margin-top: 0;
+  color: var(--azulOscuro-texto);
+  border-bottom: 1px solid var(--fondo-claro);
+  padding-bottom: 15px;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  flex-grow: 1;
+}
+.featureList li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: var(--texto-oscuro);
+}
+.check {
+  color: var(--verde-preciosExito);
+  font-size: 1.2rem;
+}
+
+.totalPrice {
+  background: var(--blanquezino-fondo);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+}
+.totalPrice p {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--azul-principal);
+  margin: 5px 0 0;
+}
+
+.descriptionBox {
+  background: var(--blanco);
+  border-radius: 20px;
+  padding: 35px;
+  border: 1px solid var(--fondo-hover);
+  margin-bottom: 30px;
+}
+.descriptionBox h3 {
+  margin-top: 0;
+  color: var(--azulOscuro-texto);
+}
+.descriptionContent {
+  line-height: 1.8;
+  color: var(--texto-oscuro);
+  var(--blanco)-space: pre-line;
+}
+
+.roomsSection {
+  margin-top: 40px;
+}
+.roomsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+.roomCard {
+  background: var(--blanco);
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid var(--borde-claro);
+  transition: 0.3s;
+}
+.roomCard img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.roomInfo {
+  padding: 20px;
+}
+.roomPrice {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--azul-principal);
+  margin-top: 10px;
+}
+
+@media (max-width: 992px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+  .topCard {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

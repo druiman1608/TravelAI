@@ -11,13 +11,16 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__ . '/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->validateCsrfTokens(except: [
+            'api/*',
+        ]);
+
         $middleware->alias([
-            'admin'   => \App\Http\Middleware\AdminMiddleware::class,
-            'mod'     => \App\Http\Middleware\ModMiddleware::class,
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'mod' => \App\Http\Middleware\ModMiddleware::class,
             'premium' => \App\Http\Middleware\PremiumMiddleware::class,
+            'role' => \App\Http\Middleware\CheckRole::class,
         ]);
     })
-    ->withExceptions(function (Exceptions $exceptions): void {
-        //
-    })->create();
+    ->withExceptions(function (Exceptions $exceptions) {})->create();

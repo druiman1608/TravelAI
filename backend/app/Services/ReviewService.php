@@ -7,15 +7,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ReviewService
 {
-    public function store($data)
+    public function store(array $data): Review
     {
         return Review::create(array_merge($data, [
             'user_id' => Auth::id(),
-            'status' => 'pendiente'
+            'status' => 'pending'
         ]));
     }
 
-    public function handleUpdate(Review $review, $data, $user)
+    public function handleUpdate(Review $review, array $data, $user): Review
     {
         if ($user->isAdmin() || $user->isMod()) {
             $review->status = $data['status'];
@@ -24,14 +24,11 @@ class ReviewService
                 $review->rating = $data['rating'];
             }
         } else {
-            if ($data['status'] === 'borrada') {
-                $review->status = 'borrada';
-            } else {
-                $review->comment = $data['comment'];
-                $review->rating = $data['rating'];
-                $review->status = 'pendiente';
-            }
+            $review->comment = $data['comment'];
+            $review->rating = $data['rating'];
+            $review->status = 'pending';
         }
-        return $review->save();
+        $review->save();
+        return $review;
     }
 }

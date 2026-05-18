@@ -10,10 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Sanctum\HasApiTokens;
 
-
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
@@ -21,19 +19,16 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone_number',
+        'profile_photo_path',
+        'status',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $hidden = ['password', 'remember_token'];
 
     public function role(): BelongsTo
     {
-        return $this->belongsTo(Role::class, 'role_id');
+        return $this->belongsTo(Role::class);
     }
 
     public function preferences(): HasOne
@@ -51,23 +46,18 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
-    public function aiChatLogs(): HasMany
-    {
-        return $this->hasMany(AIChatLog::class);
-    }
-
     public function isAdmin(): bool
     {
-        return $this->role_id == config('roles.Administrador');
+        return $this->role?->name === Role::ADMIN;
     }
 
     public function isMod(): bool
     {
-        return $this->role_id == config('roles.Moderador');
+        return $this->role?->name === Role::MODERATOR;
     }
 
     public function isPremium(): bool
     {
-        return $this->role_id == config('roles.Premium');
+        return $this->role?->name === Role::PREMIUM;
     }
 }

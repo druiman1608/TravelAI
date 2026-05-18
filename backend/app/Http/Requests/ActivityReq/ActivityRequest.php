@@ -7,29 +7,24 @@ use Illuminate\Support\Facades\Auth;
 
 class ActivityRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        /** @var \App\Models\User $user */
-
-        $user = Auth::user();
-        return Auth::check() && $user->isAdmin();
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'location_id' => 'required|exists:locations,id',
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:1',
+            'location_id'       => 'required|exists:locations,id',
+            'name'              => 'required|string|max:255',
+            'description'       => 'required|string',
+            'duration'          => 'required|string|max:100',
+            'price'             => 'required|numeric|min:0',
+            'type'              => 'nullable|string|max:100',
+            'included_features' => 'nullable|array',
+            'images'   => 'nullable|array',
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048',
+            'extras'   => 'nullable|array',
         ];
     }
 }

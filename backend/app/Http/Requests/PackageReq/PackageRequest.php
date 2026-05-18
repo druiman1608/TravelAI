@@ -7,45 +7,24 @@ use Illuminate\Support\Facades\Auth;
 
 class PackageRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        /** @var \App\Models\User $user */
-
-        $user = Auth::user();
-        return Auth::check() && $user->isAdmin();
+        return Auth::check() && Auth::user()->isAdmin();
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'hotel_id'    => 'nullable|exists:hotels,id',
-            'flight_id'   => 'nullable|exists:flights,id',
-            'activity_id' => 'nullable|exists:activities,id',
-            'total_price' => 'required|numeric|min:1',
+            'name'           => 'required|string|max:255',
+            'description'    => 'required|string',
+            'hotel_id'       => 'nullable|exists:hotels,id',
+            'flight_id'      => 'nullable|exists:flights,id',
+            'activity_id'    => 'nullable|exists:activities,id',
+            'total_price'    => 'required|numeric|min:0',
+            'discount_price' => 'nullable|numeric|lt:total_price',
+            'itinerary'      => 'nullable|array',
+            'images'   => 'nullable|array',
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048',
         ];
-    }
-
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            $selected = collect([
-                $this->hotel_id,
-                $this->flight_id,
-                $this->activity_id,
-            ])->filter()->count();
-
-            if ($selected < 2) {
-                $validator->errors()->add('services', 'Debes seleccionar al menos 2 servicios para el paquete.');
-            }
-        });
     }
 }

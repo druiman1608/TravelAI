@@ -4,12 +4,10 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\UserPreference;
-use Illuminate\Auth\Access\Response;
-
 class UserPreferencePolicy
 {
 
-    public function before(User $user)
+    public function before(User $user, string $ability)
     {
         if ($user->isAdmin()) {
             return true;
@@ -36,7 +34,7 @@ class UserPreferencePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**

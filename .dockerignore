@@ -1,0 +1,21 @@
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# Laravel
+backend/vendor/
+backend/node_modules/
+backend/.env
+backend/storage/logs/*.log
+backend/storage/*.key
+backend/public/storage
+
+# Docker data
+docker/mysql_data/
+
+# Git / OS
+.git/
+.gitignore
+**/.DS_Store

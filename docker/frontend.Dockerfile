@@ -2,6 +2,12 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-USER root
+COPY frontend/package*.json ./
 
-CMD ["sh", "-c", "npm install && npm run dev -- --port 8080 --host"]
+RUN npm ci
+
+COPY frontend/ .
+
+EXPOSE 8080
+
+CMD ["npm", "run", "dev", "--", "--port", "8080", "--host"]

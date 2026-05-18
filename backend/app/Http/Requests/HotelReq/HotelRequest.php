@@ -7,32 +7,34 @@ use Illuminate\Support\Facades\Auth;
 
 class HotelRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        // /** @var \App\Models\User $user */
-
-        // $user = Auth::user();
-        // return Auth::check() && $user->isAdmin();
-
-        return true;
+        return Auth::check() && Auth::user()->isAdmin();
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'location_id' => 'required|exists:locations,id',
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'stars' => 'required|integer|min:1|max:5',
-            'price_per_night' => 'required|numeric|min:1',
+            'location_id'     => 'required|exists:locations,id',
+            'name'            => 'required|string|max:255',
+            'description'     => 'required|string',
+            'address'         => 'required|string|max:255',
+            'zip_code'        => 'required|string|max:20',
+            'stars'           => 'required|integer|min:1|max:5',
+            'available_rooms' => 'required|integer|min:0',
+            'price_per_night' => 'required|numeric|min:0',
+            'services'        => 'nullable|array',
+            'images'   => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'location_id.exists' => 'La ubicación seleccionada no es válida.',
+            'stars.max'          => 'El máximo de estrellas permitido es 5.',
+            'images.*.image' => 'Cada archivo debe ser una imagen válida.',
         ];
     }
 }

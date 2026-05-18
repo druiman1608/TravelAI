@@ -1,0 +1,141 @@
+﻿.navbar {
+  background-color: var(--azul-principal);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 80px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logo {
+  height: 50px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.navLinks {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.link {
+  color: var(--blanco);
+  text-decoration: none;
+  padding: 0.8rem 1rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  transition: 0.3s;
+}
+
+.link:hover {
+  color: var(--azul-accion);
+}
+
+.aiLink {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 800;
+}
+
+.linkSpecial {
+  background-color: var(--azul-accion);
+  color: var(--blanco);
+  padding: 0.7rem 1.4rem;
+  border-radius: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  margin-left: 10px;
+  transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.linkSpecial:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.userIcon {
+  font-size: 35px;
+  color: var(--blanco);
+  transition: 0.3s;
+}
+
+.userIcon:hover {
+  color: var(--azul-accion);
+}
+
+.menuIcon {
+  display: none;
+  color: var(--blanco);
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.overlayActive {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 1100px) {
+  .link {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 950px) {
+  .menuIcon {
+    display: block;
+  }
+  .userSection {
+    display: none;
+  }
+  .navLinks {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--azul-principal);
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+  }
+  .navLinksActive {
+    right: 0;
+  }
+  .link,
+  .linkSpecial {
+    width: 100%;
+    text-align: center;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+}

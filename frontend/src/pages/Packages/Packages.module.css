@@ -1,0 +1,35 @@
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.extraFilterGroup {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid var(--fondo-claro);
+}
+
+.filterLabel {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--azul-principal);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.selectInput {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1.5px solid var(--borde-claro);
+  background-color: var(--blanco);
+  font-size: 0.9rem;
+  color: var(--texto-oscuro);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.selectInput:focus {
+  border-color: var(--azul-principal);
+}

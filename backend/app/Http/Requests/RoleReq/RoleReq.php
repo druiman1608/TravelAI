@@ -8,31 +8,20 @@ use Illuminate\Validation\Rule;
 
 class RoleRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-
-        return Auth::check() && $user->isAdmin();
+        return Auth::check() && Auth::user()->isAdmin();
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
-        $roleId = $this->route('role') ? $this->route('role')->id : null;
+        $roleId = $this->route('role');
 
         return [
             'name' => [
                 'required',
                 'string',
-                'max:255',
+                'max:50',
                 Rule::unique('roles', 'name')->ignore($roleId),
             ],
         ];

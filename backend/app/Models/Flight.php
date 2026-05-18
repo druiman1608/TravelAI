@@ -4,41 +4,51 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Flight extends Model
 {
-    /** @use HasFactory<\Database\Factories\FlightFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'location_id',
+        'flight_number',
+        'origin_loc_id',
+        'destination_loc_id',
         'airline',
-        'origin',
         'departure',
         'arrival',
+        'capacity',
         'price',
+        'duration_time',
+        'stops',
+        'image_url',
+        'extras'
     ];
 
-    public function location()
+    protected $casts = [
+        'extras' => 'array'
+    ];
+
+    public function getImageUrlAttribute($value)
     {
-        return $this->belongsTo(Location::class, 'location_id');
+        if (!$value) return null;
+        if (str_starts_with($value, 'http')) return $value;
+        return asset('storage/' . $value);
     }
 
-    public function packages()
+    public function origin(): BelongsTo
     {
-        return $this->hasMany(Package::class);
+        return $this->belongsTo(Location::class, 'origin_loc_id');
     }
 
-    public function reviews()
+    public function destination(): BelongsTo
+    {
+        return $this->belongsTo(Location::class, 'destination_loc_id');
+    }
+
+    public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
-    }
-
-    protected function casts(): array
-    {
-        return [
-            'departure' => 'datetime',
-            'arrival' => 'datetime',
-        ];
     }
 }

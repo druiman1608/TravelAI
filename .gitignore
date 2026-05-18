@@ -1,6 +1,7 @@
 # Docker y sistema
 .DS_Store
 mysql_data/
+docker/mysql_data/
 
 # Backend [Laravel]
 backend/vendor/

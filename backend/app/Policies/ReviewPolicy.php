@@ -4,11 +4,9 @@ namespace App\Policies;
 
 use App\Models\Review;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
-
 class ReviewPolicy
 {
-    public function before(User $user, $ability)
+    public function before(User $user, string $ability)
     {
         if ($user->isAdmin()) {
             return true;
@@ -45,6 +43,14 @@ class ReviewPolicy
     public function update(User $user, Review $review): bool
     {
         return $user->id === $review->user_id;
+    }
+
+    /**
+     * Admin o mod actualizan el estado de la review
+     */
+    public function updateStatus(User $user, Review $review): bool
+    {
+        return $user->isMod() || $user->isAdmin();
     }
 
     /**

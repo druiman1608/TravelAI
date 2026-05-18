@@ -1,0 +1,167 @@
+﻿.wrapper {
+  min-height: 60vh;
+  padding: 40px 20px;
+  background: var(--blanquezino-fondo);
+}
+
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  background: var(--blanco);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  box-shadow: var(--shadow-md);
+}
+
+.container h1 {
+  color: var(--azul-principal);
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.updated {
+  color: var(--texto-secundario);
+  font-size: 0.875rem;
+  margin-bottom: 36px;
+}
+
+section {
+  margin-bottom: 32px;
+}
+
+section h2 {
+  color: var(--azulOscuro-texto);
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--fondo-claro);
+}
+
+section p,
+section li {
+  color: var(--texto-oscuro);
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+
+section ul {
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+section ul li {
+  margin-bottom: 6px;
+}
+
+section a {
+  color: var(--azul-accion);
+  text-decoration: none;
+}
+
+section a:hover {
+  text-decoration: underline;
+}
+
+.cookieTable {
+  border: 1px solid var(--borde-claro);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+
+.cookieRow {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 2.5fr 1fr;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--borde-claro);
+  gap: 8px;
+  align-items: center;
+}
+
+.cookieRow:last-child {
+  border-bottom: none;
+}
+
+.cookieHeader {
+  background: var(--fondo-claro);
+  font-weight: 700;
+  color: var(--azulOscuro-texto);
+}
+
+.cookieRow code {
+  font-size: 0.8rem;
+  background: var(--fondo-claro);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--azul-detalles);
+}
+
+.infoTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.infoTable th,
+.infoTable td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--borde-claro);
+}
+
+.infoTable th {
+  color: var(--texto-secundario);
+  font-weight: 600;
+  width: 180px;
+  var(--blanco)-space: nowrap;
+}
+
+.infoTable td {
+  color: var(--azulOscuro-texto);
+}
+
+.treatmentCard {
+  background: var(--fondo-claro);
+  border-left: 4px solid var(--azul-principal);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.treatmentCard h3 {
+  color: var(--azul-principal);
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.treatmentCard p {
+  font-size: 0.9rem;
+  color: var(--texto-oscuro);
+  margin-bottom: 4px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 20px;
+  }
+
+  .container h1 {
+    font-size: 1.5rem;
+  }
+
+  .cookieRow {
+    grid-template-columns: 1fr 1fr;
+    font-size: 0.8rem;
+  }
+
+  .cookieRow span:nth-child(3),
+  .cookieRow span:nth-child(4),
+  .cookieHeader span:nth-child(3),
+  .cookieHeader span:nth-child(4) {
+    display: none;
+  }
+
+  .infoTable th {
+    width: 120px;
+  }
+}

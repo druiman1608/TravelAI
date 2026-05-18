@@ -1,0 +1,126 @@
+﻿.profileContainer {
+  display: flex;
+  max-width: 1200px;
+  margin: 40px auto;
+  gap: 30px;
+  padding: 0 20px;
+  align-items: flex-start;
+}
+
+.sidebar {
+  width: 300px;
+  background: var(--blanco);
+  border-radius: 20px;
+  padding: 30px 20px;
+  border: 1px solid var(--borde-claro);
+  position: sticky;
+  top: 100px;
+  z-index: 10;
+}
+
+.userBadge {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--fondo-claro);
+}
+
+.avatarPlaceholder {
+  width: 70px;
+  height: 70px;
+  background: var(--azul-principal);
+  color: var(--blanco);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 auto 15px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  color: var(--texto-secundario);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.navLink svg {
+  font-size: 1.4rem;
+}
+
+.navLink:hover {
+  background: var(--blanquezino-fondo);
+  color: var(--azul-principal);
+}
+
+.active {
+  background: var(--azul-pastel);
+  color: var(--azul-principal);
+  font-weight: 700;
+}
+
+.content {
+  flex: 1;
+  min-width: 600px;
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  margin-top: 20px;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--fondo-claro);
+  width: 100%;
+  color: var(--texto-secundario);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.logoutBtn:hover {
+  color: var(--rojo-error);
+  background-color: var(--rojo-error-fondo);
+  border-radius: 10px;
+}
+
+.logoutBtn .icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .profileContainer {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+    position: relative;
+    top: auto;
+    z-index: auto;
+  }
+
+  .content {
+    width: 100%;
+    min-width: 0;
+  }
+}

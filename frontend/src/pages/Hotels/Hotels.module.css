@@ -1,0 +1,64 @@
+.resultsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.countTag {
+  background: var(--azul-principal);
+  color: var(--blanco);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.extraFilterGroup {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--fondo-claro);
+}
+
+.filterLabel {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--azul-principal);
+  margin-bottom: 15px;
+  display: block;
+}
+
+.servicesGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--texto-oscuro);
+}
+
+.selectInput {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1.5px solid var(--borde-claro);
+}
+
+@media (max-width: 600px) {
+  .resultsHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

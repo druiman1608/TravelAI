@@ -1,0 +1,187 @@
+.viewWrapper {
+  height: 100%;
+}
+
+.loading {
+  padding: 40px;
+  text-align: center;
+  color: var(--texto-secundario);
+}
+
+.planDesc {
+  color: var(--texto-oscuro);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.header {
+  margin-bottom: 30px;
+  background: var(--blanco);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid var(--borde-claro);
+}
+.header h2 {
+  font-size: 1.8rem;
+  color: var(--azulOscuro-texto);
+  margin: 0;
+}
+.header p {
+  color: var(--texto-secundario);
+  margin-top: 5px;
+}
+
+.profileGrid {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 25px;
+  align-items: stretch;
+}
+
+.mainCard {
+  background: var(--blanco);
+  border-radius: 20px;
+  padding: 40px;
+  border: 1px solid var(--borde-claro);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.avatarWrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.avatarLarge {
+  font-size: 100px;
+  color: var(--azul-principal);
+  line-height: 1;
+}
+
+.avatarImg {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--blanco);
+}
+
+.avatarEditBtn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--azul-principal);
+  color: var(--blanco);
+  border: 2px solid var(--blanco);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background var(--transition-fast);
+}
+
+.avatarEditBtn:hover:not(:disabled) {
+  background: var(--azul-detalles);
+}
+
+.avatarEditBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.emailInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--texto-secundario);
+  margin-bottom: 15px;
+}
+
+.premiumBadge {
+  background: var(--dorado-claro-fondo);
+  color: var(--naranja-escalas);
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--dorado-claro-fondo);
+}
+
+.detailsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.infoCard {
+  background: var(--blanco);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid var(--borde-claro);
+  flex: 1;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.iconBlue {
+  color: var(--azul-principal);
+  font-size: 1.5rem;
+}
+.iconGold {
+  color: var(--dorado-premium);
+  font-size: 1.5rem;
+}
+
+.planBtn {
+  display: inline-block;
+  margin-top: 15px;
+  background: var(--azul-principal);
+  color: var(--blanco);
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid var(--azul-principal);
+  text-decoration: none;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.planBtn:hover {
+  background: var(--blanco);
+  color: var(--azul-principal);
+  border: 2px solid var(--azul-principal);
+}
+
+.miniPrefs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.prefItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--azulOscuro-texto);
+  font-weight: 500;
+}
+
+@media (max-width: 850px) {
+  .profileGrid {
+    grid-template-columns: 1fr;
+  }
+}

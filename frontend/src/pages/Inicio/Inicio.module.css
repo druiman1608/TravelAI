@@ -1,0 +1,177 @@
+﻿.homeContainer {
+  min-height: 100vh;
+  background-color: var(--blanquezino-fondo);
+  padding-bottom: 40px;
+}
+
+.aiHero {
+  background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-noche) 100%);
+  margin: 20px auto;
+  padding: 4rem 2rem;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 1400px;
+  box-shadow: 0 10px 30px rgba(0, 40, 120, 0.2);
+}
+
+.aiTextContent {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.aiTitle {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  color: var(--blanco);
+  font-weight: 800;
+}
+.aiSubtitle {
+  color: var(--blanco);
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  font-weight: 600;
+}
+
+.aiCard {
+  background: var(--blanco);
+  width: 100%;
+  max-width: 700px;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.aiCard h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.chatInputWrapper {
+  display: flex;
+  gap: 12px;
+  background: var(--fondo-claro);
+  padding: 8px;
+  border-radius: 16px;
+  transition: 0.3s;
+}
+.chatInputWrapper:focus-within {
+  background: var(--blanco);
+  box-shadow: 0 0 0 2px var(--azul-principal);
+}
+
+.aiInputGroup {
+  flex: 1;
+}
+.aiInputGroup input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.aiSendButton {
+  background: var(--azul-principal);
+  color: var(--blanco);
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.sectionHeaderBlue {
+  background: var(--azul-principal);
+  color: var(--blanco);
+  padding: 12px 25px;
+  border-radius: 10px;
+  margin: 40px auto 20px;
+  width: 90%;
+  max-width: 1400px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.categoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto 40px;
+}
+
+.categoryCard {
+  position: relative;
+  aspect-ratio: 16/10;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+
+.categoryCard:hover {
+  transform: translateY(-5px);
+}
+.categoryImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.categoryOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 26, 77, 0.8), transparent);
+  display: flex;
+  align-items: flex-end;
+  padding: 15px;
+}
+
+.categoryOverlay h3 {
+  color: var(--blanco);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.mainContent {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.featuredSection {
+  margin-bottom: 20px;
+}
+
+.featuredList {
+  width: 100%;
+}
+
+.featuredSkeleton {
+  height: 160px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #e8eef6 25%, #d0daea 50%, #e8eef6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (max-width: 768px) {
+  .aiHero {
+    width: 95%;
+    padding: 2.5rem 1rem;
+  }
+  .aiCard {
+    padding: 1.5rem;
+  }
+  .categoriesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -4,50 +4,41 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Review extends Model
 {
-    /** @use HasFactory<\Database\Factories\ReviewFactory> */
     use HasFactory;
 
     protected $fillable = [
         'user_id',
         'hotel_id',
+        'activity_id',
         'flight_id',
         'package_id',
-        'location_id',
         'rating',
         'comment',
-        'status',
+        'status'
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
-    public function hotel()
+    public function hotel(): BelongsTo
     {
         return $this->belongsTo(Hotel::class);
     }
-
-    public function flight()
-    {
-        return $this->belongsTo(Flight::class);
-    }
-
-    public function package()
-    {
-        return $this->belongsTo(Package::class);
-    }
-
-    public function activity()
+    public function activity(): BelongsTo
     {
         return $this->belongsTo(Activity::class);
     }
-
-    public function location()
+    public function flight(): BelongsTo
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(Flight::class);
+    }
+    public function package(): BelongsTo
+    {
+        return $this->belongsTo(Package::class);
     }
 }

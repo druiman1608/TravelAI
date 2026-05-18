@@ -5,40 +5,21 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Http\Resources\RoleResource;
-use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
 
 class RoleApiController extends Controller
 {
-    use ApiResponse;
-
     public function index()
     {
-        return $this->success(RoleResource::collection(Role::all()));
+        $roles = Role::all();
+        return RoleResource::collection($roles);
     }
 
-    public function store(Request $request)
+    public function show(int $id)
     {
-        $item = Role::create($request->all());
-        return $this->success(new RoleResource($item), 'Creado', 201);
-    }
-
-    public function show($id)
-    {
-        $item = Role::find($id);
-        return $item ? $this->success(new RoleResource($item)) : $this->error('No encontrado', 404);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $item = Role::findOrFail($id);
-        $item->update($request->all());
-        return $this->success(new RoleResource($item), 'Actualizado');
-    }
-
-    public function destroy($id)
-    {
-        Role::destroy($id);
-        return $this->success(null, 'Eliminado');
+        $role = Role::find($id);
+        if (!$role) {
+            return response()->json(['message' => 'Rol no encontrado'], 404);
+        }
+        return new RoleResource($role);
     }
 }

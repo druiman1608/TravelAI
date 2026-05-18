@@ -1,0 +1,95 @@
+.sectionsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.header {
+  margin-bottom: 30px;
+  background: var(--blanco);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid var(--borde-claro);
+}
+.header h2 {
+  font-size: 1.8rem;
+  color: var(--azulOscuro-texto);
+  margin: 0;
+}
+.header p {
+  color: var(--texto-secundario);
+  margin-top: 5px;
+}
+
+.card {
+  background: var(--blanco);
+  border-radius: 20px;
+  border: 1px solid var(--borde-claro);
+  overflow: hidden;
+}
+
+.cardHeader {
+  background: var(--blanquezino-fondo);
+  padding: 20px 30px;
+  border-bottom: 1px solid var(--borde-claro);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.iconCircle {
+  width: 40px;
+  height: 40px;
+  background: var(--azul-pastel);
+  color: var(--azul-principal);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardContent {
+  padding: 30px;
+}
+
+.dangerCard {
+  border-color: var(--rojo-claro-borde);
+}
+
+.deleteButton {
+  background: var(--rojo-error);
+  color: var(--blanco);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.cardContent input {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 2px solid var(--borde-claro);
+  margin-top: 8px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.cardContent input:focus {
+  border-color: var(--azul-principal);
+  outline: none;
+  background: var(--azul-pastel);
+}
+
+.cardContent button[type="submit"] {
+  background: var(--azul-principal);
+  color: var(--blanco);
+  border: none;
+  padding: 14px 30px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}

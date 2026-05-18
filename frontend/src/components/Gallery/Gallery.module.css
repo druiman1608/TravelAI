@@ -1,0 +1,93 @@
+﻿.galleryContainer {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.mosaicGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+  height: 400px;
+}
+
+.mainImage img,
+.subImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.mainImage img:hover,
+.subImg img:hover {
+  opacity: 0.9;
+}
+
+.sideImages {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+}
+
+.subImg {
+  position: relative;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--blanco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.placeholderMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--fondo-claro);
+  border-radius: 12px;
+  gap: 12px;
+  cursor: default;
+}
+
+.placeholderIcon {
+  font-size: 3rem;
+  color: var(--texto-secundario);
+  opacity: 0.4;
+}
+
+.placeholderText {
+  font-size: 0.9rem;
+  color: var(--texto-secundario);
+  opacity: 0.6;
+}
+
+.placeholderSub {
+  background: var(--fondo-claro);
+  border-radius: 12px;
+  cursor: default;
+}
+
+@media (max-width: 768px) {
+  .mosaicGrid {
+    grid-template-columns: 1fr;
+    height: 250px;
+  }
+  .sideImages {
+    display: none;
+  }
+}

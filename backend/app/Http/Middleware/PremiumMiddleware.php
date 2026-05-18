@@ -18,6 +18,8 @@ class PremiumMiddleware
             return $next($request);
         }
 
-        return redirect()->route('dashboard')->with('error', 'El chat con IA es exclusivo para usuarios Premium.');
+        return response()->json([
+            'message' => 'Contenido exclusivo para usuarios Premium.'
+        ], 403);
     }
 }

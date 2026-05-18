@@ -5,40 +5,75 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Package;
 use App\Http\Resources\PackageResource;
-use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\PackageReq\PackageRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PackageApiController extends Controller
 {
-    use ApiResponse;
-
     public function index()
     {
-        return $this->success(PackageResource::collection(Package::all()));
+        $packages = Package::with(['hotel.location', 'flight.destination', 'activity.location'])->get();
+        return PackageResource::collection($packages);
     }
 
-    public function store(Request $request)
+    public function store(PackageRequest $request)
     {
-        $item = Package::create($request->all());
-        return $this->success(new PackageResource($item), 'Creado', 201);
+        $data = $request->validated();
+
+        $paths = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $paths[] = $file->store('packages', 'public');
+            }
+        }
+
+        $data['images'] = $paths;
+        $package = Package::create($data);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => new PackageResource($package->load(['hotel', 'flight', 'activity']))
+        ], 201);
     }
 
-    public function show($id)
+    public function show(int $id)
     {
-        $item = Package::find($id);
-        return $item ? $this->success(new PackageResource($item)) : $this->error('No encontrado', 404);
+        $package = Package::with(['hotel.location', 'flight.destination', 'activity.location', 'reviews.user'])
+            ->findOrFail($id);
+        return new PackageResource($package);
     }
 
-    public function update(Request $request, $id)
+    public function update(PackageRequest $request, int $id)
     {
-        $item = Package::findOrFail($id);
-        $item->update($request->all());
-        return $this->success(new PackageResource($item), 'Actualizado');
+        $package = Package::findOrFail($id);
+        $data = $request->validated();
+
+        if ($request->hasFile('images')) {
+            $paths = [];
+            foreach ($request->file('images') as $file) {
+                $paths[] = $file->store('packages', 'public');
+            }
+            $data['images'] = $paths;
+        }
+
+        $package->update($data);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => new PackageResource($package->load(['hotel', 'flight', 'activity']))
+        ]);
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        Package::destroy($id);
-        return $this->success(null, 'Eliminado');
+        $package = Package::findOrFail($id);
+        $images = $package->images ?? [];
+
+        foreach ($images as $path) {
+            Storage::disk('public')->delete($path);
+        }
+
+        $package->delete();
+        return response()->json(['message' => 'Paquete eliminado correctamente']);
     }
 }

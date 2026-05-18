@@ -2,29 +2,37 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ReservationResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
-            'usuario' => $this->user->name,
-            'total' => $this->price,
-            'estado' => $this->status,
-            'detalles' => [
-                'hotel' => $this->hotel->name ?? null,
-                'vuelo' => $this->flight->id ?? null,
-                'paquete' => $this->package->name ?? null,
-                'actividad' => $this->activity->name ?? null,
-            ]
+            'id'                => $this->id,
+            'titular'           => $this->contact_name,
+            'dni'               => $this->contact_dni,
+            'precio_total'      => (float) $this->total_price,
+            'extras_seleccionados' => $this->extras,
+            'acompañantes'      => $this->passengers_data,
+            'estado'            => $this->mapStatus($this->status),
+            'resumen' => [
+                'hotel'     => $this->hotel?->name,
+                'habitacion' => $this->hotelRoom?->type,
+                'vuelo'     => $this->flight?->airline,
+                'actividad' => $this->activity?->name,
+            ],
+            'fecha' => $this->created_at?->format('d-m-Y'),
         ];
+    }
+
+    private function mapStatus($status)
+    {
+        $statuses = [
+            'pending'   => 'pendiente',
+            'confirmed' => 'confirmada',
+            'cancelled' => 'cancelada'
+        ];
+        return $statuses[$status] ?? $status;
     }
 }

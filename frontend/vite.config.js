@@ -8,11 +8,12 @@ export default defineConfig({
     host: "0.0.0.0",
     port: 8080,
     strictPort: true,
-    hrm: {
+    hmr: {
       clientPort: 8081,
     },
     watch: {
       usePolling: true,
+      interval: 100,
     },
   },
 });

@@ -1,0 +1,345 @@
+﻿.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.modalContent {
+  background: var(--blanco);
+  padding: 28px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 740px;
+  max-height: 92vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  animation: modalIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modalHeader {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--fondo-claro);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modalHeader h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--negro-fondo);
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formGroup label {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--texto-oscuro);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  padding: 10px 12px;
+  border: 1.5px solid var(--borde-claro);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: var(--azulOscuro-texto);
+  background: var(--blanco);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--indigo-acentos);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.formGroup input:disabled {
+  background: var(--blanquezino-fondo);
+  color: var(--texto-placeholder);
+  cursor: not-allowed;
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+
+.gridTwoCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.gridThreeCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+
+.imageSection {
+  background: var(--blanquezino-fondo);
+  padding: 14px;
+  border-radius: 12px;
+  border: 1.5px dashed var(--borde-medio);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.imageSection label {
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--texto-secundario);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.imageSection input[type="file"] {
+  font-size: 0.82rem;
+  color: var(--texto-oscuro);
+}
+
+.imageSectionTitle {
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--texto-secundario);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+.saveBtn {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, var(--indigo-acentos), var(--violeta-acentos));
+  color: var(--blanco);
+  border: none;
+  border-radius: 11px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: all 0.15s;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  font-family: inherit;
+}
+
+.saveBtn:hover {
+  background: linear-gradient(135deg, var(--indigo-oscuro), var(--indigo-acentos));
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+  transform: translateY(-1px);
+}
+
+.saveBtn:active {
+  transform: translateY(0);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--texto-secundario);
+  padding: 4px 8px;
+  border-radius: 6px;
+  line-height: 1;
+  transition:
+    color 0.15s,
+    background 0.15s;
+}
+
+.closeBtn:hover {
+  color: var(--negro-fondo);
+  background: var(--fondo-claro);
+}
+
+.extrasSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.extraRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.extraInput {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1.5px solid var(--borde-claro);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: var(--azulOscuro-texto);
+  background: var(--blanco);
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+.extraInput:focus {
+  outline: none;
+  border-color: var(--indigo-acentos);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.removeExtraBtn {
+  padding: 8px 12px;
+  background: var(--rojo-error);
+  color: var(--blanco);
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.removeExtraBtn:hover {
+  background: var(--rojo-oscuro);
+}
+
+.addExtraBtn {
+  align-self: flex-start;
+  background: var(--indigo-acentos);
+  color: var(--blanco);
+  border: none;
+  padding: 7px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-top: 2px;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+
+.addExtraBtn:hover {
+  background: var(--indigo-oscuro);
+}
+
+.extrasLabel {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--texto-oscuro);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+
+@media (max-width: 768px) {
+  .overlay {
+    padding: 12px;
+    align-items: flex-end;
+  }
+
+  .modalContent {
+    padding: 20px 18px;
+    border-radius: 18px 18px 0 0;
+    max-height: 92vh;
+    max-width: 100%;
+    margin: 0;
+    animation: modalInMobile 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
+  }
+
+  @keyframes modalInMobile {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .gridTwoCols,
+  .gridThreeCols {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .saveBtn {
+    padding: 14px;
+    font-size: 1rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .overlay {
+    padding: 0;
+  }
+
+  .modalContent {
+    padding: 18px 14px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .modalHeader h2 {
+    font-size: 1rem;
+  }
+
+  .formGroup input,
+  .formGroup select,
+  .formGroup textarea {
+    font-size: 16px;
+    padding: 11px 12px;
+  }
+}

@@ -1,0 +1,86 @@
+.reviewCardAlternative {
+  display: flex;
+  gap: 25px;
+  padding: 25px;
+  background: var(--blanco);
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  align-items: center;
+  transition: transform 0.3s ease;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.reviewCardAlternative:hover {
+  transform: translateY(-5px);
+}
+
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.avatarLarge {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--azul-detalles);
+  margin-bottom: 12px;
+}
+
+.starsRow {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+}
+
+.starFilled {
+  color: var(--amarillo-estrella);
+  font-size: 1.1rem;
+}
+
+.starEmpty {
+  color: var(--borde-claro);
+  font-size: 1.1rem;
+}
+
+.rightCol {
+  flex: 1;
+}
+
+.userName {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  color: var(--azulOscuro-texto);
+  font-weight: 700;
+}
+
+.comment {
+  margin: 0;
+  color: var(--texto-secundario);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .reviewCardAlternative {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+    gap: 15px;
+  }
+
+  .leftCol {
+    width: 100%;
+  }
+
+  .rightCol {
+    width: 100%;
+  }
+}

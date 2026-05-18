@@ -3,11 +3,9 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
-
 class UserPolicy
 {
-    public function before(User $user, $ability)
+    public function before(User $user, string $ability)
     {
         if ($user->isAdmin()) {
             return true;

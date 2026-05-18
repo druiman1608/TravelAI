@@ -2,24 +2,28 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class FlightResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(Request $request): array
+    public function toArray($request): array
     {
-        // return parent::toArray($request);
         return [
-            'id' => $this->id,
-            'nombre' => $this->name ?? $this->number,
-            'precio' => $this->price ?? $this->price_per_night,
-            'ubicacion' => $this->location->city ?? 'N/A',
+            'id'             => $this->id,
+            'numero_vuelo'   => $this->flight_number,
+            'aerolinea'      => $this->airline,
+            'precio'         => (float) $this->price,
+            'capacidad'      => $this->capacity,
+            'salida'         => $this->departure,
+            'llegada'        => $this->arrival,
+            'origen_id'      => $this->origin_loc_id,
+            'origen_ciudad'  => $this->origin?->city ?? 'N/A',
+            'destino_id'     => $this->destination_loc_id,
+            'destino_ciudad' => $this->destination?->city ?? 'N/A',
+            'duracion'       => $this->duration_time ?? 'N/A',
+            'escalas'        => (int) $this->stops,
+            'imagen'         => $this->image_url,
+            'extras' => $this->extras ?? [],
         ];
     }
 }

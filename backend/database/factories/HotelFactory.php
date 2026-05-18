@@ -2,26 +2,27 @@
 
 namespace Database\Factories;
 
+use App\Models\Location;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Hotel>
- */
 class HotelFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            'location_id' => \App\Models\Location::factory(),
-            'name' => $this->faker->company() . ' Hotel',
-            'description' => $this->faker->text(200),
-            'stars' => $this->faker->numberBetween(1, 5),
-            'price_per_night' => $this->faker->randomFloat(2, 45, 600),
+            'location_id' => Location::factory(),
+            'name' => fake()->company() . ' Hotel',
+            'description' => fake()->paragraph(),
+            'address' => fake()->streetAddress(),
+            'zip_code' => fake()->postcode(),
+            'stars' => fake()->numberBetween(1, 5),
+            'services' => ['Wifi', 'Piscina', 'Desayuno', 'Parking'],
+            'available_rooms' => fake()->numberBetween(5, 100),
+            'price_per_night' => fake()->randomFloat(2, 50, 450),
+            'images' => [
+                'https://picsum.photos/seed/' . rand(1, 1000) . '/800/600',
+                'https://picsum.photos/seed/' . rand(1, 1000) . '/800/600',
+            ],
         ];
     }
 }

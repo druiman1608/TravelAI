@@ -19,7 +19,12 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:8081', 'http://127.0.0.1:8081'],
+    'allowed_origins' => array_filter(
+        array_merge(
+            ['http://localhost:8081', 'http://127.0.0.1:8081'],
+            env('CORS_ALLOWED_ORIGINS') ? explode(',', env('CORS_ALLOWED_ORIGINS')) : []
+        )
+    ),
 
     'allowed_origins_patterns' => [],
 
@@ -29,6 +34,5 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
-
+    'supports_credentials' => true,
 ];

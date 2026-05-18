@@ -4,11 +4,9 @@ namespace App\Policies;
 
 use App\Models\Reservation;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
-
 class ReservationPolicy
 {
-    public function before(User $user, $ability)
+    public function before(User $user, string $ability)
     {
         if ($user->isAdmin()) {
             return true;
@@ -44,7 +42,7 @@ class ReservationPolicy
      */
     public function update(User $user, Reservation $reservation): bool
     {
-        return $user->id === $reservation->user_id && $reservation->status === 'pendiente';
+        return $user->id === $reservation->user_id && $reservation->status === 'pending';
     }
 
     /**
