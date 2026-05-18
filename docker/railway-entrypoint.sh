@@ -2,6 +2,16 @@
 set -e
 
 echo "--- Creando .env desde variables de entorno ---"
+
+# Railway inyecta MYSQLHOST, MYSQLPORT, etc. — usamos DB_* si existen, si no los de Railway
+_DB_HOST="${DB_HOST:-${MYSQLHOST:-}}"
+_DB_PORT="${DB_PORT:-${MYSQLPORT:-3306}}"
+_DB_DATABASE="${DB_DATABASE:-${MYSQLDATABASE:-railway}}"
+_DB_USERNAME="${DB_USERNAME:-${MYSQLUSER:-root}}"
+_DB_PASSWORD="${DB_PASSWORD:-${MYSQLPASSWORD:-}}"
+
+echo "--- DB_HOST resuelto: $_DB_HOST ---"
+
 cat > /app/.env << ENVEOF
 APP_NAME=TravelAI
 APP_ENV=${APP_ENV:-production}
@@ -10,11 +20,11 @@ APP_DEBUG=${APP_DEBUG:-false}
 APP_URL=${APP_URL:-http://localhost:8080}
 
 DB_CONNECTION=mysql
-DB_HOST=${DB_HOST}
-DB_PORT=${DB_PORT:-3306}
-DB_DATABASE=${DB_DATABASE:-travelai}
-DB_USERNAME=${DB_USERNAME}
-DB_PASSWORD=${DB_PASSWORD}
+DB_HOST=${_DB_HOST}
+DB_PORT=${_DB_PORT}
+DB_DATABASE=${_DB_DATABASE}
+DB_USERNAME=${_DB_USERNAME}
+DB_PASSWORD=${_DB_PASSWORD}
 
 SESSION_DRIVER=database
 CACHE_STORE=database
@@ -41,10 +51,10 @@ fi
 
 echo "--- Esperando a la base de datos ---"
 until php -r "
-\$h = getenv('DB_HOST');
-\$p = getenv('DB_PORT') ?: '3306';
-\$u = getenv('DB_USERNAME');
-\$pw = getenv('DB_PASSWORD');
+\$h = '$_DB_HOST';
+\$p = '$_DB_PORT';
+\$u = '$_DB_USERNAME';
+\$pw = '$_DB_PASSWORD';
 new PDO(\"mysql:host=\$h;port=\$p\", \$u, \$pw);
 " 2>/dev/null; do
   echo "BD no disponible, reintentando..."
