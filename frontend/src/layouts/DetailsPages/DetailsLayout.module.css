@@ -1,4 +1,4 @@
-﻿.mainContainer {
+.mainContainer {
   max-width: 1200px;
   margin: 30px auto;
   padding: 0 20px;
@@ -193,7 +193,7 @@
 .descriptionContent {
   line-height: 1.8;
   color: var(--texto-oscuro);
-  var(--blanco)-space: pre-line;
+  white-space: pre-line;
 }
 
 .roomsSection {

@@ -1,4 +1,4 @@
-﻿.viewWrapper {
+.viewWrapper {
   display: flex;
   flex-direction: column;
   min-height: 500px;
@@ -111,7 +111,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: capitalize;
-  var(--blanco)-space: nowrap;
+  white-space: nowrap;
 }
 
 .statusPublished {

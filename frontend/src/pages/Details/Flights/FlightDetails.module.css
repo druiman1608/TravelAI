@@ -309,7 +309,7 @@
   font-weight: 700;
   cursor: pointer;
   transition: 0.3s;
-  var(--blanco)-space: nowrap;
+  white-space: nowrap;
 }
 
 .btnReserveTop:hover {

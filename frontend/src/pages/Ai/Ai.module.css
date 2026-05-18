@@ -1,4 +1,4 @@
-﻿.chatWrapper {
+.chatWrapper {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 80px);
@@ -174,7 +174,7 @@
 .msgText {
   margin: 0;
   font-size: 0.95rem;
-  var(--blanco)-space: pre-wrap;
+  white-space: pre-wrap;
 }
 
 .plannerBtn {

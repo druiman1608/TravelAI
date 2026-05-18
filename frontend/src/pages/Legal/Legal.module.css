@@ -1,4 +1,4 @@
-﻿.wrapper {
+.wrapper {
   min-height: 60vh;
   padding: 40px 20px;
   background: var(--blanquezino-fondo);
@@ -113,7 +113,7 @@ section a:hover {
   color: var(--texto-secundario);
   font-weight: 600;
   width: 180px;
-  var(--blanco)-space: nowrap;
+  white-space: nowrap;
 }
 
 .infoTable td {
