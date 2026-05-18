@@ -8,7 +8,7 @@ export function useHotelsData() {
     ["hotels"],
     async () => {
       const res = await api.get("/hotels");
-      return res.data.data || res.data;
+      const d = res.data.data ?? res.data; return Array.isArray(d) ? d : [];
     },
     { interval: 60000 },
   );

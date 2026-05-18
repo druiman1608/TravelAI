@@ -8,7 +8,7 @@ export function usePackagesData() {
     ["packages"],
     async () => {
       const res = await api.get("/packages");
-      return res.data.data || res.data;
+      const d = res.data.data ?? res.data; return Array.isArray(d) ? d : [];
     },
     { interval: 60000 },
   );
