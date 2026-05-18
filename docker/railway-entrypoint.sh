@@ -72,7 +72,6 @@ php artisan storage:link --force
 
 echo "--- Cacheando configuracion ---"
 php artisan config:cache
-php artisan route:cache
 
 echo "--- Arrancando servidor en puerto ${PORT:-8080} ---"
 exec php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
