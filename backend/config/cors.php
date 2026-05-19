@@ -26,7 +26,7 @@ return [
         )
     ),
 
-    'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => ['#^https://[\w-]+\.vercel\.app$#'],
 
     'allowed_headers' => ['*'],
 
