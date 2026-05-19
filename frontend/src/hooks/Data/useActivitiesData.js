@@ -17,7 +17,7 @@ export function useActivitiesData() {
   const itemsPerPage = 6;
 
   const dynamicPriceLimit = useMemo(() => {
-    if (!activities || activities.length === 0) return 1500;
+    if (!Array.isArray(activities) || activities.length === 0) return 1500;
     const max = Math.max(...activities.map((a) => a.precio || 0));
     return Math.ceil(max / 100) * 100;
   }, [activities]);

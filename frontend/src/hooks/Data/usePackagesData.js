@@ -17,7 +17,7 @@ export function usePackagesData() {
   const itemsPerPage = 5;
 
   const dynamicPriceLimit = useMemo(() => {
-    if (!allPackages || allPackages.length === 0) return 5000;
+    if (!Array.isArray(allPackages) || allPackages.length === 0) return 5000;
     const max = Math.max(...allPackages.map((p) => p.precio_total || 0));
     return Math.ceil(max / 500) * 500;
   }, [allPackages]);

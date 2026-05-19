@@ -17,7 +17,7 @@ export function useHotelsData() {
   const itemsPerPage = 6;
 
   const dynamicPriceLimit = useMemo(() => {
-    if (!hotels || hotels.length === 0) return 2000;
+    if (!Array.isArray(hotels) || hotels.length === 0) return 2000;
     const max = Math.max(...hotels.map((h) => h.precio_noche || 0));
     return Math.ceil(max / 100) * 100;
   }, [hotels]);
@@ -37,7 +37,7 @@ export function useHotelsData() {
   }, [dynamicPriceLimit]);
 
   const dynamicServices = useMemo(() => {
-    if (!hotels) return [];
+    if (!Array.isArray(hotels)) return [];
     return [...new Set(hotels.flatMap((h) => h.servicios || []))].filter(
       Boolean,
     );

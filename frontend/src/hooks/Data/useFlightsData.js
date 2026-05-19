@@ -17,7 +17,7 @@ export function useFlightsData() {
   const itemsPerPage = 5;
 
   const dynamicPriceLimit = useMemo(() => {
-    if (!flights || flights.length === 0) return 2000;
+    if (!Array.isArray(flights) || flights.length === 0) return 2000;
     const max = Math.max(...flights.map((f) => f.precio_total || 0));
     return Math.ceil(max / 100) * 100;
   }, [flights]);

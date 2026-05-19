@@ -11,7 +11,7 @@ export function useLiveResource(key, fetchFn, options = {}) {
   });
 
   return {
-    data: data || [],
+    data: Array.isArray(data) ? data : [],
     isLoading,
     isError,
     error,
