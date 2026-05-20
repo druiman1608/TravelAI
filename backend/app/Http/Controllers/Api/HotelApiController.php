@@ -57,7 +57,7 @@ class HotelApiController extends Controller
 
     public function show(int $id)
     {
-        $hotel = Hotel::with(['rooms', 'reviews', 'location'])->find($id);
+        $hotel = Hotel::with(['rooms', 'reviews' => fn($q) => $q->where('status', 'approved')->with('user'), 'location'])->find($id);
 
         if (!$hotel) {
             return response()->json(['message' => 'Hotel no encontrado'], 404);

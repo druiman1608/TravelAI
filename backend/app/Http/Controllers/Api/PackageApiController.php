@@ -38,7 +38,7 @@ class PackageApiController extends Controller
 
     public function show(int $id)
     {
-        $package = Package::with(['hotel.location', 'flight.destination', 'activity.location', 'reviews.user'])
+        $package = Package::with(['hotel.location', 'flight.destination', 'activity.location', 'reviews' => fn($q) => $q->where('status', 'approved')->with('user')])
             ->findOrFail($id);
         return new PackageResource($package);
     }

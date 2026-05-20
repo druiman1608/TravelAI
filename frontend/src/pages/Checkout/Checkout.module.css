@@ -274,6 +274,31 @@
   color: var(--azul-claro-400);
   margin-bottom: 5px;
 }
+.premiumDiscount {
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+}
+
+.discountRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+  margin-bottom: 4px;
+}
+
+.discountRow:last-child {
+  margin-bottom: 0;
+}
+
+.discountAmount {
+  color: var(--verde-preciosExito);
+  font-weight: 700;
+}
+
 .sumTotal {
   margin-top: 30px;
   text-align: center;

@@ -24,7 +24,7 @@ function extractFlightExtras(flight) {
   });
 }
 
-export function useCheckout(state) {
+export function useCheckout(state, isPremium = false) {
   const [numAcompañantes, setNumAcompañantes] = useState(0);
   const [noches, setNoches] = useState(1);
   const [fechaEntrada, setFechaEntrada] = useState(
@@ -76,10 +76,14 @@ export function useCheckout(state) {
 
   const stats = useMemo(() => {
     const extraTotal = selExtras.reduce((sum, e) => sum + (e.precio || 0), 0);
+    const totalSinDescuento = (data.base + extraTotal) * (numAcompañantes + 1);
+    const descuento = isPremium ? totalSinDescuento * 0.1 : 0;
     return {
-      totalFinal: (data.base + extraTotal) * (numAcompañantes + 1),
+      totalSinDescuento,
+      descuento,
+      totalFinal: totalSinDescuento - descuento,
     };
-  }, [data, selExtras, numAcompañantes]);
+  }, [data, selExtras, numAcompañantes, isPremium]);
 
   const toggleExtra = (extra) => {
     setSelExtras((prev) =>

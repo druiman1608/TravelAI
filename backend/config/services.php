@@ -20,6 +20,7 @@ return [
 
     'resend' => [
         'api_key' => env('RESEND_API_KEY'),
+        'from'    => env('RESEND_FROM', 'TravelAI <onboarding@resend.dev>'),
     ],
 
     'google' => [

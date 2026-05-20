@@ -15,9 +15,10 @@ export default function EditProfile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password && formData.password !== formData.confirmPassword) {
-      return toast.error("Las contraseñas no coinciden");
-    }
+    if (!formData.name.trim()) return toast.error("El nombre no puede estar vacío.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) return toast.error("El email no tiene un formato válido.");
+    if (formData.password && formData.password.length < 8) return toast.error("La contraseña debe tener al menos 8 caracteres.");
+    if (formData.password && formData.password !== formData.confirmPassword) return toast.error("Las contraseñas no coinciden.");
 
     try {
       await api.put("/user/update", {

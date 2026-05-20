@@ -48,11 +48,33 @@ class PaymentApiController extends Controller
 
             $extrasHtml = '';
             if (!empty($request->extras)) {
-                $extrasHtml = '<h3 style="color:#1e293b;margin-top:24px;">Extras incluidos</h3><ul style="padding-left:20px;color:#475569;">';
+                $extrasHtml = '<div style="background:#f1f5f9;border-radius:12px;padding:24px;margin-bottom:24px;">'
+                    . '<h2 style="color:#0f172a;margin-bottom:16px;font-size:1.1rem;">Extras incluidos</h2>'
+                    . '<ul style="padding-left:20px;color:#475569;margin:0;">';
                 foreach ($request->extras as $extra) {
-                    $extrasHtml .= "<li>{$extra['nombre']} — {$extra['precio']}€</li>";
+                    $nombre = htmlspecialchars($extra['nombre'] ?? '');
+                    $precio = htmlspecialchars($extra['precio'] ?? '');
+                    $extrasHtml .= "<li style='margin-bottom:6px;'>{$nombre} — {$precio}€</li>";
                 }
-                $extrasHtml .= '</ul>';
+                $extrasHtml .= '</ul></div>';
+            }
+
+            $passengersHtml = '';
+            $passengers = $request->passengers_data ?? [];
+            if (!empty($passengers)) {
+                $passengersHtml = '<div style="background:#f1f5f9;border-radius:12px;padding:24px;margin-bottom:24px;">'
+                    . '<h2 style="color:#0f172a;margin-bottom:16px;font-size:1.1rem;">Acompañantes</h2>';
+                foreach ($passengers as $i => $p) {
+                    $num    = $i + 1;
+                    $nombre = htmlspecialchars($p['nombre'] ?? 'No indicado');
+                    $dni    = htmlspecialchars($p['dni']    ?? 'No indicado');
+                    $passengersHtml .= "<div style='border-left:3px solid #3b82f6;padding-left:12px;margin-bottom:12px;'>"
+                        . "<p style='margin:4px 0;color:#475569;font-weight:600;'>Acompañante #{$num}</p>"
+                        . "<p style='margin:4px 0;color:#475569;'><strong>Nombre:</strong> {$nombre}</p>"
+                        . "<p style='margin:4px 0;color:#475569;'><strong>DNI:</strong> {$dni}</p>"
+                        . "</div>";
+                }
+                $passengersHtml .= '</div>';
             }
 
             $html = "
@@ -62,16 +84,17 @@ class PaymentApiController extends Controller
         <p style='color:#64748b;font-size:1rem;margin-bottom:32px;'>Tu aventura está reservada. Aquí tienes todos los detalles.</p>
         <div style='background:#f1f5f9;border-radius:12px;padding:24px;margin-bottom:24px;'>
           <h2 style='color:#0f172a;margin-bottom:16px;font-size:1.1rem;'>Datos del titular</h2>
-          <p style='margin:6px 0;color:#475569;'><strong>Nombre:</strong> {$request->contact_name}</p>
-          <p style='margin:6px 0;color:#475569;'><strong>DNI:</strong> {$request->contact_dni}</p>
-          <p style='margin:6px 0;color:#475569;'><strong>Email:</strong> {$request->contact_email}</p>
-          <p style='margin:6px 0;color:#475569;'><strong>Teléfono:</strong> {$request->contact_phone}</p>
+          <p style='margin:6px 0;color:#475569;'><strong>Nombre:</strong> " . htmlspecialchars($request->contact_name ?? '') . "</p>
+          <p style='margin:6px 0;color:#475569;'><strong>DNI:</strong> " . htmlspecialchars($request->contact_dni ?? '') . "</p>
+          <p style='margin:6px 0;color:#475569;'><strong>Email:</strong> " . htmlspecialchars($request->contact_email ?? '') . "</p>
+          <p style='margin:6px 0;color:#475569;'><strong>Teléfono:</strong> " . htmlspecialchars($request->contact_phone ?? '') . "</p>
         </div>
         <div style='background:#f1f5f9;border-radius:12px;padding:24px;margin-bottom:24px;'>
           <h2 style='color:#0f172a;margin-bottom:16px;font-size:1.1rem;'>Resumen de la reserva</h2>
           <p style='margin:6px 0;color:#475569;'><strong>Nº de reserva:</strong> #{$reservation->id}</p>
           <p style='margin:6px 0;color:#475569;'><strong>Total pagado:</strong> <span style='color:#3b82f6;font-weight:700;'>{$reservation->total_price}€</span></p>
         </div>
+        {$passengersHtml}
         {$extrasHtml}
         <div style='margin-top:32px;padding-top:24px;border-top:1px solid #e2e8f0;text-align:center;color:#94a3b8;font-size:0.85rem;'>
           <p>Gracias por confiar en nosotros 🌍</p>
@@ -79,8 +102,10 @@ class PaymentApiController extends Controller
       </div>
     </div>";
 
+            $fromAddress = config('services.resend.from', 'TravelAI <onboarding@resend.dev>');
+
             $resend->emails->send([
-                'from'    => 'TravelAI <onboarding@resend.dev>',
+                'from'    => $fromAddress,
                 'to'      => [$request->contact_email],
                 'subject' => "¡Tu reserva #{$reservation->id} está confirmada! ✈️",
                 'html'    => $html,

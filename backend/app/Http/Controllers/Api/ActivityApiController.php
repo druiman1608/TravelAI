@@ -43,7 +43,7 @@ class ActivityApiController extends Controller
 
     public function show(int $id)
     {
-        $activity = Activity::with(['reviews.user', 'location'])->findOrFail($id);
+        $activity = Activity::with(['reviews' => fn($q) => $q->where('status', 'approved')->with('user'), 'location'])->findOrFail($id);
 
         return response()->json([
             'status' => 'success',

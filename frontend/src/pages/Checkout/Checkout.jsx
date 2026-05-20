@@ -79,7 +79,10 @@ function ContactSection({ contacto, setContacto }) {
             type="tel"
             placeholder="600 000 000"
             value={contacto.phone || ""}
-            onChange={update("phone")}
+            onChange={(e) => {
+              const val = e.target.value.replace(/[^\d\s+\-()]/g, "");
+              setContacto({ ...contacto, phone: val });
+            }}
           />
         </div>
       </div>
@@ -396,6 +399,9 @@ function Sidebar({
   pkg,
   selExtras,
   totalFinal = 0,
+  totalSinDescuento = 0,
+  descuento = 0,
+  isPremium = false,
   onPagar,
 }) {
   return (
@@ -466,6 +472,18 @@ function Sidebar({
           </div>
         )}
 
+        {isPremium && descuento > 0 && (
+          <div className={styles.premiumDiscount}>
+            <div className={styles.discountRow}>
+              <span>Subtotal</span>
+              <span>{Number(totalSinDescuento).toFixed(2)}€</span>
+            </div>
+            <div className={styles.discountRow}>
+              <span>Descuento Premium (10%)</span>
+              <span className={styles.discountAmount}>-{Number(descuento).toFixed(2)}€</span>
+            </div>
+          </div>
+        )}
         <div className={styles.sumTotal}>
           <div className={styles.totalLabel}>Total a pagar</div>
           <div className={styles.totalValue}>
@@ -489,7 +507,7 @@ function Sidebar({
 export default function Checkout() {
   const { state } = useLocation();
   const { user } = useAuth();
-  const checkout = useCheckout(state);
+  const checkout = useCheckout(state, user?.is_premium);
   const [showModal, setShowModal] = useState(false);
 
   if (!state)
@@ -573,6 +591,9 @@ export default function Checkout() {
           pkg={checkout.pkg}
           selExtras={checkout.selExtras}
           totalFinal={checkout.stats?.totalFinal || 0}
+          totalSinDescuento={checkout.stats?.totalSinDescuento || 0}
+          descuento={checkout.stats?.descuento || 0}
+          isPremium={user?.is_premium}
           onPagar={handlePagar}
         />
       </div>

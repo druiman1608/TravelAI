@@ -22,7 +22,7 @@ class ReservationService
         if (!empty($data['flight_id'])) $price += Flight::findOrFail($data['flight_id'])->price;
         if (!empty($data['activity_id'])) $price += Activity::findOrFail($data['activity_id'])->price;
 
-        return Auth::user()->isPremium() ? $price * 0.85 : $price;
+        return Auth::user()->isPremium() ? $price * 0.90 : $price;
     }
 
     public function store(array $data): Reservation
