@@ -22,10 +22,9 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      toast.warn("Por favor rellena todos los campos obligatorios.");
-      return;
-    }
+    if (!form.name.trim()) return toast.error("El nombre es obligatorio.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) return toast.error("El email no tiene un formato válido.");
+    if (!form.message.trim()) return toast.error("El mensaje no puede estar vacío.");
     setSending(true);
     await new Promise((r) => setTimeout(r, 800));
     toast.success("Mensaje enviado. Te responderemos en menos de 48 horas.");

@@ -536,10 +536,8 @@ export default function Checkout() {
   };
 
   const handlePagar = () => {
-    if (!checkout.contacto.email || !checkout.contacto.name) {
-      toast.warn("Por favor, rellena al menos tu nombre y email de contacto.");
-      return;
-    }
+    if (!checkout.contacto.name.trim()) return toast.error("El nombre del titular es obligatorio.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(checkout.contacto.email)) return toast.error("El email de contacto no tiene un formato válido.");
     setShowModal(true);
   };
 

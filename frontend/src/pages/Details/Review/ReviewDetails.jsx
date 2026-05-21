@@ -35,7 +35,11 @@ export default function ReviewDetails() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (rating === 0) {
-      toast.error("Selecciona una puntuación");
+      toast.error("Selecciona una puntuación.");
+      return;
+    }
+    if (newComment.trim().length < 5) {
+      toast.error("El comentario debe tener al menos 5 caracteres.");
       return;
     }
     setSubmitting(true);

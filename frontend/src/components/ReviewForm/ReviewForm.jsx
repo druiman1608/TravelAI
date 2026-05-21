@@ -17,7 +17,11 @@ export default function ReviewForm({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (rating === 0) {
-      toast.error("Por favor, selecciona una puntuación");
+      toast.error("Por favor, selecciona una puntuación.");
+      return;
+    }
+    if (comment.trim().length < 5) {
+      toast.error("El comentario debe tener al menos 5 caracteres.");
       return;
     }
     setLoading(true);
