@@ -149,6 +149,12 @@
   transform: translateY(-2px);
 }
 
+@media (max-width: 992px) {
+  .noResultsContainer {
+    min-width: unset;
+  }
+}
+
 @media (max-width: 768px) {
   .loadingContainer,
   .noResultsContainer {
