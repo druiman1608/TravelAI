@@ -23,10 +23,6 @@ class ReviewRequest extends FormRequest
             'comment'     => 'required|string|min:5|max:1000',
         ];
 
-        if (Auth::user()->isAdmin() || Auth::user()->isMod()) {
-            $rules['status'] = 'required|in:pending,approved,rejected';
-        }
-
         return $rules;
     }
 
@@ -56,7 +52,6 @@ class ReviewRequest extends FormRequest
         return [
             'rating.required' => 'La puntuación es obligatoria.',
             'comment.min'     => 'El comentario debe tener al menos 5 caracteres.',
-            'status.in'       => 'El estado seleccionado no es válido.',
         ];
     }
 }
