@@ -18,6 +18,12 @@
   min-width: 0;
 }
 
+.contentWrapper {
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
 .resultsHeader {
   display: flex;
   justify-content: space-between;
