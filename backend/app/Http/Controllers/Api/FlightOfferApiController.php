@@ -46,7 +46,11 @@ class FlightOfferApiController extends Controller
         $offer = FlightOffer::with([
             'outboundFlight.origin',
             'outboundFlight.destination',
-            'outboundFlight.reviews.user',
+            'outboundFlight' => fn($q) => $q->with([
+                'origin',
+                'destination',
+                'reviews' => fn($r) => $r->where('status', 'approved')->with('user'),
+            ]),
             'returnFlight.origin',
             'returnFlight.destination'
         ])->find($id);
