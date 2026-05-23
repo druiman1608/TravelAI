@@ -1,7 +1,7 @@
-# TravelAI — Plataforma de Viajes con IA
+# TravelAI - Plataforma de Viajes con IA
 
 **Autor:** David Ruiz Manuel  
-**Ciclo:** 2º DAW — IES Juan de la Cierva · Curso 2025/26  
+**Ciclo:** 2º DAW - IES Juan de la Cierva · Curso 2025/26  
 **Aplicación en producción:** https://travel-ai-iota-roan.vercel.app
 
 ## Título y Temática
@@ -42,11 +42,11 @@ integrado mediante Stripe.
 
 ## Roles del sistema
 
-- **Administrador** — Control total: CRUD de todos los servicios y usuarios
-- **Moderador** — Gestión de reseñas (aprobar/rechazar)
-- **Usuario Premium** — 10% de descuento en todas las reservas, uso ilimitado de la IA
-- **Usuario registrado** — Reservas, reseñas, chat IA (Solo 10 usos), sin descuentos
-- **Usuario anónimo** — Navegación pública y consulta de servicios, no puede usar la IA
+- **Administrador** - Control total: CRUD de todos los servicios y usuarios
+- **Moderador** - Gestión de reseñas (aprobar/rechazar)
+- **Usuario Premium** - 10% de descuento en todas las reservas, uso ilimitado de la IA
+- **Usuario registrado** - Reservas, reseñas, chat IA (Solo 10 usos), sin descuentos
+- **Usuario anónimo** - Navegación pública y consulta de servicios, no puede usar la IA
 
 ## Documentación
 
