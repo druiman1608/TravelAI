@@ -1,72 +1,58 @@
-# TravelAI — TFG DAW
-## Autor del Proyecto
+# TravelAI - Plataforma de Viajes con IA
 
-  - David Ruiz Manuel
+**Autor:** David Ruiz Manuel  
+**Ciclo:** 2º DAW - IES Juan de la Cierva · Curso 2025/26  
+**Aplicación en producción:** https://travel-ai-iota-roan.vercel.app  
+**Figma:** https://www.figma.com/design/vPdK5EgxmQ1DWkNIa8bnMB/TravelAi?node-id=1-2&t=YcrE7awEi822gs4I-1  
+**Vídeo:** https://youtu.be/hVKNvST6bwE
 
 ## Título y Temática
 
   - Título: TravelAI
   
-  - Temática: Desarrollo de una aplicación web para una agencia de viajes que integra un chatbot basado en inteligencia artificial, orientado a asistir a los usuarios en la elección y gestión de reservas de vuelos, hoteles y paquetes turísticos.
+  - Temática: Desarrollo de una aplicación web para una agencia de viajes que integra un chatbot basado en inteligencia artificial, orientado a asistir a los usuarios en la elección y gestión de reservas de vuelos, hoteles, actividades y paquetes turísticos.
 
-## Objetivos y Descripción
+## Descripción
 
-  ### Objetivos del Proyecto:
-  
-  - Desarrollar una aplicación web funcional y escalable que permita a los usuarios realizar reservas dentro del contexto de una agencia de viajes.
-  
-  - Implementar una interfaz de usuario intuitiva y visualmente atractiva.
-  
-  - Integrar un sistema robusto de autenticación y autorización con distintos roles y permisos.
-    
-  - Desarrollar un backend eficiente que gestione la lógica de negocio y las interacciones con la base de datos.
+TravelAI es una plataforma web de reservas de viajes que integra un
+asistente de inteligencia artificial para ayudar a los usuarios a
+elegir y gestionar sus viajes. Permite reservar hoteles, vuelos,
+actividades y paquetes combinados, con un sistema de pagos real
+integrado mediante Stripe.
 
-  - Implementar un sistema de despliegue mediante contenedores Docker.
+## Objetivos
 
-  ### Descripción General:
-  
-  - TravelAI está diseñada como una plataforma web de reservas orientada a vuelos, hoteles y paquetes de viaje. La aplicación incorpora un chatbot basado en inteligencia artificial cuyo objetivo es asistir al usuario en la selección de opciones de viaje en función de los requisitos y preferencias que este indique.
-  
-  - Frontend: Interfaz visual para la interacción con el usuario final.
-  
-  - Backend: Gestión de la lógica de negocio, comunicación con la base de datos y gestión de la API del chatbot.
+- Construir una plataforma de reservas funcional con ciclo de vida completo
+- Diseñar una interfaz intuitiva y visualmente cuidada
+- Implementar autenticación segura con roles diferenciados
+- Integrar servicios externos reales: pagos, IA, email transaccional
+- Desplegar la aplicación en producción de forma accesible
 
-## Arquitectura y Tecnologías
+## Tecnologías
 
-### Frontend
+| Parte | Tecnología |
+|---|---|
+| Frontend | React + Vite + CSS Modules |
+| Backend | Laravel + PHP |
+| Base de datos | MySQL |
+| Autenticación | Laravel Sanctum + Google OAuth |
+| Pagos | Stripe |
+| IA | Groq API (llama-3.1-8b-instant) |
+| Email | Resend |
+| Despliegue frontend | Vercel |
+| Despliegue backend | Railway |
 
-  - Tecnología principal: React
+## Roles del sistema
 
-  - Lenguaje: JavaScript
+- **Administrador** - Control total: CRUD de todos los servicios y usuarios
+- **Moderador** - Gestión de reseñas (aprobar/rechazar)
+- **Usuario Premium** - 10% de descuento en todas las reservas, uso ilimitado de la IA
+- **Usuario registrado** - Reservas, reseñas, chat IA (Solo 10 usos), sin descuentos
+- **Usuario anónimo** - Navegación pública y consulta de servicios, no puede usar la IA
 
-  - Estilos: Module CSS
+## Documentación
 
-  - Prototipado: Figma
+Toda la documentación técnica está disponible en la
+[Wiki del repositorio](https://github.com/druiman1608/TravelAI/wiki).
 
-  - Librerias: [Implementación más adelante]
 
-### Backend
-
-  - Tecnologia principal: Laravel
-
-  - Lenguaje: PHP
-
-  - Base de datos: MySQL
-  
-  - Librerias: [Implementación más adelante]
-
-### Despliegue
-
-  - Contenedores: Docker
-
-## [Funcionalidades](https://github.com/druiman1608/TravelAi/wiki/Funcionalidades-%E2%80%90-TravelAI)
-
-## [Vistas de la aplicación](https://github.com/druiman1608/TravelAi/wiki/Vistas-de-la-Aplicaci%C3%B3n-%E2%80%90-TravelAI)
-
-## [Esquema Entidad-Relación de la Base de datos](https://github.com/druiman1608/TravelAi/wiki/Esquema-Entidad%E2%80%93Relaci%C3%B3n-de-la-Base-de-Datos-%E2%80%90-TravelAI)
-
-## [Documentación técnica](https://github.com/druiman1608/TravelAi/wiki/Documentaci%C3%B3n-t%C3%A9cnica-%E2%80%90-TravelAI)
-
-## [Bitacora del proyecto](https://github.com/druiman1608/TravelAi/wiki/Bitacora-del-proyecto-%E2%80%90-TravelAI)
-
-## [Bibliografía](https://github.com/druiman1608/TravelAi/wiki/Bibliograf%C3%ADa-%E2%80%90-TravelAI)
