@@ -5,7 +5,8 @@
 **Aplicación en producción:** https://travel-ai-iota-roan.vercel.app  
 **Figma:** https://www.figma.com/design/vPdK5EgxmQ1DWkNIa8bnMB/TravelAi?node-id=1-2&t=YcrE7awEi822gs4I-1  
 **Vídeo:** https://youtu.be/hVKNvST6bwE  
-**Instalación en local:** [SETUP.md](SETUP.md)
+**Instalación en local:** [Setup.md](https://github.com/druiman1608/TravelAI/blob/main/setup.md)  
+**Documentación:** [Wiki del repositorio](https://github.com/druiman1608/TravelAI/wiki)  
 
 ## Título y Temática
 
